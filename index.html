@@ -1,4 +1,208 @@
-<!DOCTYPE html>
+    <!-- Education Section -->
+    <section class="section" id="education">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-subtitle">My Journey</div>
+                <h2 class="section-title">Education</h2>
+                <p class="section-description">
+                    Academic milestones and learning experiences that shaped my path
+                </p>
+            </div>
+            <div class="education-timeline">
+                <div class="timeline-line"></div>
+                
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2023-24</div>
+                        <h3 class="timeline-title">Class 10th - Secondary Education</h3>
+                        <div class="timeline-subtitle">Shakun Vidya Niketan</div>
+                        <p class="timeline-description">
+                            Completed secondary education with a focus on science and mathematics. 
+                            This foundational period sparked my interest in technology and problem-solving.
+                        </p>
+                        <button class="show-details-btn" onclick="toggleDetails(this)">Show Details</button>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Achieved 70% overall percentage</li>
+                                <li>Excelled in Mathematics and Science subjects</li>
+                                <li>Participated in various academic competitions</li>
+                                <li>Developed initial interest in computer programming</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="timeline-item reveal">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <div class="timeline-year">2025-26</div>
+                        <h3 class="timeline-title">Class 12th - Senior Secondary</h3>
+                        <div class="timeline-subtitle">B.L Academy</div>
+                        <p class="timeline-description">
+                            Currently pursuing senior secondary education with Physics, Chemistry, and Mathematics (PCM). 
+                            Simultaneously developing web development skills and building projects.
+                        </p>
+                        <button class="show-details-btn" onclick="toggleDetails(this)">Show Details</button>
+                        <div class="timeline-details">
+                            <ul>
+                                <li>Subject Focus: Physics, Chemistry, Mathematics (PCM)</li>
+                                <li>Self-taught web development alongside academics</li>
+                                <li>Building portfolio projects and gaining practical experience</li>
+                                <li>Preparing for competitive entrance examinations</li>
+                                <li>Active in coding communities and online learning platforms</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Achievements Section -->
+    <section class="section" id="achievements">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-subtitle">Recognition</div>
+                <h2 class="section-title">Achievements & Certificates</h2>
+                <p class="section-description">
+                    Milestones and certifications that validate my skills and dedication
+                </p>
+            </div>
+            <div class="achievements-grid">
+                <div class="achievement-card reveal">
+                    <div class="achievement-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <h3 class="achievement-title">HTML & CSS Certification</h3>
+                    <p class="achievement-description">
+                        Comprehensive certification from FreeCodeCamp covering advanced HTML5 and CSS3 concepts, 
+                        responsive design principles, and modern web development practices.
+                    </p>
+                    <a href="#" class="achievement-link" onclick="downloadCertificate()">
+                        <i class="fas fa-download"></i> Download Certificate
+                    </a>
+                </div>
+
+                <div class="achievement-card reveal">
+                    <div class="achievement-icon">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <h3 class="achievement-title">15+ Projects Completed</h3>
+                    <p class="achievement-description">
+                        Successfully developed and deployed over 15 web development projects, 
+                        ranging from simple static websites to interactive web applications.
+                    </p>
+                    <a href="#projects" class="achievement-link">
+                        <i class="fas fa-eye"></i> View Projects
+                    </a>
+                </div>
+
+                <div class="achievement-card reveal">
+                    <div class="achievement-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="achievement-title">Community Recognition</h3>
+                    <p class="achievement-description">
+                        Active contributor to coding communities and recognized for helping fellow developers 
+                        solve problems and share knowledge.
+                    </p>
+                    <a href="https://github.com/Divyanshu5520" class="achievement-link" target="_blank">
+                        <i class="fas fa-external-link-alt"></i> View GitHub
+                    </a>
+                </div>
+
+                <div class="achievement-card reveal">
+                    <div class="achievement-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <h3 class="achievement-title">Academic Excellence</h3>
+                    <p class="achievement-description">
+                        Maintained consistent academic performance while pursuing passion for web development, 
+                        demonstrating strong time management and dedication.
+                    </p>
+                    <a href="#education" class="achievement-link">
+                        <i class="fas fa-graduation-cap"></i> View Education
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials Section -->
+    <section class="section" id="testimonials">
+        <div class="container">
+            <div class="section-header reveal">
+                <div class="section-subtitle">What others say</div>
+                <h2 class="section-title">Testimonials</h2>
+                <p class="section-description">
+                    Feedback from mentors, teachers, and peers who have witnessed my growth
+                </p>
+            </div>
+            <div class="testimonials-container reveal">
+                <div class="testimonial-slider">
+                    <div class="testimonial-track" id="testimonialTrack">
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                Divyanshu is an exceptionally dedicated student who combines academic excellence with practical skills. 
+                                His passion for web development is evident in the quality of his projects and his eagerness to learn new technologies.
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">MT</div>
+                                <div class="author-info">
+                                    <h4>Mathematics Teacher</h4>
+                                    <p>B.L Academy</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                Working with Divyanshu has been a pleasure. His ability to understand complex requirements and translate them into 
+                                clean, functional code is impressive for someone so young. He has a bright future ahead.
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">CM</div>
+                                <div class="author-info">
+                                    <h4>Coding Mentor</h4>
+                                    <p>Online Community</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="testimonial-slide">
+                            <div class="testimonial-content">
+                                Divyanshu's projects showcase not just technical skills but also creativity and attention to detail. 
+                                He approaches every challenge with enthusiasm and delivers results that exceed expectations.
+                            </div>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">SP</div>
+                                <div class="author-info">
+                                    <h4>Senior Developer</h4>
+                                    <p>Tech Community</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-controls">
+                    <button class="testimonial-btn" id="prevTestimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="testimonial-btn" id="nextTestimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                
+                <div class="testimonial-dots" id="testimonialDots">
+                    <span class="testimonial-dot active" onclick="goToSlide(0)"></span>
+                    <span class="testimonial-dot" onclick="goToSlide(1)"></span>
+                    <span class="testimonial-dot" onclick="goToSlide(2)"></span>
+                </div>
+            </div>
+        </div>
+    </section><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -192,6 +396,43 @@
 
         .mobile-menu-btn:hover {
             background: var(--surface-elevated);
+        }
+
+        /* Particle Background */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--primary);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0.6;
+            animation: float-particle linear infinite;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+            }
+            90% {
+                opacity: 0.6;
+            }
+            100% {
+                transform: translateY(-100vh) translateX(var(--random-x));
+                opacity: 0;
+            }
         }
 
         /* Hero Section */
@@ -628,12 +869,385 @@
             color: var(--primary);
         }
 
-        /* Contact Section */
-        .contact-content {
+        /* Education Timeline */
+        .education-timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline-line {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 4rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+
+        .timeline-item.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-right: calc(50% + 2rem);
+            text-align: right;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: calc(50% + 2rem);
+            text-align: left;
+        }
+
+        .timeline-dot {
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: var(--primary);
+            border: 4px solid var(--background);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            z-index: 2;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.5);
+        }
+
+        .timeline-content {
+            background: var(--surface);
+            padding: 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 2rem;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            right: -30px;
+            border-left-color: var(--surface);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            left: -30px;
+            border-right-color: var(--surface);
+        }
+
+        .timeline-year {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .timeline-details {
+            display: none;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .timeline-details.show {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .timeline-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .timeline-details li {
+            position: relative;
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+        }
+
+        .timeline-details li::before {
+            content: '▶';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-size: 0.8rem;
+        }
+
+        .show-details-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .show-details-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Achievements Section */
+        .achievements-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .achievement-card {
+            background: var(--surface);
+            border-radius: 16px;
+            padding: 2rem;
+            border: 1px solid var(--border);
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .achievement-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 102, 255, 0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .achievement-card:hover::before {
+            left: 100%;
+        }
+
+        .achievement-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .achievement-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-description {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 2;
+        }
+
+        .achievement-link:hover {
+            color: var(--primary-dark);
+            transform: translateX(5px);
+        }
+
+        /* Testimonials Section */
+        .testimonials-container {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-slider {
+            overflow: hidden;
+            border-radius: 16px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+        }
+
+        .testimonial-track {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-slide {
+            flex: 0 0 100%;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .testimonial-content {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .testimonial-content::before,
+        .testimonial-content::after {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary);
+            position: absolute;
+            font-family: serif;
+        }
+
+        .testimonial-content::before {
+            top: -1rem;
+            left: -1rem;
+        }
+
+        .testimonial-content::after {
+            bottom: -2rem;
+            right: -1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+        }
+
+        .author-avatar {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .author-info h4 {
+            margin: 0;
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .author-info p {
+            margin: 0;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .testimonial-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .testimonial-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .testimonial-dots {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .testimonial-dot {
+            width: 12px;
+            height: 12px;
+            background: var(--border);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-dot.active {
+            background: var(--primary);
+            transform: scale(1.2);
         }
 
         .contact-form {
@@ -827,7 +1441,40 @@
             box-shadow: var(--shadow-glow);
         }
 
-        /* Responsive Design */
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: start;
+        }
+
+        /* Mobile Responsiveness Improvements */
+        @media (max-width: 1024px) {
+            .timeline-line {
+                left: 2rem;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 4rem;
+                margin-right: 0;
+                text-align: left;
+            }
+
+            .timeline-dot {
+                left: 2rem;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content::before,
+            .timeline-item:nth-child(even) .timeline-content::before {
+                left: -30px;
+                right: auto;
+                border-right-color: var(--surface);
+                border-left-color: transparent;
+            }
+        }
+
         @media (max-width: 768px) {
             .nav-menu {
                 position: fixed;
@@ -856,6 +1503,7 @@
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 2rem;
+                padding-top: 2rem;
             }
 
             .hero-image {
@@ -873,7 +1521,7 @@
             }
 
             .stats-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
                 gap: 1rem;
             }
 
@@ -894,6 +1542,32 @@
             .footer-links {
                 flex-direction: column;
                 gap: 1rem;
+            }
+
+            .timeline-line {
+                left: 1rem;
+            }
+
+            .timeline-dot {
+                left: 1rem;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 3rem;
+                margin-right: 1rem;
+            }
+
+            .testimonial-slide {
+                padding: 2rem 1rem;
+            }
+
+            .testimonial-content {
+                font-size: 1.1rem;
+            }
+
+            .achievements-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -922,10 +1596,38 @@
             .skills-grid {
                 grid-template-columns: 1fr;
             }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item:nth-child(odd) .timeline-content,
+            .timeline-item:nth-child(even) .timeline-content {
+                margin-left: 2rem;
+                margin-right: 0.5rem;
+            }
+
+            .testimonial-content::before,
+            .testimonial-content::after {
+                font-size: 2rem;
+            }
+
+            .testimonial-content::before {
+                top: -0.5rem;
+                left: -0.5rem;
+            }
+
+            .testimonial-content::after {
+                bottom: -1rem;
+                right: -0.5rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Particle Background -->
+    <div class="particles-container" id="particlesContainer"></div>
+
     <!-- Loading Screen -->
     <div class="loader-screen" id="loader">
         <div class="loader"></div>
