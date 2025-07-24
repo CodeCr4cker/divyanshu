@@ -49,6 +49,160 @@
             overflow-x: hidden;
         }
 
+        /* Enhanced Loading Screen */
+        .loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease, visibility 1s ease;
+        }
+
+        .loader-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .loader-brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .loader-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .loader {
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            position: relative;
+            animation: spin 2s linear infinite;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 4px solid transparent;
+            border-top: 4px solid var(--primary);
+            border-right: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite reverse;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loader-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            animation: fade 2s ease-in-out infinite;
+            text-align: center;
+        }
+
+        .loader-progress {
+            width: 300px;
+            height: 4px;
+            background: var(--surface-elevated);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            border-radius: 2px;
+            animation: progress 3s ease-in-out;
+        }
+
+        /* Loading Animations */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px rgba(0, 102, 255, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(0, 212, 170, 0.8); }
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            25% { width: 30%; }
+            50% { width: 60%; }
+            75% { width: 85%; }
+            100% { width: 100%; }
+        }
+
         /* Particles Background */
         #particles-js {
             position: fixed;
@@ -70,41 +224,31 @@
         }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
-        /* Loading Screen */
-        .loader-screen {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: var(--background);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            z-index: 10000;
-            transition: opacity 0.8s ease, visibility 0.8s ease;
-        }
-
-        .loader-screen.hidden {
+        /* SPA Content Container */
+        .app-container {
             opacity: 0;
-            visibility: hidden;
+            transition: opacity 0.5s ease;
         }
 
-        .loader {
-            width: 60px;
-            height: 60px;
-            border: 3px solid var(--surface-elevated);
-            border-top: 3px solid var(--primary);
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .app-container.loaded {
+            opacity: 1;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .page-content {
+            display: none;
+            animation: fadeIn 0.6s ease-in-out;
         }
 
-        /* Header */
+        .page-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Enhanced Header */
         .header {
             position: fixed;
             top: 0;
@@ -143,6 +287,7 @@
             background-clip: text;
             text-decoration: none;
             transition: transform 0.3s ease;
+            cursor: pointer;
         }
 
         .logo:hover {
@@ -164,6 +309,7 @@
             border-radius: 8px;
             transition: all 0.3s ease;
             position: relative;
+            cursor: pointer;
         }
 
         .nav-link:hover,
@@ -205,13 +351,60 @@
             background: var(--surface-elevated);
         }
 
+        /* Enhanced Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 80px;
+            left: -100%;
+            width: 100%;
+            height: calc(100vh - 80px);
+            background: rgba(10, 10, 10, 0.98);
+            backdrop-filter: blur(20px);
+            transition: left 0.3s ease;
+            z-index: 999;
+            padding: 2rem;
+        }
+
+        .mobile-menu.active {
+            left: 0;
+        }
+
+        .mobile-nav-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .mobile-nav-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 500;
+            padding: 1rem;
+            border-radius: 12px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            cursor: pointer;
+        }
+
+        .mobile-nav-link:hover,
+        .mobile-nav-link.active {
+            background: var(--surface-elevated);
+            color: var(--text-primary);
+            transform: translateX(10px);
+        }
+
         /* Hero Section */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             display: flex;
             align-items: center;
             position: relative;
             overflow: hidden;
+            padding: 0 2rem;
         }
 
         .hero-bg {
@@ -235,7 +428,6 @@
         .hero-container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 2rem;
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 4rem;
@@ -331,7 +523,6 @@
         }
 
         .hero-image {
-            
             position: relative;
             animation: slideInRight 1s ease-out;
         }
@@ -436,562 +627,36 @@
             margin: 0 auto;
         }
 
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            line-height: 1.8;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 2rem;
-        }
-
-        .stat-item {
-            text-align: center;
-            padding: 2rem;
-            background: var(--surface);
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .stat-item:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .stat-number {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: var(--gradient-primary);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            display: block;
-        }
-
-        .stat-label {
-            color: var(--text-secondary);
-            font-weight: 500;
-            margin-top: 0.5rem;
-        }
-
-        /* Skills Section */
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .skill-category {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 2rem;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .skill-category-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 1.5rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .skill-category-icon {
-            width: 30px;
-            height: 30px;
-            background: var(--gradient-primary);
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 0.9rem;
-        }
-
-        .skill-list {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.8rem;
-        }
-
-        .skill-tag {
-            background: var(--surface-elevated);
-            color: var(--text-primary);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            font-size: 0.9rem;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .skill-tag:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: var(--surface);
-            border-radius: 16px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .project-image {
-            height: 200px;
-            background: var(--gradient-primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .project-description {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(0, 102, 255, 0.1);
-            color: var(--primary);
-            padding: 0.3rem 0.8rem;
-            border-radius: 6px;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: var(--primary);
-        }
-
-        /* Education Timeline */
-        .education-timeline {
-            position: relative;
-            margin: 2rem 0;
-        }
-
-        .timeline-line {
-            position: absolute;
-            left: 30px;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: var(--primary);
-        }
-
-        .timeline-item {
-            position: relative;
-            margin-bottom: 3rem;
-            padding-left: 80px;
-        }
-
-        .timeline-dot {
-            position: absolute;
-            left: 20px;
-            top: 8px;
-            width: 20px;
-            height: 20px;
-            background: var(--primary);
-            border-radius: 50%;
-            border: 4px solid var(--background);
-            box-shadow: 0 0 0 2px var(--primary);
-        }
-
-        .timeline-content {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .timeline-content:hover {
-            transform: translateY(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .timeline-title {
-            font-size: 1.3rem;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .timeline-subtitle {
-            color: var(--primary);
-            font-weight: 500;
-            margin-bottom: 1rem;
-        }
-
-        .timeline-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-        }
-
-        /* Achievements Section */
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .achievement-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 2rem;
-            text-align: center;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .achievement-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: var(--gradient-primary);
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-10px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .achievement-icon {
-            width: 80px;
-            height: 80px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            color: white;
-            margin: 0 auto 1.5rem;
-        }
-
-        .achievement-title {
-            font-size: 1.2rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-        }
-
-        .achievement-description {
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 1.5rem;
-        }
-
-        .achievement-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 500;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.3rem;
-            transition: all 0.3s ease;
-        }
-
-        .achievement-link:hover {
-            color: var(--accent);
-            transform: translateX(5px);
-        }
-
-        /* Testimonials Section */
-        .testimonials-container {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-        }
-
-        .testimonial-card {
-            background: var(--surface);
-            border-radius: 16px;
-            padding: 3rem;
-            text-align: center;
-            border: 1px solid var(--border);
-            display: none;
-            animation: fadeInUp 0.8s ease;
-        }
-
-        .testimonial-card.active {
-            display: block;
-        }
-
-        .testimonial-quote {
-            font-size: 1.3rem;
-            line-height: 1.8;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            font-style: italic;
-        }
-
-        .testimonial-quote::before,
-        .testimonial-quote::after {
-            content: '"';
-            font-size: 2rem;
-            color: var(--primary);
-            font-weight: bold;
-        }
-
-        .testimonial-author {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-        }
-
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            background: var(--gradient-primary);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 600;
-            font-size: 1.2rem;
-        }
-
-        .author-info h4 {
-            font-weight: 600;
-            margin-bottom: 0.2rem;
-        }
-
-        .author-info p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        .testimonial-nav {
-            display: flex;
-            justify-content: center;
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .nav-btn {
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
             width: 50px;
             height: 50px;
-            background: var(--surface-elevated);
-            border: 1px solid var(--border);
+            background: var(--primary);
+            color: white;
+            border: none;
             border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            font-size: 1.2rem;
             cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
             transition: all 0.3s ease;
-            color: var(--text-secondary);
+            z-index: 1000;
         }
 
-        .nav-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
         }
 
-        /* Contact Section */
-        .contact-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: start;
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-glow);
         }
 
-        .contact-form {
-            background: var(--surface);
-            padding: 2rem;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .form-input {
-            width: 100%;
-            padding: 1rem;
-            background: var(--surface-elevated);
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            color: var(--text-primary);
-            font-size: 1rem;
-            transition: all 0.3s ease;
-        }
-
-        .form-input:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(0, 102, 255, 0.1);
-        }
-
-        .form-textarea {
-            height: 120px;
-            resize: vertical;
-        }
-
-        .contact-info {
-            display: flex;
-            flex-direction: column;
-            gap: 2rem;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            padding: 1.5rem;
-            background: var(--surface);
-            border-radius: 12px;
-            border: 1px solid var(--border);
-            transition: all 0.3s ease;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .contact-icon {
-            width: 50px;
-            height: 50px;
-            background: var(--gradient-primary);
-            border-radius: 12px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 1.2rem;
-        }
-
-        /* Footer */
-        .footer {
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            padding: 3rem 0 2rem;
-            text-align: center;
-        }
-
-        .footer-content {
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-bottom: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .footer-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .footer-link:hover {
-            color: var(--primary);
-        }
-
-        .footer-bottom {
-            padding-top: 2rem;
-            border-top: 1px solid var(--border);
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
-
-        /* Animations */
+        /* Enhanced Animations */
         @keyframes slideInLeft {
             from {
                 opacity: 0;
@@ -1029,66 +694,10 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Scroll Reveal */
-        .reveal {
-            opacity: 0;
-            transform: translateY(50px);
-            transition: all 0.8s ease;
-        }
-
-        .reveal.revealed {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Back to Top Button */
-        .back-to-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 50px;
-            height: 50px;
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            font-size: 1.2rem;
-            cursor: pointer;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
-        }
-
-        .back-to-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .back-to-top:hover {
-            transform: translateY(-3px);
-            box-shadow: var(--shadow-glow);
-        }
-
-        /* Responsive Design */
+        /* Enhanced Mobile Responsiveness */
         @media (max-width: 1030px) {
             .nav-menu {
-                position: fixed;
-                top: 80px;
-                left: -100%;
-                width: 100%;
-                height: calc(100vh - 80px);
-                background: rgba(10, 10, 10, 0.98);
-                backdrop-filter: blur(20px);
-                flex-direction: column;
-                justify-content: start;
-                align-items: center;
-                padding-top: 2rem;
-                transition: left 0.3s ease;
-            }
-
-            .nav-menu.active {
-                left: 0;
+                display: none;
             }
 
             .mobile-menu-btn {
@@ -1096,34 +705,20 @@
             }
         }
 
-
-        
-@media (max-width: 768px) {
+        @media (max-width: 768px) {
             .hero-container {
                 grid-template-columns: 1fr;
                 text-align: center;
                 gap: 2rem;
-                
+                padding: 6rem 0;
             }
 
             .hero-image {
-                margin-top: 18rem;
                 order: -1;
             }
 
             .hero-avatar {
-                max-width: 250px;
-            }
-
-            .about-content,
-            .contact-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .stats-grid {
-                grid-template-columns: 1fr;
-                gap: 1rem;
+                max-width: 280px;
             }
 
             .social-links {
@@ -1137,48 +732,32 @@
             }
 
             .hero-cta {
-                margin-bottom: 4rem;
                 justify-content: center;
             }
 
-            .footer-links {
-                flex-direction: column;
-                gap: 1rem;
-            }
-
-            .timeline-item {
-                padding-left: 60px;
-            }
-
-            .timeline-line {
-                left: 20px;
-            }
-
-            .timeline-dot {
-                left: 10px;
-            }
-
-            .testimonial-card {
-                padding: 2rem;
-            }
-
-            .testimonial-quote {
-                font-size: 1.1rem;
-            }
-        }
-
-        @media (max-width: 480px) {
             .container {
                 padding: 0 1rem;
-            }
-            .hero-image {
-                margin-top: 18rem;
             }
 
             .nav-container {
                 padding: 0 1rem;
             }
 
+            .mobile-menu {
+                padding: 1rem;
+            }
+
+            .loader-progress {
+                width: 250px;
+            }
+
+            .loader-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+        }
+
+        @media (max-width: 480px) {
             .hero-title {
                 font-size: 2rem;
             }
@@ -1188,19 +767,9 @@
                 font-size: 0.9rem;
             }
 
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .skills-grid,
-            .achievements-grid {
-                grid-template-columns: 1fr;
-            }
-
             .hero-cta {
                 flex-direction: column;
                 align-items: center;
-                margin-bottom: 4rem;
             }
 
             .social-links {
@@ -1208,18 +777,141 @@
                 justify-content: center;
             }
 
-            .timeline-item {
-                padding-left: 40px;
+            .loader-brand {
+                font-size: 1.5rem;
             }
 
-            .timeline-line {
-                left: 15px;
+            .loader-progress {
+                width: 200px;
             }
 
-            .timeline-dot {
-                left: 5px;
-                width: 16px;
-                height: 16px;
+            .loader-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+        }
+
+        /* Enhanced content sections for demonstration */
+        .content-section {
+            padding: 2rem;
+            background: var(--surface);
+            margin: 2rem 0;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .content-section h2 {
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .content-section p {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .feature-card {
+            background: var(--surface-elevated);
+            padding: 2rem;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .feature-card p {
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* SPA Route indicator */
+        .route-indicator {
+            position: fixed;
+            top: 50%;
+            right: 2rem;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+            z-index: 100;
+        }
+
+        .route-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--surface-elevated);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .route-dot.active {
+            background: var(--primary);
+            transform: scale(1.5);
+        }
+
+        .route-dot:hover {
+            background: var(--accent);
+        }
+
+        .route-label {
+            position: absolute;
+            right: 120%;
+            top: 50%;
+            transform: translateY(-50%);
+            background: var(--surface-elevated);
+            color: var(--text-primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .route-dot:hover .route-label {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        @media (max-width: 768px) {
+            .route-indicator {
+                display: none;
             }
         }
     </style>
@@ -1228,1112 +920,1294 @@
     <!-- Particles Background -->
     <div id="particles-js"></div>
 
-    <!-- Loading Screen -->
+    <!-- Enhanced Loading Screen -->
     <div class="loader-screen" id="loader">
-        <div class="loader"></div>
+        <div class="loader-container">
+            <div class="loader-brand">Divyanshu Pandey</div>
+            <div class="loader-wrapper">
+                <div class="loader"></div>
+                <div class="loader-center">
+                    <i class="fas fa-code"></i>
+                </div>
+            </div>
+            <div class="loader-text">Loading Portfolio...</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
     </div>
 
-    <!-- Header -->
-    <header class="header" id="header">
-        <div class="nav-container">
-            <a href="#" class="logo">Divyanshu Pandey</a>
-            <nav>
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
-                    <li><a href="#about" class="nav-link">About</a></li>
-                    <li><a href="#skills" class="nav-link">Skills</a></li>
-                    <li><a href="#projects" class="nav-link">Projects</a></li>
-                    <li><a href="#education" class="nav-link">Education</a></li>
-                    <li><a href="#achievements" class="nav-link">Achievements</a></li>
-                    <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
-                    <li><a href="#contact" class="nav-link">Contact</a></li>
-                </ul>
-                <button class="mobile-menu-btn" id="mobileMenuBtn">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </nav>
-        </div>
-    </header>
-
-    <!-- Hero Section -->
-    <section class="hero" id="home">
-        <div class="hero-bg"></div>
-        <div class="hero-container">
-            <div class="hero-content">
-                <div class="hero-subtitle">
-                    <span>Hello, I'm</span>
-                </div>
-                <h1 class="hero-title">
-                    <span class="gradient-text">Divyanshu</span><br>
-                    Pandey
-                </h1>
-                <p class="hero-description">
-                    A passionate 12th-grade student and aspiring web developer, crafting beautiful digital experiences with modern technologies.
-                </p>
-                <div class="hero-cta">
-                    <a href="#projects" class="btn btn-primary">
-                        View My Work <i class="fas fa-arrow-right"></i>
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        Get In Touch <i class="fas fa-envelope"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-avatar">
-                    <span><image src="https://raw.githubusercontent.com/CodeCr4cker/Project/main/divyanshu/logo.jpg"></span>
-                </div>
-            </div>
-        </div>
-        <div class="social-links">
-            <a href="https://github.com/Divyanshu5520" class="social-link" target="_blank">
-                <i class="fab fa-github"></i>
-            </a>
-            <a href="#" class="social-link" target="_blank">
-                <i class="fab fa-linkedin"></i>
-            </a>
-            <a href="#" class="social-link" target="_blank">
-                <i class="fab fa-twitter"></i>
-            </a>
-            <a href="#" class="social-link" target="_blank">
-                <i class="fab fa-instagram"></i>
-            </a>
-        </div>
-    </section>
-
-    <!-- About Section -->
-    <section class="section" id="about">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">Get to know me</div>
-                <h2 class="section-title">About Me</h2>
-                <p class="section-description">
-                    Passionate about creating digital solutions that make a difference
-                </p>
-            </div>
-            <div class="about-content">
-                <div class="reveal">
-                    <p class="about-text">
-                        Hi there! I'm Divyanshu Pandey, a dedicated 12th-grade student with an unwavering passion for web development and technology. My journey into the world of coding began with curiosity and has evolved into a deep commitment to creating meaningful digital experiences.
-                    </p>
-                    <p class="about-text">
-                        I specialize in front-end development, with expertise in HTML, CSS, JavaScript, and modern frameworks. I believe in writing clean, efficient code and staying updated with the latest industry trends and best practices.
-                    </p>
-                    <a href="#contact" class="btn btn-primary">Let's Connect</a>
-                </div>
-                <div class="stats-grid reveal">
-                    <div class="stat-item">
-                        <span class="stat-number">15+</span>
-                        <span class="stat-label">Projects Completed</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">2+</span>
-                        <span class="stat-label">Years Experience</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">5+</span>
-                        <span class="stat-label">Technologies</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number">100%</span>
-                        <span class="stat-label">Client Satisfaction</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section" id="skills">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">What I do</div>
-                <h2 class="section-title">Skills & Expertise</h2>
-                <p class="section-description">
-                    Technologies and tools I use to bring ideas to life
-                </p>
-            </div>
-            <div class="skills-grid">
-                <div class="skill-category reveal">
-                    <div class="skill-category-title">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-code"></i>
-                        </div>
-                        Frontend Development
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag">HTML5</span>
-                        <span class="skill-tag">CSS3</span>
-                        <span class="skill-tag">JavaScript</span>
-                        <span class="skill-tag">React</span>
-                        <span class="skill-tag">Responsive Design</span>
-                        <span class="skill-tag">Bootstrap</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-category-title">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-database"></i>
-                        </div>
-                        Backend & Database
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag">Python</span>
-                        <span class="skill-tag">MySQL</span>
-                        <span class="skill-tag">PHP</span>
-                        <span class="skill-tag">Node.js</span>
-                        <span class="skill-tag">API Integration</span>
-                    </div>
-                </div>
-                <div class="skill-category reveal">
-                    <div class="skill-category-title">
-                        <div class="skill-category-icon">
-                            <i class="fas fa-tools"></i>
-                        </div>
-                        Tools & Technologies
-                    </div>
-                    <div class="skill-list">
-                        <span class="skill-tag">Git & GitHub</span>
-                        <span class="skill-tag">VS Code</span>
-                        <span class="skill-tag">Figma</span>
-                        <span class="skill-tag">Chrome DevTools</span>
-                        <span class="skill-tag">Netlify</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Projects Section -->
-    <section class="section" id="projects">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">My Work</div>
-                <h2 class="section-title">Featured Projects</h2>
-                <p class="section-description">
-                    A showcase of my recent work and creative solutions
-                </p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <i class="fas fa-file-pdf"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Code to PDF Converter</h3>
-                        <p class="project-description">
-                            A web application that converts source code into beautifully formatted PDF documents with syntax highlighting and customizable themes.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">PDF.js</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://codecr4cker.github.io/Code-2-pdf/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <i class="fas fa-comments"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">React Chat Application</h3>
-                        <p class="project-description">
-                            A real-time chat application built with React, featuring modern UI design, emoji support, and responsive layout for seamless communication.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">HTML</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://codecr4cker.github.io/react-chat-app/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <i class="fas fa-building"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Construction Portfolio</h3>
-                        <p class="project-description">
-                            A professional portfolio website for a construction company, showcasing their projects, services, and company information with modern design.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">Responsive</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://codecr4cker.github.io/html-test/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project-card reveal">
-                    <div class="project-image">
-                        <i class="fas fa-link"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 class="project-title">Link Converter Tool</h3>
-                        <p class="project-description">
-                            A utility web application for converting and managing different types of links, with features for URL validation and format conversion.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">HTML</span>
-                            <span class="tech-tag">CSS</span>
-                            <span class="tech-tag">JavaScript</span>
-                            <span class="tech-tag">APIs</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://codecr4cker.github.io/link-converter/" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live Demo
-                            </a>
-                            <a href="#" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Education Section -->
-    <section class="section" id="education">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">My Journey</div>
-                <h2 class="section-title">Education</h2>
-                <p class="section-description">
-                    Academic milestones and learning experiences that shaped my path
-                </p>
-            </div>
-            <div class="education-timeline reveal">
-                <div class="timeline-line"></div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">Class 12th - Science (PCM)</h3>
-                        <div class="timeline-subtitle">B.L Academy • 2024-2026</div>
-                        <p class="timeline-description">
-                            Currently pursuing higher secondary education with focus on Physics, Chemistry, and Mathematics. Actively engaged in coding projects and web development alongside academic studies.
-                        </p>
-                    </div>
-                </div>
-                
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3 class="timeline-title">Class 10th</h3>
-                        <div class="timeline-subtitle">Shakun Vidya Niketan • 2022-2024</div>
-                        <p class="timeline-description">
-                            Completed secondary education with 70% marks. Developed initial interest in computer science and began learning programming fundamentals during this period.
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Achievements Section -->
-    <section class="section" id="achievements">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">Accomplishments</div>
-                <h2 class="section-title">Achievements & Certificates</h2>
-                <p class="section-description">
-                    Recognition and certifications that validate my skills and dedication
-                </p>
-            </div>
-            <div class="achievements-grid">
-                <div class="achievement-card reveal">
-                    <div class="achievement-icon">
-                        <i class="fas fa-certificate"></i>
-                    </div>
-                    <h3 class="achievement-title">HTML & CSS Certification</h3>
-                    <p class="achievement-description">
-                        Successfully completed comprehensive HTML and CSS course from FreeCodeCamp, demonstrating proficiency in modern web development practices.
-                    </p>
-                    <a href="#" class="achievement-link">
-                        View Certificate <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
-                
-                <div class="achievement-card reveal">
-                    <div class="achievement-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 class="achievement-title">JavaScript Fundamentals</h3>
-                    <p class="achievement-description">
-                        Completed JavaScript programming course with focus on ES6+ features, DOM manipulation, and modern web development techniques.
-                    </p>
-                    <a href="#" class="achievement-link">
-                        View Certificate <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
-                
-                <div class="achievement-card reveal">
-                    <div class="achievement-icon">
-                        <i class="fas fa-trophy"></i>
-                    </div>
-                    <h3 class="achievement-title">Web Design Competition</h3>
-                    <p class="achievement-description">
-                        Secured first position in inter-school web design competition, showcasing creativity and technical skills in responsive design.
-                    </p>
-                    <a href="#" class="achievement-link">
-                        View Achievement <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
-                
-                <div class="achievement-card reveal">
-                    <div class="achievement-icon">
-                        <i class="fas fa-project-diagram"></i>
-                    </div>
-                    <h3 class="achievement-title">Open Source Contributor</h3>
-                    <p class="achievement-description">
-                        Active contributor to open source projects on GitHub, helping improve documentation and fixing bugs in various repositories.
-                    </p>
-                    <a href="https://github.com/Divyanshu5520" class="achievement-link" target="_blank">
-                        View Contributions <i class="fas fa-external-link-alt"></i>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials Section -->
-    <section class="section" id="testimonials">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">What they say</div>
-                <h2 class="section-title">Testimonials</h2>
-                <p class="section-description">
-                    Feedback from mentors, teachers, and collaborators
-                </p>
-            </div>
-            <div class="testimonials-container reveal">
-                <div class="testimonial-card active">
-                    <p class="testimonial-quote">
-                        Divyanshu is an exceptional student with a natural talent for web development. His dedication to learning and problem-solving skills are truly impressive for someone his age.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">CS</div>
-                        <div class="author-info">
-                            <h4>Computer Science Teacher</h4>
-                            <p>B.L Academy</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-quote">
-                        Working with Divyanshu on web projects has been a great experience. He brings fresh ideas and implements them with clean, efficient code. Highly recommended!
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SM</div>
-                        <div class="author-info">
-                            <h4>Senior Developer</h4>
-                            <p>Tech Mentor</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-card">
-                    <p class="testimonial-quote">
-                        Divyanshu's portfolio projects demonstrate excellent understanding of modern web technologies. His attention to detail and user experience is commendable.
-                    </p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">RK</div>
-                        <div class="author-info">
-                            <h4>UI/UX Designer</h4>
-                            <p>Design Consultant</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="testimonial-nav">
-                    <button class="nav-btn" id="prevBtn">
-                        <i class="fas fa-chevron-left"></i>
+    <!-- SPA Container -->
+    <div class="app-container" id="appContainer">
+        <!-- Enhanced Header -->
+        <header class="header" id="header">
+            <div class="nav-container">
+                <div class="logo" data-route="home">Divyanshu Pandey</div>
+                <nav>
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a class="nav-link active" data-route="home">Home</a></li>
+                        <li><a class="nav-link" data-route="about">About</a></li>
+                        <li><a class="nav-link" data-route="skills">Skills</a></li>
+                        <li><a class="nav-link" data-route="projects">Projects</a></li>
+                        <li><a class="nav-link" data-route="education">Education</a></li>
+                        <li><a class="nav-link" data-route="contact">Contact</a></li>
+                    </ul>
+                    <button class="mobile-menu-btn" id="mobileMenuBtn">
+                        <i class="fas fa-bars"></i>
                     </button>
-                    <button class="nav-btn" id="nextBtn">
-                        <i class="fas fa-chevron-right"></i>
-                    </button>
-                </div>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Enhanced Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <ul class="mobile-nav-list">
+                <li><a class="mobile-nav-link active" data-route="home"><i class="fas fa-home"></i> Home</a></li>
+                <li><a class="mobile-nav-link" data-route="about"><i class="fas fa-user"></i> About</a></li>
+                <li><a class="mobile-nav-link" data-route="skills"><i class="fas fa-code"></i> Skills</a></li>
+                <li><a class="mobile-nav-link" data-route="projects"><i class="fas fa-folder"></i> Projects</a></li>
+                <li><a class="mobile-nav-link" data-route="education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a class="mobile-nav-link" data-route="contact"><i class="fas fa-envelope"></i> Contact</a></li>
+            </ul>
+        </div>
+
+        <!-- Route Indicator -->
+        <div class="route-indicator" id="routeIndicator">
+            <div class="route-dot active" data-route="home">
+                <div class="route-label">Home</div>
+            </div>
+            <div class="route-dot" data-route="about">
+                <div class="route-label">About</div>
+            </div>
+            <div class="route-dot" data-route="skills">
+                <div class="route-label">Skills</div>
+            </div>
+            <div class="route-dot" data-route="projects">
+                <div class="route-label">Projects</div>
+            </div>
+            <div class="route-dot" data-route="education">
+                <div class="route-label">Education</div>
+            </div>
+            <div class="route-dot" data-route="contact">
+                <div class="route-label">Contact</div>
             </div>
         </div>
-    </section>
 
-    <!-- Contact Section -->
-    <section class="section" id="contact">
-        <div class="container">
-            <div class="section-header reveal">
-                <div class="section-subtitle">Let's work together</div>
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="section-description">
-                    Have a project in mind? Let's discuss how we can bring your ideas to life
-                </p>
-            </div>
-            <div class="contact-content">
-                <form class="contact-form reveal" id="contactForm">
-                    <div class="form-group">
-                        <label for="name" class="form-label">Full Name</label>
-                        <input type="text" id="name" name="name" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="email" class="form-label">Email Address</label>
-                        <input type="email" id="email" name="email" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="subject" class="form-label">Subject</label>
-                        <input type="text" id="subject" name="subject" class="form-input" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="message" class="form-label">Message</label>
-                        <textarea id="message" name="message" class="form-input form-textarea" required></textarea>
-                    </div>
-                    <button type="submit" class="btn btn-primary">
-                        Send Message <i class="fas fa-paper-plane"></i>
-                    </button>
-                </form>
-                
-                <div class="contact-info reveal">
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-envelope"></i>
+        <!-- Page Contents -->
+        <!-- Home Page -->
+        <div class="page-content active" id="home-page">
+            <section class="hero">
+                <div class="hero-bg"></div>
+                <div class="hero-container">
+                    <div class="hero-content">
+                        <div class="hero-subtitle">
+                            <span>Hello, I'm</span>
                         </div>
-                        <div>
-                            <h4>Email</h4>
+                        <h1 class="hero-title">
+                            <span class="gradient-text">Divyanshu</span><br>
+                            Pandey
+                        </h1>
+                        <p class="hero-description">
+                            A passionate 12th-grade student and aspiring web developer, crafting beautiful digital experiences with modern technologies.
+                        </p>
+                        <div class="hero-cta">
+                            <button class="btn btn-primary" data-route="projects">
+                                View My Work <i class="fas fa-arrow-right"></i>
+                            </button>
+                            <button class="btn btn-secondary" data-route="contact">
+                                Get In Touch <i class="fas fa-envelope"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="hero-image">
+                        <div class="hero-avatar">
+                            <span>DP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="social-links">
+                    <a href="https://github.com/Divyanshu5520" class="social-link" target="_blank">
+                        <i class="fab fa-github"></i>
+                    </a>
+                    <a href="#" class="social-link" target="_blank">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="social-link" target="_blank">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="social-link" target="_blank">
+                        <i class="fab fa-instagram"></i>
+                    </a>
+                </div>
+            </section>
+        </div>
+
+        <!-- About Page -->
+        <div class="page-content" id="about-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">Get to know me</div>
+                        <h2 class="section-title">About Me</h2>
+                        <p class="section-description">
+                            Passionate about creating digital solutions that make a difference
+                        </p>
+                    </div>
+                    <div class="content-section">
+                        <h2>My Journey</h2>
+                        <p>
+                            Hi there! I'm Divyanshu Pandey, a dedicated 12th-grade student with an unwavering passion for web development and technology. My journey into the world of coding began with curiosity and has evolved into a deep commitment to creating meaningful digital experiences.
+                        </p>
+                        <p>
+                            I specialize in front-end development, with expertise in HTML, CSS, JavaScript, and modern frameworks. I believe in writing clean, efficient code and staying updated with the latest industry trends and best practices.
+                        </p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>15+ Projects</h3>
+                            <p>Successfully completed various web development projects ranging from simple websites to complex applications.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>2+ Years Experience</h3>
+                            <p>Continuously learning and developing skills in web technologies and programming languages.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Multiple Technologies</h3>
+                            <p>Proficient in HTML, CSS, JavaScript, React, Python, and various development tools and frameworks.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Skills Page -->
+        <div class="page-content" id="skills-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">What I do</div>
+                        <h2 class="section-title">Skills & Expertise</h2>
+                        <p class="section-description">
+                            Technologies and tools I use to bring ideas to life
+                        </p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>Frontend Development</h3>
+                            <p>HTML5, CSS3, JavaScript, React, Responsive Design, Bootstrap - Creating beautiful and interactive user interfaces.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-database"></i>
+                            </div>
+                            <h3>Backend & Database</h3>
+                            <p>Python, MySQL, PHP, Node.js, API Integration - Building robust server-side applications and managing data.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <h3>Tools & Technologies</h3>
+                            <p>Git & GitHub, VS Code, Figma, Chrome DevTools, Netlify - Using modern development tools for efficient workflows.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <h3>Responsive Design</h3>
+                            <p>Mobile-first approach, Cross-browser compatibility, Progressive Web Apps - Ensuring great experiences across all devices.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-paint-brush"></i>
+                            </div>
+                            <h3>UI/UX Design</h3>
+                            <p>User-centered design, Prototyping, Wireframing - Creating intuitive and engaging user experiences.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-rocket"></i>
+                            </div>
+                            <h3>Performance Optimization</h3>
+                            <p>Code optimization, Loading speed improvement, SEO best practices - Delivering fast and efficient web solutions.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Projects Page -->
+        <div class="page-content" id="projects-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">My Work</div>
+                        <h2 class="section-title">Featured Projects</h2>
+                        <p class="section-description">
+                            A showcase of my recent work and creative solutions
+                        </p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-pdf"></i>
+                            </div>
+                            <h3>Code to PDF Converter</h3>
+                            <p>A web application that converts source code into beautifully formatted PDF documents with syntax highlighting and customizable themes.</p>
+                            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <a href="https://codecr4cker.github.io/Code-2-pdf/" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" target="_blank" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-comments"></i>
+                            </div>
+                            <h3>React Chat Application</h3>
+                            <p>A real-time chat application built with React, featuring modern UI design, emoji support, and responsive layout for seamless communication.</p>
+                            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <a href="https://codecr4cker.github.io/react-chat-app/" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" target="_blank" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-building"></i>
+                            </div>
+                            <h3>Construction Portfolio</h3>
+                            <p>A professional portfolio website for a construction company, showcasing their projects, services, and company information with modern design.</p>
+                            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <a href="https://codecr4cker.github.io/html-test/" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" target="_blank" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-link"></i>
+                            </div>
+                            <h3>Link Converter Tool</h3>
+                            <p>A utility web application for converting and managing different types of links, with features for URL validation and format conversion.</p>
+                            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
+                                <a href="https://codecr4cker.github.io/link-converter/" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-external-link-alt"></i> Live Demo
+                                </a>
+                                <a href="#" target="_blank" class="btn btn-secondary">
+                                    <i class="fab fa-github"></i> Code
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Education Page -->
+        <div class="page-content" id="education-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">My Journey</div>
+                        <h2 class="section-title">Education & Achievements</h2>
+                        <p class="section-description">
+                            Academic milestones and learning experiences that shaped my path
+                        </p>
+                    </div>
+                    <div class="content-section">
+                        <h2>Current Education</h2>
+                        <p><strong>Class 12th - Science (PCM)</strong> | B.L Academy | 2024-2026</p>
+                        <p>Currently pursuing higher secondary education with focus on Physics, Chemistry, and Mathematics. Actively engaged in coding projects and web development alongside academic studies.</p>
+                    </div>
+                    <div class="content-section">
+                        <h2>Previous Education</h2>
+                        <p><strong>Class 10th</strong> | Shakun Vidya Niketan | 2022-2024</p>
+                        <p>Completed secondary education with 70% marks. Developed initial interest in computer science and began learning programming fundamentals during this period.</p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-certificate"></i>
+                            </div>
+                            <h3>HTML & CSS Certification</h3>
+                            <p>Successfully completed comprehensive HTML and CSS course from FreeCodeCamp, demonstrating proficiency in modern web development practices.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-code"></i>
+                            </div>
+                            <h3>JavaScript Fundamentals</h3>
+                            <p>Completed JavaScript programming course with focus on ES6+ features, DOM manipulation, and modern web development techniques.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-trophy"></i>
+                            </div>
+                            <h3>Web Design Competition</h3>
+                            <p>Secured first position in inter-school web design competition, showcasing creativity and technical skills in responsive design.</p>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-project-diagram"></i>
+                            </div>
+                            <h3>Open Source Contributor</h3>
+                            <p>Active contributor to open source projects on GitHub, helping improve documentation and fixing bugs in various repositories.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <!-- Contact Page -->
+        <div class="page-content" id="contact-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">Let's work together</div>
+                        <h2 class="section-title">Get In Touch</h2>
+                        <p class="section-description">
+                            Have a project in mind? Let's discuss how we can bring your ideas to life
+                        </p>
+                    </div>
+                    <div class="content-section">
+                        <form id="contactForm">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name</label>
+                                    <input type="text" name="name" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                </div>
+                                <div>
+                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email Address</label>
+                                    <input type="email" name="email" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 1rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Subject</label>
+                                <input type="text" name="subject" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                            </div>
+                            <div style="margin-bottom: 2rem;">
+                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
+                                <textarea name="message" required rows="6" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem; resize: vertical;"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                Send Message <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </form>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                            <h3>Email</h3>
                             <p>divyanshu@example.com</p>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-phone"></i>
-                        </div>
-                        <div>
-                            <h4>Phone</h4>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-phone"></i>
+                            </div>
+                            <h3>Phone</h3>
                             <p>+91 12345 67890</p>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-map-marker-alt"></i>
-                        </div>
-                        <div>
-                            <h4>Location</h4>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <h3>Location</h3>
                             <p>Bahraigh, Uttar Pradesh, India</p>
                         </div>
-                    </div>
-                    <div class="contact-item">
-                        <div class="contact-icon">
-                            <i class="fas fa-clock"></i>
-                        </div>
-                        <div>
-                            <h4>Response Time</h4>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <h3>Response Time</h3>
                             <p>Within 24 hours</p>
                         </div>
                     </div>
                 </div>
-            </div>
+            </section>
         </div>
-    </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <div class="footer-content reveal">
-                <h3>Let's create something amazing together</h3>
-                <p>Thank you for visiting my portfolio. Feel free to reach out for any collaborations or opportunities.</p>
-            </div>
-            <div class="footer-links">
-                <a href="#home" class="footer-link">Home</a>
-                <a href="#about" class="footer-link">About</a>
-                <a href="#skills" class="footer-link">Skills</a>
-                <a href="#projects" class="footer-link">Projects</a>
-                <a href="#education" class="footer-link">Education</a>
-                <a href="#achievements" class="footer-link">Achievements</a>
-                <a href="#testimonials" class="footer-link">Testimonials</a>
-                <a href="#contact" class="footer-link">Contact</a>
-            </div>
-            <div class="footer-bottom">
-                <p>&copy; 2025 Divyanshu Pandey. Made with ❤️ | All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
+        <!-- Back to Top Button -->
+        <button class="back-to-top" id="backToTop">
+            <i class="fas fa-arrow-up"></i>
+        </button>
+    </div>
 
-    <!-- Back to Top Button -->
-    <button class="back-to-top" id="backToTop">
-        <i class="fas fa-arrow-up"></i>
-    </button>
-
-    <!-- Particles.js -->
+    <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
-
     <script>
-        // Particles.js Configuration
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 50,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#0066ff'
-                },
-                shape: {
-                    type: 'circle',
-                    stroke: {
-                        width: 0,
-                        color: '#000000'
-                    }
-                },
-                opacity: {
-                    value: 0.3,
-                    random: false,
-                    anim: {
-                        enable: false
-                    }
-                },
-                size: {
-                    value: 3,
-                    random: true,
-                    anim: {
-                        enable: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#0066ff',
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 2,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.5
-                        }
-                    },
-                    push: {
-                        particles_nb: 4
-                    }
-                }
-            },
-            retina_detect: true
-        });
-
-        // Loading Screen
-        window.addEventListener('load', () => {
-            const loader = document.getElementById('loader');
-            setTimeout(() => {
-                loader.classList.add('hidden');
-            }, 2000);
-        });
-
-        // Header Scroll Effect
-        const header = document.getElementById('header');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 100) {
-                header.classList.add('scrolled');
-            } else {
-                header.classList.remove('scrolled');
+        // SPA Router Class
+        class SPARouter {
+            constructor() {
+                this.routes = {};
+                this.currentRoute = 'home';
+                this.init();
             }
-        });
 
-        // Mobile Menu Toggle
-        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-        const navMenu = document.getElementById('navMenu');
-        const navLinks = document.querySelectorAll('.nav-link');
+            init() {
+                // Register routes
+                this.registerRoute('home', 'home-page');
+                this.registerRoute('about', 'about-page');
+                this.registerRoute('skills', 'skills-page');
+                this.registerRoute('projects', 'projects-page');
+                this.registerRoute('education', 'education-page');
+                this.registerRoute('contact', 'contact-page');
 
-        mobileMenuBtn.addEventListener('click', () => {
-            navMenu.classList.toggle('active');
-            const icon = mobileMenuBtn.querySelector('i');
-            if (navMenu.classList.contains('active')) {
-                icon.classList.replace('fa-bars', 'fa-times');
-            } else {
-                icon.classList.replace('fa-times', 'fa-bars');
-            }
-        });
-
-        // Close mobile menu when clicking on nav links
-        navLinks.forEach(link => {
-            link.addEventListener('click', () => {
-                navMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
-            });
-        });
-
-        // Active Navigation Link
-        window.addEventListener('scroll', () => {
-            const sections = document.querySelectorAll('section');
-            const scrollPos = window.scrollY + 100;
-
-            sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.offsetHeight;
-                const sectionId = section.getAttribute('id');
-
-                if (scrollPos >= sectionTop && scrollPos < sectionTop + sectionHeight) {
-                    navLinks.forEach(link => {
-                        link.classList.remove('active');
-                        if (link.getAttribute('href') === `#${sectionId}`) {
-                            link.classList.add('active');
-                        }
-                    });
-                }
-            });
-        });
-
-        // Smooth Scrolling for Navigation Links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const targetId = this.getAttribute('href').substring(1);
-                const targetSection = document.getElementById(targetId);
+                // Set up event listeners
+                this.setupEventListeners();
                 
-                if (targetSection) {
-                    const offsetTop = targetSection.offsetTop - 80;
+                // Load initial route
+                this.loadRoute(this.currentRoute);
+            }
+
+            registerRoute(path, elementId) {
+                this.routes[path] = {
+                    element: document.getElementById(elementId),
+                    path: path
+                };
+            }
+
+            setupEventListeners() {
+                // Navigation links
+                document.querySelectorAll('[data-route]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        const route = e.currentTarget.getAttribute('data-route');
+                        this.navigateTo(route);
+                    });
+                });
+
+                // Browser back/forward buttons
+                window.addEventListener('popstate', (e) => {
+                    const route = e.state?.route || 'home';
+                    this.loadRoute(route, false);
+                });
+            }
+
+            navigateTo(route) {
+                if (this.routes[route]) {
+                    this.loadRoute(route, true);
+                }
+            }
+
+            loadRoute(route, pushState = true) {
+                // Hide all pages
+                Object.values(this.routes).forEach(routeObj => {
+                    routeObj.element.classList.remove('active');
+                });
+
+                // Show target page
+                if (this.routes[route]) {
+                    this.routes[route].element.classList.add('active');
+                    this.currentRoute = route;
+
+                    // Update URL
+                    if (pushState) {
+                        history.pushState({ route }, '', `#${route}`);
+                    }
+
+                    // Update navigation
+                    this.updateNavigation(route);
+
+                    // Close mobile menu
+                    this.closeMobileMenu();
+
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    // Update page title
+                    this.updatePageTitle(route);
+                }
+            }
+
+            updateNavigation(activeRoute) {
+                // Update desktop navigation
+                document.querySelectorAll('.nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-route') === activeRoute) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Update mobile navigation
+                document.querySelectorAll('.mobile-nav-link').forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('data-route') === activeRoute) {
+                        link.classList.add('active');
+                    }
+                });
+
+                // Update route indicator
+                document.querySelectorAll('.route-dot').forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-route') === activeRoute) {
+                        dot.classList.add('active');
+                    }
+                });
+            }
+
+            updatePageTitle(route) {
+                const titles = {
+                    home: 'Divyanshu Pandey - Professional Portfolio',
+                    about: 'About - Divyanshu Pandey',
+                    skills: 'Skills - Divyanshu Pandey',
+                    projects: 'Projects - Divyanshu Pandey',
+                    education: 'Education - Divyanshu Pandey',
+                    contact: 'Contact - Divyanshu Pandey'
+                };
+                document.title = titles[route] || titles.home;
+            }
+
+            closeMobileMenu() {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                mobileMenu.classList.remove('active');
+                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+            }
+        }
+
+        // Enhanced Loading Screen
+        class LoadingScreen {
+            constructor() {
+                this.loader = document.getElementById('loader');
+                this.appContainer = document.getElementById('appContainer');
+                this.loadingTexts = [
+                    'Loading Portfolio...',
+                    'Initializing Components...',
+                    'Setting up Navigation...',
+                    'Finalizing Experience...',
+                    'Ready!'
+                ];
+                this.currentTextIndex = 0;
+                this.init();
+            }
+
+            init() {
+                this.animateLoadingText();
+                this.simulateLoading();
+            }
+
+            animateLoadingText() {
+                const loaderText = document.querySelector('.loader-text');
+                const textInterval = setInterval(() => {
+                    if (this.currentTextIndex < this.loadingTexts.length - 1) {
+                        loaderText.textContent = this.loadingTexts[this.currentTextIndex];
+                        this.currentTextIndex++;
+                    } else {
+                        clearInterval(textInterval);
+                    }
+                }, 600);
+            }
+
+            simulateLoading() {
+                setTimeout(() => {
+                    this.hideLoader();
+                }, 3000);
+            }
+
+            hideLoader() {
+                this.loader.classList.add('hidden');
+                setTimeout(() => {
+                    this.appContainer.classList.add('loaded');
+                    this.initializeApp();
+                }, 500);
+            }
+
+            initializeApp() {
+                // Initialize particles
+                this.initParticles();
+                
+                // Initialize router
+                window.router = new SPARouter();
+                
+                // Initialize other components
+                this.initComponents();
+            }
+
+            initParticles() {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: {
+                            value: window.innerWidth < 768 ? 30 : 50,
+                            density: {
+                                enable: true,
+                                value_area: 800
+                            }
+                        },
+                        color: {
+                            value: '#0066ff'
+                        },
+                        shape: {
+                            type: 'circle'
+                        },
+                        opacity: {
+                            value: 0.3,
+                            random: false
+                        },
+                        size: {
+                            value: 3,
+                            random: true
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#0066ff',
+                            opacity: 0.2,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: 'none',
+                            random: false,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: {
+                                enable: true,
+                                mode: 'grab'
+                            },
+                            onclick: {
+                                enable: true,
+                                mode: 'push'
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            grab: {
+                                distance: 140,
+                                line_linked: {
+                                    opacity: 0.5
+                                }
+                            },
+                            push: {
+                                particles_nb: 4
+                            }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+
+            initComponents() {
+                this.initMobileMenu();
+                this.initScrollEffects();
+                this.initFormHandling();
+                this.initAnimations();
+            }
+
+            initMobileMenu() {
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                const mobileMenu = document.getElementById('mobileMenu');
+
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('active');
+                    const icon = mobileMenuBtn.querySelector('i');
+                    if (mobileMenu.classList.contains('active')) {
+                        icon.classList.replace('fa-bars', 'fa-times');
+                    } else {
+                        icon.classList.replace('fa-times', 'fa-bars');
+                    }
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenu.contains(e.target) && !mobileMenuBtn.contains(e.target)) {
+                        mobileMenu.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                    }
+                });
+            }
+
+            initScrollEffects() {
+                const header = document.getElementById('header');
+                const backToTop = document.getElementById('backToTop');
+
+                window.addEventListener('scroll', () => {
+                    // Header scroll effect
+                    if (window.scrollY > 100) {
+                        header.classList.add('scrolled');
+                    } else {
+                        header.classList.remove('scrolled');
+                    }
+
+                    // Back to top button
+                    if (window.scrollY > 500) {
+                        backToTop.classList.add('visible');
+                    } else {
+                        backToTop.classList.remove('visible');
+                    }
+                });
+
+                backToTop.addEventListener('click', () => {
                     window.scrollTo({
-                        top: offsetTop,
+                        top: 0,
                         behavior: 'smooth'
                     });
-                }
-            });
-        });
+                });
+            }
 
-        // Scroll Reveal Animation
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
+            initFormHandling() {
+                const contactForm = document.getElementById('contactForm');
+                if (contactForm) {
+                    contactForm.addEventListener('submit', (e) => {
+                        e.preventDefault();
+                        
+                        // Simulate form submission
+                        const submitBtn = contactForm.querySelector('button[type="submit"]');
+                        const originalText = submitBtn.innerHTML;
+                        
+                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+                        submitBtn.disabled = true;
+                        
+                        setTimeout(() => {
+                            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
+                            submitBtn.style.background = 'var(--gradient-secondary)';
+                            
+                            setTimeout(() => {
+                                submitBtn.innerHTML = originalText;
+                                submitBtn.disabled = false;
+                                submitBtn.style.background = '';
+                                contactForm.reset();
+                            }, 2000);
+                        }, 2000);
+                    });
+                }
+            }
+
+            initAnimations() {
+                // Add hover effects to buttons
+                document.querySelectorAll('.btn').forEach(btn => {
+                    btn.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-2px) scale(1.02)';
+                    });
+                    
+                    btn.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateY(0) scale(1)';
+                    });
+                });
+
+                // Add hover effects to feature cards
+                document.querySelectorAll('.feature-card').forEach(card => {
+                    card.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-8px) scale(1.02)';
+                        this.querySelector('.feature-icon').style.transform = 'scale(1.1) rotate(5deg)';
+                    });
+                    
+                    card.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateY(0) scale(1)';
+                        this.querySelector('.feature-icon').style.transform = 'scale(1) rotate(0deg)';
+                    });
+                });
+
+                // Animate hero subtitle
+                this.animateHeroSubtitle();
+            }
+
+            animateHeroSubtitle() {
+                const subtitle = document.querySelector('.hero-subtitle span');
+                if (subtitle) {
+                    const phrases = ["Hello, I'm", "Welcome, I'm", "Hi there, I'm"];
+                    let phraseIndex = 0;
+                    let charIndex = 0;
+                    let isDeleting = false;
+
+                    const typeEffect = () => {
+                        const currentPhrase = phrases[phraseIndex];
+                        
+                        if (isDeleting) {
+                            subtitle.textContent = currentPhrase.substring(0, charIndex - 1);
+                            charIndex--;
+                        } else {
+                            subtitle.textContent = currentPhrase.substring(0, charIndex + 1);
+                            charIndex++;
+                        }
+
+                        if (!isDeleting && charIndex === currentPhrase.length) {
+                            setTimeout(() => isDeleting = true, 2000);
+                        } else if (isDeleting && charIndex === 0) {
+                            isDeleting = false;
+                            phraseIndex = (phraseIndex + 1) % phrases.length;
+                        }
+
+                        const typingSpeed = isDeleting ? 50 : 100;
+                        setTimeout(typeEffect, typingSpeed);
+                    };
+
+                    setTimeout(typeEffect, 1000);
+                }
+            }
+        }
+
+        // Enhanced App Initialization
+        class App {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                // Check if page is already loaded
+                if (document.readyState === 'loading') {
+                    document.addEventListener('DOMContentLoaded', () => {
+                        this.startApp();
+                    });
+                } else {
+                    this.startApp();
+                }
+            }
+
+            startApp() {
+                // Initialize loading screen
+                new LoadingScreen();
+                
+                // Initialize responsive handlers
+                this.initResponsiveHandlers();
+                
+                // Initialize performance optimizations
+                this.initPerformanceOptimizations();
+            }
+
+            initResponsiveHandlers() {
+                // Handle window resize
+                let resizeTimeout;
+                window.addEventListener('resize', () => {
+                    clearTimeout(resizeTimeout);
+                    resizeTimeout = setTimeout(() => {
+                        this.handleResize();
+                    }, 250);
+                });
+
+                // Handle orientation change
+                window.addEventListener('orientationchange', () => {
+                    setTimeout(() => {
+                        this.handleResize();
+                    }, 100);
+                });
+            }
+
+            handleResize() {
+                // Update particles based on screen size
+                if (window.pJSDom && window.pJSDom[0]) {
+                    const particleCount = window.innerWidth < 768 ? 25 : 50;
+                    window.pJSDom[0].pJS.particles.number.value = particleCount;
+                    window.pJSDom[0].pJS.fn.particlesRefresh();
+                }
+
+                // Close mobile menu on resize to desktop
+                if (window.innerWidth > 1030) {
+                    const mobileMenu = document.getElementById('mobileMenu');
+                    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                    if (mobileMenu && mobileMenu.classList.contains('active')) {
+                        mobileMenu.classList.remove('active');
+                        mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                    }
+                }
+            }
+
+            initPerformanceOptimizations() {
+                // Lazy load images
+                this.initLazyLoading();
+                
+                // Debounce scroll events
+                this.initOptimizedScrolling();
+                
+                // Preload critical resources
+                this.preloadResources();
+            }
+
+            initLazyLoading() {
+                const images = document.querySelectorAll('img[data-src]');
+                const imageObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            observer.unobserve(img);
+                        }
+                    });
+                });
+
+                images.forEach(img => imageObserver.observe(img));
+            }
+
+            initOptimizedScrolling() {
+                let scrollTimeout;
+                let isScrolling = false;
+
+                const optimizedScrollHandler = () => {
+                    if (!isScrolling) {
+                        requestAnimationFrame(() => {
+                            // Scroll-dependent updates here
+                            isScrolling = false;
+                        });
+                        isScrolling = true;
+                    }
+                };
+
+                window.addEventListener('scroll', optimizedScrollHandler, { passive: true });
+            }
+
+            preloadResources() {
+                // Preload critical fonts
+                const fontPreloads = [
+                    'https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap',
+                    'https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap'
+                ];
+
+                fontPreloads.forEach(href => {
+                    const link = document.createElement('link');
+                    link.rel = 'preload';
+                    link.as = 'style';
+                    link.href = href;
+                    document.head.appendChild(link);
+                });
+            }
+        }
+
+        // Service Worker Registration (for PWA capabilities)
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/sw.js')
+                    .then((registration) => {
+                        console.log('SW registered: ', registration);
+                    })
+                    .catch((registrationError) => {
+                        console.log('SW registration failed: ', registrationError);
+                    });
+            });
+        }
+
+        // Initialize the app
+        new App();
+
+        // Global utilities
+        window.utils = {
+            // Smooth scroll to element
+            scrollTo: (elementId) => {
+                const element = document.getElementById(elementId);
+                if (element) {
+                    element.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            },
+
+            // Copy text to clipboard
+            copyToClipboard: (text) => {
+                navigator.clipboard.writeText(text).then(() => {
+                    console.log('Text copied to clipboard');
+                });
+            },
+
+            // Show notification
+            showNotification: (message, type = 'info') => {
+                const notification = document.createElement('div');
+                notification.className = `notification notification-${type}`;
+                notification.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    right: 20px;
+                    background: var(--surface-elevated);
+                    color: var(--text-primary);
+                    padding: 1rem 1.5rem;
+                    border-radius: 8px;
+                    border: 1px solid var(--border);
+                    z-index: 10001;
+                    animation: slideInRight 0.3s ease;
+                    max-width: 300px;
+                `;
+                notification.textContent = message;
+
+                document.body.appendChild(notification);
+
+                setTimeout(() => {
+                    notification.style.animation = 'slideOutRight 0.3s ease';
+                    setTimeout(() => {
+                        notification.remove();
+                    }, 300);
+                }, 3000);
+            }
         };
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
+        // Add notification animations
+        const notificationStyles = document.createElement('style');
+        notificationStyles.textContent = `
+            @keyframes slideInRight {
+                from {
+                    transform: translateX(100%);
+                    opacity: 0;
                 }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.reveal').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Back to Top Button
-        const backToTop = document.getElementById('backToTop');
-        
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 500) {
-                backToTop.classList.add('visible');
-            } else {
-                backToTop.classList.remove('visible');
-            }
-        });
-
-        backToTop.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Testimonials Carousel
-        const testimonialCards = document.querySelectorAll('.testimonial-card');
-        const prevBtn = document.getElementById('prevBtn');
-        const nextBtn = document.getElementById('nextBtn');
-        let currentTestimonial = 0;
-
-        function showTestimonial(index) {
-            testimonialCards.forEach((card, i) => {
-                card.classList.toggle('active', i === index);
-            });
-        }
-
-        function nextTestimonial() {
-            currentTestimonial = (currentTestimonial + 1) % testimonialCards.length;
-            showTestimonial(currentTestimonial);
-        }
-
-        function prevTestimonial() {
-            currentTestimonial = (currentTestimonial - 1 + testimonialCards.length) % testimonialCards.length;
-            showTestimonial(currentTestimonial);
-        }
-
-        nextBtn.addEventListener('click', nextTestimonial);
-        prevBtn.addEventListener('click', prevTestimonial);
-
-        // Auto-rotate testimonials
-        setInterval(nextTestimonial, 5000);
-
-        // Contact Form Handling
-        const contactForm = document.getElementById('contactForm');
-        contactForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            
-            // Create success message
-            const successDiv = document.createElement('div');
-            successDiv.innerHTML = `
-                <div style="background: rgba(0, 212, 170, 0.1); color: var(--accent); padding: 1rem; border-radius: 8px; margin-top: 1rem; border: 1px solid var(--accent); animation: fadeInUp 0.5s ease;">
-                    <i class="fas fa-check-circle"></i> Thank you! Your message has been sent successfully.
-                </div>
-            `;
-            
-            // Remove existing success messages
-            const existingSuccess = contactForm.querySelector('.success-message');
-            if (existingSuccess) {
-                existingSuccess.remove();
-            }
-            
-            // Add success message
-            successDiv.className = 'success-message';
-            contactForm.appendChild(successDiv);
-            
-            // Reset form
-            contactForm.reset();
-            
-            // Remove success message after 5 seconds
-            setTimeout(() => {
-                if (successDiv) {
-                    successDiv.remove();
-                }
-            }, 5000);
-        });
-
-        // Add typing effect to hero subtitle
-        const typewriterText = document.querySelector('.hero-subtitle span');
-        const phrases = ["Hello, I'm", "Welcome, I'm", "Hi there, I'm"];
-        let phraseIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-
-        function typeEffect() {
-            const currentPhrase = phrases[phraseIndex];
-            
-            if (isDeleting) {
-                typewriterText.textContent = currentPhrase.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                typewriterText.textContent = currentPhrase.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            if (!isDeleting && charIndex === currentPhrase.length) {
-                setTimeout(() => isDeleting = true, 2000);
-            } else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                phraseIndex = (phraseIndex + 1) % phrases.length;
-            }
-
-            const typingSpeed = isDeleting ? 50 : 100;
-            setTimeout(typeEffect, typingSpeed);
-        }
-
-        // Start typing effect after page load
-        setTimeout(typeEffect, 1000);
-
-        // Parallax effect for hero background
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const heroBg = document.querySelector('.hero-bg');
-            if (heroBg) {
-                heroBg.style.transform = `translateY(${scrolled * 0.5}px)`;
-            }
-        });
-
-        // Add hover effects to project cards
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-15px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-
-        // Add click ripple effect to buttons
-        document.querySelectorAll('.btn').forEach(button => {
-            button.addEventListener('click', function(e) {
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.cssText = `
-                    position: absolute;
-                    width: ${size}px;
-                    height: ${size}px;
-                    left: ${x}px;
-                    top: ${y}px;
-                    background: rgba(255, 255, 255, 0.3);
-                    border-radius: 50%;
-                    transform: scale(0);
-                    animation: ripple 0.6s ease-out;
-                    pointer-events: none;
-                `;
-                
-                this.style.position = 'relative';
-                this.style.overflow = 'hidden';
-                this.appendChild(ripple);
-                
-                setTimeout(() => ripple.remove(), 600);
-            });
-        });
-
-        // Add CSS for ripple animation
-        const style = document.createElement('style');
-        style.textContent = `
-            @keyframes ripple {
                 to {
-                    transform: scale(2);
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+            }
+            
+            @keyframes slideOutRight {
+                from {
+                    transform: translateX(0);
+                    opacity: 1;
+                }
+                to {
+                    transform: translateX(100%);
                     opacity: 0;
                 }
             }
         `;
-        document.head.appendChild(style);
+        document.head.appendChild(notificationStyles);
 
-        // Achievement cards animation on hover
-        document.querySelectorAll('.achievement-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.querySelector('.achievement-icon').style.transform = 'scale(1.1) rotate(10deg)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.querySelector('.achievement-icon').style.transform = 'scale(1) rotate(0deg)';
-            });
+        // Handle hash routing from URL
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.slice(1);
+            if (hash && window.router) {
+                setTimeout(() => {
+                    window.router.navigateTo(hash);
+                }, 500);
+            }
         });
 
-        // Timeline dots animation
-        const timelineDots = document.querySelectorAll('.timeline-dot');
-        const timelineObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animation = `pulse 2s ease-in-out infinite`;
-                }
-            });
-        }, { threshold: 0.5 });
+        // Add touch gestures for mobile
+        let startX = 0;
+        let startY = 0;
 
-        timelineDots.forEach(dot => {
-            timelineObserver.observe(dot);
+        document.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+        }, { passive: true });
+
+        document.addEventListener('touchend', (e) => {
+            if (!startX || !startY) return;
+
+            const endX = e.changedTouches[0].clientX;
+            const endY = e.changedTouches[0].clientY;
+
+            const diffX = startX - endX;
+            const diffY = startY - endY;
+
+            // Swipe detection (minimum 50px movement)
+            if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                if (diffX > 0) {
+                    // Swipe left - next section
+                    console.log('Swipe left detected');
+                } else {
+                    // Swipe right - previous section
+                    console.log('Swipe right detected');
+                }
+            }
+
+            startX = 0;
+            startY = 0;
+        }, { passive: true });
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            // ESC key to close mobile menu
+            if (e.key === 'Escape') {
+                const mobileMenu = document.getElementById('mobileMenu');
+                const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+                if (mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                }
+            }
+
+            // Tab navigation enhancement
+            if (e.key === 'Tab') {
+                document.body.classList.add('keyboard-navigation');
+            }
         });
 
-        // Add pulse animation for timeline dots
-        const pulseStyle = document.createElement('style');
-        pulseStyle.textContent = `
-            @keyframes pulse {
-                0%, 100% {
-                    transform: scale(1);
-                    box-shadow: 0 0 0 0 rgba(0, 102, 255, 0.7);
+        // Remove keyboard navigation class on mouse use
+        document.addEventListener('mousedown', () => {
+            document.body.classList.remove('keyboard-navigation');
+        });
+
+        // Add focus styles for keyboard navigation
+        const keyboardStyles = document.createElement('style');
+        keyboardStyles.textContent = `
+            .keyboard-navigation *:focus {
+                outline: 2px solid var(--primary) !important;
+                outline-offset: 2px !important;
+            }
+        `;
+        document.head.appendChild(keyboardStyles);
+
+        // Print styles
+        const printStyles = document.createElement('style');
+        printStyles.textContent = `
+            @media print {
+                .header, .mobile-menu, .back-to-top, .route-indicator, #particles-js {
+                    display: none !important;
                 }
-                50% {
-                    transform: scale(1.2);
-                    box-shadow: 0 0 0 10px rgba(0, 102, 255, 0);
+                
+                .page-content {
+                    display: block !important;
+                }
+                
+                body {
+                    background: white !important;
+                    color: black !important;
+                }
+                
+                .section {
+                    padding: 2rem 0 !important;
+                }
+                
+                .feature-card, .content-section {
+                    break-inside: avoid;
+                    margin-bottom: 1rem;
                 }
             }
         `;
-        document.head.appendChild(pulseStyle);
+        document.head.appendChild(printStyles);
 
-        // Skill tags hover effect
-        document.querySelectorAll('.skill-tag').forEach(tag => {
-            tag.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-3px) scale(1.05)';
-                this.style.boxShadow = '0 4px 12px rgba(0, 102, 255, 0.3)';
-            });
+        // Analytics and error tracking (placeholder)
+        window.analytics = {
+            track: (event, data) => {
+                console.log('Analytics event:', event, data);
+                // Integrate with your analytics service
+            },
             
-            tag.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-                this.style.boxShadow = 'none';
-            });
-        });
-
-        // Smooth fade-in for stats
-        const statNumbers = document.querySelectorAll('.stat-number');
-        const statsObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const finalNumber = entry.target.textContent;
-                    const number = parseInt(finalNumber);
-                    let current = 0;
-                    const increment = number / 50;
-                    
-                    const timer = setInterval(() => {
-                        current += increment;
-                        if (current >= number) {
-                            entry.target.textContent = finalNumber;
-                            clearInterval(timer);
-                        } else {
-                            entry.target.textContent = Math.floor(current) + (finalNumber.includes('+') ? '+' : finalNumber.includes('%') ? '%' : '');
-                        }
-                    }, 30);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        statNumbers.forEach(stat => {
-            statsObserver.observe(stat);
-        });
-
-        // Add floating animation to social links
-        document.querySelectorAll('.social-link').forEach((link, index) => {
-            link.style.animation = `float 3s ease-in-out infinite ${index * 0.2}s`;
-        });
-
-        // Particles.js responsive configuration
-        function updateParticlesConfig() {
-            if (window.innerWidth < 768) {
-                window.pJSDom[0].pJS.particles.number.value = 25;
-                window.pJSDom[0].pJS.fn.particlesRefresh();
-            } else {
-                window.pJSDom[0].pJS.particles.number.value = 50;
-                window.pJSDom[0].pJS.fn.particlesRefresh();
+            error: (error) => {
+                console.error('Application error:', error);
+                // Send to error tracking service
             }
+        };
+
+        // Global error handling
+        window.addEventListener('error', (e) => {
+            window.analytics.error({
+                message: e.message,
+                filename: e.filename,
+                lineno: e.lineno,
+                colno: e.colno,
+                error: e.error
+            });
+        });
+
+        // Unhandled promise rejection handling
+        window.addEventListener('unhandledrejection', (e) => {
+            window.analytics.error({
+                type: 'unhandledrejection',
+                reason: e.reason
+            });
+        });
+
+        // Performance monitoring
+        window.addEventListener('load', () => {
+            setTimeout(() => {
+                const perfData = performance.getEntriesByType('navigation')[0];
+                if (perfData) {
+                    window.analytics.track('page_load_performance', {
+                        load_time: Math.round(perfData.loadEventEnd - perfData.loadEventStart),
+                        dom_ready: Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart),
+                        first_paint: Math.round(performance.getEntriesByType('paint')[0]?.startTime || 0)
+                    });
+                }
+            }, 1000);
+        });
+
+        // Connection monitoring
+        if ('connection' in navigator) {
+            const connection = navigator.connection;
+            
+            const logConnectionInfo = () => {
+                window.analytics.track('connection_info', {
+                    effective_type: connection.effectiveType,
+                    downlink: connection.downlink,
+                    rtt: connection.rtt
+                });
+            };
+
+            connection.addEventListener('change', logConnectionInfo);
+            logConnectionInfo();
         }
 
-        window.addEventListener('resize', updateParticlesConfig);
-        
-        // Initialize particles config based on screen size
-        setTimeout(updateParticlesConfig, 1000);
-
-        // Form input focus effects
-        document.querySelectorAll('.form-input').forEach(input => {
-            input.addEventListener('focus', function() {
-                this.parentElement.style.transform = 'translateY(-2px)';
-            });
-            
-            input.addEventListener('blur', function() {
-                this.parentElement.style.transform = 'translateY(0)';
-            });
-        });
-
-        // Add loading animation to buttons on click
-        document.querySelectorAll('.btn-primary').forEach(btn => {
-            btn.addEventListener('click', function(e) {
-                if (this.closest('form')) {
-                    const originalText = this.innerHTML;
-                    this.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                    this.disabled = true;
-                    
-                    setTimeout(() => {
-                        this.innerHTML = originalText;
-                        this.disabled = false;
-                    }, 2000);
+        // Visibility API for performance optimization
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) {
+                // Page is hidden, pause non-essential animations
+                if (window.pJSDom && window.pJSDom[0]) {
+                    window.pJSDom[0].pJS.fn.vendors.pause();
                 }
-            });
-        });
-
-        // Navbar hide/show on scroll
-        let lastScrollTop = 0;
-        window.addEventListener('scroll', () => {
-            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-            
-            if (scrollTop > lastScrollTop && scrollTop > 100) {
-                // Scrolling down
-                header.style.transform = 'translateY(-100%)';
             } else {
-                // Scrolling up
-                header.style.transform = 'translateY(0)';
-            }
-            
-            lastScrollTop = scrollTop;
-        });
-
-        // Add intersection observer for timeline items
-        const timelineItems = document.querySelectorAll('.timeline-item');
-        const timelineItemObserver = new IntersectionObserver((entries) => {
-            entries.forEach((entry, index) => {
-                if (entry.isIntersecting) {
-                    setTimeout(() => {
-                        entry.target.style.opacity = '1';
-                        entry.target.style.transform = 'translateX(0)';
-                    }, index * 200);
+                // Page is visible, resume animations
+                if (window.pJSDom && window.pJSDom[0]) {
+                    window.pJSDom[0].pJS.fn.vendors.play();
                 }
-            });
-        }, { threshold: 0.3 });
-
-        timelineItems.forEach((item, index) => {
-            item.style.opacity = '0';
-            item.style.transform = 'translateX(-50px)';
-            item.style.transition = 'all 0.6s ease-out';
-            timelineItemObserver.observe(item);
+            }
         });
 
-        // Preload important images and optimize performance
-        const imageUrls = [
-            'https://raw.githubusercontent.com/CodeCr4cker/About/main/Img/itz.png'
-        ];
-
-        imageUrls.forEach(url => {
-            const img = new Image();
-            img.src = url;
-        });
-
-        // Add mouse movement parallax effect
-        document.addEventListener('mousemove', (e) => {
-            const mouseX = e.clientX / window.innerWidth;
-            const mouseY = e.clientY / window.innerHeight;
+        // Custom CSS properties for theme switching (future feature)
+        const themeManager = {
+            themes: {
+                dark: {
+                    '--primary': '#0066ff',
+                    '--background': '#0a0a0a',
+                    '--surface': '#1a1a1a',
+                    '--text-primary': '#ffffff'
+                },
+                light: {
+                    '--primary': '#0066ff',
+                    '--background': '#ffffff',
+                    '--surface': '#f8f9fa',
+                    '--text-primary': '#000000'
+                }
+            },
             
-            document.querySelectorAll('.hero-avatar').forEach(avatar => {
-                const x = (mouseX - 0.5) * 20;
-                const y = (mouseY - 0.5) * 20;
-                avatar.style.transform = `translate(${x}px, ${y}px) scale(1.05)`;
-            });
-        });
+            setTheme: (themeName) => {
+                const theme = this.themes[themeName];
+                if (theme) {
+                    Object.entries(theme).forEach(([property, value]) => {
+                        document.documentElement.style.setProperty(property, value);
+                    });
+                    localStorage.setItem('theme', themeName);
+                }
+            },
+            
+            initTheme: () => {
+                const savedTheme = localStorage.getItem('theme') || 'dark';
+                this.setTheme(savedTheme);
+            }
+        };
+
+        // Initialize theme (currently defaults to dark)
+        // themeManager.initTheme(); // Uncomment to enable theme management
+
+        console.log('🚀 Portfolio SPA loaded successfully!');
+        console.log('📱 Mobile-friendly features enabled');
+        console.log('⚡ Performance optimizations active');
+        console.log('🎨 Enhanced loader and animations ready');
     </script>
 </body>
 </html>
