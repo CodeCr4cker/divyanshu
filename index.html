@@ -536,20 +536,19 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 8rem;
-            font-weight: 300;
-            color: white;
             position: relative;
             overflow: hidden;
             margin: 0 auto;
             animation: pulse 4s ease-in-out infinite;
+            padding: 10px;
         }
 
         .hero-avatar img {
-            width: 90%;
-            height: 90%;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
             object-fit: cover;
+            border: 4px solid rgba(255, 255, 255, 0.1);
         }
 
         @keyframes pulse {
@@ -625,6 +624,97 @@
             color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto;
+        }
+
+        /* Blog Section Styles */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: var(--surface-elevated);
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: var(--gradient-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .blog-content {
+            padding: 2rem;
+        }
+
+        .blog-meta {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .blog-category {
+            background: var(--primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .blog-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.4;
+        }
+
+        .blog-excerpt {
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-read-more {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .blog-read-more:hover {
+            gap: 1rem;
         }
 
         /* Back to Top Button */
@@ -755,6 +845,10 @@
             .loader-wrapper {
                 width: 100px;
                 height: 100px;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -950,6 +1044,7 @@
                         <li><a class="nav-link" data-route="about">About</a></li>
                         <li><a class="nav-link" data-route="skills">Skills</a></li>
                         <li><a class="nav-link" data-route="projects">Projects</a></li>
+                        <li><a class="nav-link" data-route="blog">Blog</a></li>
                         <li><a class="nav-link" data-route="education">Education</a></li>
                         <li><a class="nav-link" data-route="contact">Contact</a></li>
                     </ul>
@@ -967,6 +1062,7 @@
                 <li><a class="mobile-nav-link" data-route="about"><i class="fas fa-user"></i> About</a></li>
                 <li><a class="mobile-nav-link" data-route="skills"><i class="fas fa-code"></i> Skills</a></li>
                 <li><a class="mobile-nav-link" data-route="projects"><i class="fas fa-folder"></i> Projects</a></li>
+                <li><a class="mobile-nav-link" data-route="blog"><i class="fas fa-blog"></i> Blog</a></li>
                 <li><a class="mobile-nav-link" data-route="education"><i class="fas fa-graduation-cap"></i> Education</a></li>
                 <li><a class="mobile-nav-link" data-route="contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
@@ -985,6 +1081,9 @@
             </div>
             <div class="route-dot" data-route="projects">
                 <div class="route-label">Projects</div>
+            </div>
+            <div class="route-dot" data-route="blog">
+                <div class="route-label">Blog</div>
             </div>
             <div class="route-dot" data-route="education">
                 <div class="route-label">Education</div>
@@ -1022,7 +1121,7 @@
                     </div>
                     <div class="hero-image">
                         <div class="hero-avatar">
-                            <span>DP</span>
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&crop=face&auto=format&q=80" alt="Divyanshu Pandey" />
                         </div>
                     </div>
                 </div>
@@ -1226,6 +1325,142 @@
             </section>
         </div>
 
+        <!-- Blog Page -->
+        <div class="page-content" id="blog-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">Latest Updates</div>
+                        <h2 class="section-title">Blog & Articles</h2>
+                        <p class="section-description">
+                            Sharing insights, tutorials, and thoughts on web development
+                        </p>
+                    </div>
+                    <div class="blog-grid">
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=600&h=200&fit=crop&auto=format&q=80" alt="JavaScript Tips" />
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">JavaScript</span>
+                                    <span><i class="fas fa-calendar"></i> Dec 15, 2024</span>
+                                    <span><i class="fas fa-clock"></i> 5 min read</span>
+                                </div>
+                                <h3 class="blog-title">10 Essential JavaScript Tips for Beginners</h3>
+                                <p class="blog-excerpt">
+                                    Discover the most important JavaScript concepts every beginner should master to become a proficient developer.
+                                </p>
+                                <a href="#" class="blog-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&h=200&fit=crop&auto=format&q=80" alt="CSS Grid" />
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">CSS</span>
+                                    <span><i class="fas fa-calendar"></i> Dec 10, 2024</span>
+                                    <span><i class="fas fa-clock"></i> 8 min read</span>
+                                </div>
+                                <h3 class="blog-title">Mastering CSS Grid Layout in 2024</h3>
+                                <p class="blog-excerpt">
+                                    A comprehensive guide to CSS Grid, covering everything from basic concepts to advanced layout techniques.
+                                </p>
+                                <a href="#" class="blog-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=600&h=200&fit=crop&auto=format&q=80" alt="React Hooks" />
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">React</span>
+                                    <span><i class="fas fa-calendar"></i> Dec 5, 2024</span>
+                                    <span><i class="fas fa-clock"></i> 12 min read</span>
+                                </div>
+                                <h3 class="blog-title">React Hooks: A Complete Guide</h3>
+                                <p class="blog-excerpt">
+                                    Learn how to use React Hooks effectively to build modern, functional React components with state management.
+                                </p>
+                                <a href="#" class="blog-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=200&fit=crop&auto=format&q=80" alt="Web Performance" />
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">Performance</span>
+                                    <span><i class="fas fa-calendar"></i> Nov 28, 2024</span>
+                                    <span><i class="fas fa-clock"></i> 10 min read</span>
+                                </div>
+                                <h3 class="blog-title">Web Performance Optimization Techniques</h3>
+                                <p class="blog-excerpt">
+                                    Practical strategies to improve your website's loading speed and overall performance for better user experience.
+                                </p>
+                                <a href="#" class="blog-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=600&h=200&fit=crop&auto=format&q=80" alt="Git Workflow" />
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">Git</span>
+                                    <span><i class="fas fa-calendar"></i> Nov 20, 2024</span>
+                                    <span><i class="fas fa-clock"></i> 6 min read</span>
+                                </div>
+                                <h3 class="blog-title">Git Workflow Best Practices</h3>
+                                <p class="blog-excerpt">
+                                    Learn essential Git commands and workflows that every developer should know for effective version control.
+                                </p>
+                                <a href="#" class="blog-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+
+                        <article class="blog-card">
+                            <div class="blog-image">
+                                <img src="https://images.unsplash.com/photo-1558655146-9f40138edfeb?w=600&h=200&fit=crop&auto=format&q=80" alt="Responsive Design" />
+                            </div>
+                            <div class="blog-content">
+                                <div class="blog-meta">
+                                    <span class="blog-category">Design</span>
+                                    <span><i class="fas fa-calendar"></i> Nov 15, 2024</span>
+                                    <span><i class="fas fa-clock"></i> 9 min read</span>
+                                </div>
+                                <h3 class="blog-title">Building Responsive Websites in 2024</h3>
+                                <p class="blog-excerpt">
+                                    Modern approaches to responsive web design using CSS Grid, Flexbox, and container queries.
+                                </p>
+                                <a href="#" class="blog-read-more">
+                                    Read More <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </article>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- Education Page -->
         <div class="page-content" id="education-page">
             <section class="section">
@@ -1360,11 +1595,12 @@
     <!-- Scripts -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
     <script>
-        // SPA Router Class
+        // SPA Router Class with Enhanced Loading
         class SPARouter {
             constructor() {
                 this.routes = {};
                 this.currentRoute = 'home';
+                this.isLoading = false;
                 this.init();
             }
 
@@ -1374,6 +1610,7 @@
                 this.registerRoute('about', 'about-page');
                 this.registerRoute('skills', 'skills-page');
                 this.registerRoute('projects', 'projects-page');
+                this.registerRoute('blog', 'blog-page');
                 this.registerRoute('education', 'education-page');
                 this.registerRoute('contact', 'contact-page');
 
@@ -1404,17 +1641,58 @@
                 // Browser back/forward buttons
                 window.addEventListener('popstate', (e) => {
                     const route = e.state?.route || 'home';
-                    this.loadRoute(route, false);
+                    this.loadRoute(route, false, false);
                 });
             }
 
             navigateTo(route) {
-                if (this.routes[route]) {
-                    this.loadRoute(route, true);
+                if (this.routes[route] && !this.isLoading) {
+                    this.loadRoute(route, true, true);
                 }
             }
 
-            loadRoute(route, pushState = true) {
+            showLoader() {
+                const loader = document.getElementById('loader');
+                const appContainer = document.getElementById('appContainer');
+                
+                this.isLoading = true;
+                loader.classList.remove('hidden');
+                appContainer.classList.remove('loaded');
+                
+                // Reset progress bar animation
+                const progressBar = loader.querySelector('.loader-progress-bar');
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight; // Trigger reflow
+                progressBar.style.animation = 'progress 3s ease-in-out';
+            }
+
+            hideLoader() {
+                const loader = document.getElementById('loader');
+                const appContainer = document.getElementById('appContainer');
+                
+                setTimeout(() => {
+                    loader.classList.add('hidden');
+                    setTimeout(() => {
+                        appContainer.classList.add('loaded');
+                        this.isLoading = false;
+                    }, 500);
+                }, 3000);
+            }
+
+            loadRoute(route, pushState = true, showLoading = false) {
+                if (showLoading && route !== this.currentRoute) {
+                    this.showLoader();
+                    
+                    setTimeout(() => {
+                        this.performRouteTransition(route, pushState);
+                        this.hideLoader();
+                    }, 100);
+                } else {
+                    this.performRouteTransition(route, pushState);
+                }
+            }
+
+            performRouteTransition(route, pushState) {
                 // Hide all pages
                 Object.values(this.routes).forEach(routeObj => {
                     routeObj.element.classList.remove('active');
@@ -1476,6 +1754,7 @@
                     about: 'About - Divyanshu Pandey',
                     skills: 'Skills - Divyanshu Pandey',
                     projects: 'Projects - Divyanshu Pandey',
+                    blog: 'Blog - Divyanshu Pandey',
                     education: 'Education - Divyanshu Pandey',
                     contact: 'Contact - Divyanshu Pandey'
                 };
@@ -1726,6 +2005,17 @@
                     card.addEventListener('mouseleave', function() {
                         this.style.transform = 'translateY(0) scale(1)';
                         this.querySelector('.feature-icon').style.transform = 'scale(1) rotate(0deg)';
+                    });
+                });
+
+                // Add hover effects to blog cards
+                document.querySelectorAll('.blog-card').forEach(card => {
+                    card.addEventListener('mouseenter', function() {
+                        this.style.transform = 'translateY(-8px) scale(1.02)';
+                    });
+                    
+                    card.addEventListener('mouseleave', function() {
+                        this.style.transform = 'translateY(0) scale(1)';
                     });
                 });
 
@@ -2063,73 +2353,12 @@
         `;
         document.head.appendChild(keyboardStyles);
 
-        // Print styles
-        const printStyles = document.createElement('style');
-        printStyles.textContent = `
-            @media print {
-                .header, .mobile-menu, .back-to-top, .route-indicator, #particles-js {
-                    display: none !important;
-                }
-                
-                .page-content {
-                    display: block !important;
-                }
-                
-                body {
-                    background: white !important;
-                    color: black !important;
-                }
-                
-                .section {
-                    padding: 2rem 0 !important;
-                }
-                
-                .feature-card, .content-section {
-                    break-inside: avoid;
-                    margin-bottom: 1rem;
-                }
-            }
-        `;
-        document.head.appendChild(printStyles);
-
-        // Analytics and error tracking (placeholder)
-        window.analytics = {
-            track: (event, data) => {
-                console.log('Analytics event:', event, data);
-                // Integrate with your analytics service
-            },
-            
-            error: (error) => {
-                console.error('Application error:', error);
-                // Send to error tracking service
-            }
-        };
-
-        // Global error handling
-        window.addEventListener('error', (e) => {
-            window.analytics.error({
-                message: e.message,
-                filename: e.filename,
-                lineno: e.lineno,
-                colno: e.colno,
-                error: e.error
-            });
-        });
-
-        // Unhandled promise rejection handling
-        window.addEventListener('unhandledrejection', (e) => {
-            window.analytics.error({
-                type: 'unhandledrejection',
-                reason: e.reason
-            });
-        });
-
         // Performance monitoring
         window.addEventListener('load', () => {
             setTimeout(() => {
                 const perfData = performance.getEntriesByType('navigation')[0];
                 if (perfData) {
-                    window.analytics.track('page_load_performance', {
+                    console.log('Page Load Performance:', {
                         load_time: Math.round(perfData.loadEventEnd - perfData.loadEventStart),
                         dom_ready: Math.round(perfData.domContentLoadedEventEnd - perfData.domContentLoadedEventStart),
                         first_paint: Math.round(performance.getEntriesByType('paint')[0]?.startTime || 0)
@@ -2137,22 +2366,6 @@
                 }
             }, 1000);
         });
-
-        // Connection monitoring
-        if ('connection' in navigator) {
-            const connection = navigator.connection;
-            
-            const logConnectionInfo = () => {
-                window.analytics.track('connection_info', {
-                    effective_type: connection.effectiveType,
-                    downlink: connection.downlink,
-                    rtt: connection.rtt
-                });
-            };
-
-            connection.addEventListener('change', logConnectionInfo);
-            logConnectionInfo();
-        }
 
         // Visibility API for performance optimization
         document.addEventListener('visibilitychange', () => {
@@ -2169,46 +2382,12 @@
             }
         });
 
-        // Custom CSS properties for theme switching (future feature)
-        const themeManager = {
-            themes: {
-                dark: {
-                    '--primary': '#0066ff',
-                    '--background': '#0a0a0a',
-                    '--surface': '#1a1a1a',
-                    '--text-primary': '#ffffff'
-                },
-                light: {
-                    '--primary': '#0066ff',
-                    '--background': '#ffffff',
-                    '--surface': '#f8f9fa',
-                    '--text-primary': '#000000'
-                }
-            },
-            
-            setTheme: (themeName) => {
-                const theme = this.themes[themeName];
-                if (theme) {
-                    Object.entries(theme).forEach(([property, value]) => {
-                        document.documentElement.style.setProperty(property, value);
-                    });
-                    localStorage.setItem('theme', themeName);
-                }
-            },
-            
-            initTheme: () => {
-                const savedTheme = localStorage.getItem('theme') || 'dark';
-                this.setTheme(savedTheme);
-            }
-        };
-
-        // Initialize theme (currently defaults to dark)
-        // themeManager.initTheme(); // Uncomment to enable theme management
-
-        console.log('🚀 Portfolio SPA loaded successfully!');
+        console.log('🚀 Enhanced Portfolio SPA loaded successfully!');
         console.log('📱 Mobile-friendly features enabled');
         console.log('⚡ Performance optimizations active');
-        console.log('🎨 Enhanced loader and animations ready');
+        console.log('🎨 Enhanced loader with 3-second transitions');
+        console.log('📝 Blog section added');
+        console.log('🖼️ Real hero image implemented');
     </script>
 </body>
 </html>
