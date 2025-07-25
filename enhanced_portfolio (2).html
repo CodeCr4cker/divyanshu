@@ -2476,48 +2476,42 @@
             }
 
             initTestimonialSlider() {
-                const slider = document.getElementById('testimonialSlider');
-                const dots = document.querySelectorAll('.testimonial-dot');
-                const prevBtn = document.getElementById('prevTestimonial');
-                const nextBtn = document.getElementById('nextTestimonial');
-                let currentSlide = 0;
-                const totalSlides = 4;
+    const slider = document.getElementById('testimonialSlider');
+    const dots = document.querySelectorAll('.testimonial-dot');
+    const prevBtn = document.getElementById('prevTestimonial');
+    const nextBtn = document.getElementById('nextTestimonial');
+    let currentSlide = 0;
+    const totalSlides = 4;
 
-                const updateSlider = (slideIndex) => {
-                    slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-                    
-                    dots.forEach((dot, index) => {
-                        dot.classList.toggle('active', index === slideIndex);
-                    });
-                    
-                    currentSlide = slideIndex;
-                };
+    const updateSlider = (slideIndex) => {
+        slider.style.transform = `translateX(-${slideIndex * 100}%)`;
+        
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === slideIndex);
+        });
+        
+        currentSlide = slideIndex;
+    };
 
-                // Next button
-                nextBtn.addEventListener('click', () => {
-                    const nextSlide = (currentSlide + 1) % totalSlides;
-                    updateSlider(nextSlide);
-                });
+    // Next button
+    nextBtn.addEventListener('click', () => {
+        const nextSlide = (currentSlide + 1) % totalSlides;
+        updateSlider(nextSlide);
+    });
 
-                // Previous button
-                prevBtn.addEventListener('click', () => {
-                    const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-                    updateSlider(prevSlide);
-                });
+    // Previous button
+    prevBtn.addEventListener('click', () => {
+        const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+        updateSlider(prevSlide);
+    });
 
-                // Dot navigation
-                dots.forEach((dot, index) => {
-                    dot.addEventListener('click', () => {
-                        updateSlider(index);
-                    });
-                });
-
-                // Auto-play
-                setInterval(() => {
-                    const nextSlide = (currentSlide + 1) % totalSlides;
-                    updateSlider(nextSlide);
-                }, 5000);
-            }
+    // Dot navigation
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+            updateSlider(index);
+        });
+    });
+}
 
             updateNavigation(activeRoute) {
                 // Update desktop navigation
