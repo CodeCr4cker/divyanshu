@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Education Timeline - Divyanshu Pandey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #0052cc;
+            --secondary: #ff6b35;
+            --accent: #00d4aa;
+            --background: #0a0a0a;
+            --surface: #1a1a1a;
+            --surface-elevated: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #666666;
+            --border: #333333;
+            --gradient-primary: linear-gradient(135deg, #0066ff, #00d4aa);
+            --gradient-secondary: linear-gradient(135deg, #ff6b35, #ffba35);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 32px rgba(0, 102, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Enhanced Timeline Styles */
+        .timeline-container {
+            position: relative;
+            margin: 2rem 0;
+        }
+
+        .timeline {
+            position: relative;
+            padding: 2rem 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: var(--gradient-primary);
+            transform: translateX(-50%);
+            border-radius: 2px;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin: 3rem 0;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+
+        .timeline-item:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        .timeline-item:nth-child(odd) {
+            animation-delay: 0.4s;
+        }
+
+        .timeline-content {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            position: relative;
+            width: calc(50% - 2rem);
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-md);
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+            margin-right: 2rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-content {
+            margin-left: 2rem;
+            margin-right: auto;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary);
+        }
+
+        /* Timeline Node */
+        .timeline-node {
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 60px;
+            height: 60px;
+            background: var(--surface-elevated);
+            border: 4px solid var(--primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--primary);
+            z-index: 2;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.3);
+        }
+
+        .timeline-node:hover {
+            background: var(--primary);
+            color: white;
+            transform: translate(-50%, -50%) scale(1.1);
+            box-shadow: 0 0 25px rgba(0, 102, 255, 0.5);
+        }
+
+        /* Content Styles */
+        .timeline-badge {
+            display: inline-block;
+            background: var(--gradient-primary);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .timeline-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .timeline-subtitle {
+            font-size: 1.1rem;
+            color: var(--accent);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-period {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-description {
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+        }
+
+        .timeline-achievements {
+            list-style: none;
+            margin: 1rem 0;
+        }
+
+        .timeline-achievements li {
+            position: relative;
+            padding: 0.5rem 0 0.5rem 2rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+        }
+
+        .timeline-achievements li::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 1rem;
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            transform: translateY(-50%);
+        }
+
+        .timeline-achievements li:hover {
+            color: var(--text-primary);
+            transform: translateX(5px);
+        }
+
+        .timeline-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background: rgba(0, 102, 255, 0.1);
+            color: var(--primary);
+            padding: 0.3rem 0.8rem;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* Arrow Connectors */
+        .timeline-content::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            width: 0;
+            height: 0;
+            border: 15px solid transparent;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content::before {
+            left: -15px;
+            border-right-color: var(--border);
+            transform: translateY(-50%);
+        }
+
+        .timeline-item:nth-child(even) .timeline-content::before {
+            right: -15px;
+            border-left-color: var(--border);
+            transform: translateY(-50%);
+        }
+
+        .timeline-content:hover::before {
+            border-right-color: var(--primary);
+            border-left-color: var(--primary);
+        }
+
+        /* Status Indicators */
+        .status-indicator {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-current {
+            background: var(--gradient-secondary);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+
+        .status-completed {
+            background: var(--gradient-primary);
+            color: white;
+        }
+
+        .status-upcoming {
+            background: rgba(102, 102, 102, 0.2);
+            color: var(--text-muted);
+            border: 1px solid var(--border);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 107, 53, 0.7);
+            }
+            50% {
+                box-shadow: 0 0 0 10px rgba(255, 107, 53, 0);
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .timeline::before {
+                left: 2rem;
+            }
+
+            .timeline-content {
+                width: calc(100% - 4rem);
+                margin-left: 4rem !important;
+                margin-right: 0 !important;
+            }
+
+            .timeline-content::before {
+                left: -15px !important;
+                right: auto !important;
+                border-right-color: var(--border) !important;
+                border-left-color: transparent !important;
+            }
+
+            .timeline-content:hover::before {
+                border-right-color: var(--primary) !important;
+                border-left-color: transparent !important;
+            }
+
+            .timeline-node {
+                left: 2rem;
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+
+            .timeline-item {
+                margin: 2rem 0;
+            }
+
+            body {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .timeline-content {
+                padding: 1.5rem;
+            }
+
+            .timeline-title {
+                font-size: 1.3rem;
+            }
+
+            .timeline-subtitle {
+                font-size: 1rem;
+            }
+
+            .timeline-node {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Interactive Elements */
+        .timeline-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            margin-top: 1rem;
+        }
+
+        .timeline-link:hover {
+            color: var(--accent);
+            gap: 1rem;
+        }
+
+        /* Statistics */
+        .timeline-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 0.5rem;
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Certificate Gallery */
+        .certificate-gallery {
+            display: flex;
+            gap: 0.5rem;
+            margin-top: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .certificate-thumb {
+            width: 60px;
+            height: 40px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .certificate-thumb:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="section-header">
+            <div class="section-subtitle">My Journey</div>
+            <h1 class="section-title">Education Timeline</h1>
+            <p class="section-description">
+                Academic milestones and learning experiences that shaped my path in technology and development
+            </p>
+        </div>
+
+        <div class="timeline-container">
+            <div class="timeline">
+                <!-- Current Education -->
+                <div class="timeline-item">
+                    <div class="timeline-node">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="status-indicator status-current">Current</div>
+                        <div class="timeline-badge">Higher Secondary</div>
+                        <h3 class="timeline-title">Class 12th - Science (PCM)</h3>
+                        <div class="timeline-subtitle">B.L Academy</div>
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar"></i>
+                            <span>2024 - 2026</span>
+                        </div>
+                        <p class="timeline-description">
+                            Currently pursuing higher secondary education with specialization in Physics, Chemistry, and Mathematics. Actively balancing academic excellence with passion for web development and programming.
+                        </p>
+                        <ul class="timeline-achievements">
+                            <li>Focus on advanced mathematics and physics concepts</li>
+                            <li>Active participation in coding clubs and tech events</li>
+                            <li>Leading school's web development team</li>
+                            <li>Maintaining strong academic performance while pursuing coding</li>
+                        </ul>
+                        <div class="timeline-skills">
+                            <span class="skill-tag">Mathematics</span>
+                            <span class="skill-tag">Physics</span>
+                            <span class="skill-tag">Chemistry</span>
+                            <span class="skill-tag">Problem Solving</span>
+                            <span class="skill-tag">Analytical Thinking</span>
+                        </div>
+                        <div class="timeline-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">2</span>
+                                <span class="stat-label">Years</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">95%</span>
+                                <span class="stat-label">Target</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Secondary Education -->
+                <div class="timeline-item">
+                    <div class="timeline-node">
+                        <i class="fas fa-school"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="status-indicator status-completed">Completed</div>
+                        <div class="timeline-badge">Secondary Education</div>
+                        <h3 class="timeline-title">Class 10th</h3>
+                        <div class="timeline-subtitle">Shakun Vidya Niketan</div>
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar"></i>
+                            <span>2022 - 2024</span>
+                        </div>
+                        <p class="timeline-description">
+                            Successfully completed secondary education with 70% marks. This period marked the beginning of my journey into computer science and programming. Discovered my passion for web development during computer science classes.
+                        </p>
+                        <ul class="timeline-achievements">
+                            <li>Achieved 70% overall score in board examinations</li>
+                            <li>First introduction to computer programming</li>
+                            <li>Participated in science exhibitions and tech fairs</li>
+                            <li>Developed foundational problem-solving skills</li>
+                            <li>Started learning HTML and CSS basics</li>
+                        </ul>
+                        <div class="timeline-skills">
+                            <span class="skill-tag">Basic Programming</span>
+                            <span class="skill-tag">HTML</span>
+                            <span class="skill-tag">CSS</span>
+                            <span class="skill-tag">Computer Science</span>
+                            <span class="skill-tag">Mathematics</span>
+                        </div>
+                        <div class="timeline-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">70%</span>
+                                <span class="stat-label">Score</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">2</span>
+                                <span class="stat-label">Years</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">3</span>
+                                <span class="stat-label">Awards</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Self-Learning & Certifications -->
+                <div class="timeline-item">
+                    <div class="timeline-node">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="status-indicator status-current">Ongoing</div>
+                        <div class="timeline-badge">Self-Learning</div>
+                        <h3 class="timeline-title">Web Development Journey</h3>
+                        <div class="timeline-subtitle">Online Platforms & Self-Study</div>
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar"></i>
+                            <span>2022 - Present</span>
+                        </div>
+                        <p class="timeline-description">
+                            Embarked on an intensive self-learning journey in web development. Acquired skills through online platforms, documentation, and hands-on projects. Continuously expanding knowledge in modern web technologies.
+                        </p>
+                        <ul class="timeline-achievements">
+                            <li>Mastered HTML5, CSS3, and JavaScript fundamentals</li>
+                            <li>Learned responsive design and mobile-first approach</li>
+                            <li>Explored React.js and modern JavaScript frameworks</li>
+                            <li>Built 15+ projects showcasing various skills</li>
+                            <li>Active contributor to open-source projects</li>
+                            <li>Completed multiple online certifications</li>
+                        </ul>
+                        <div class="timeline-skills">
+                            <span class="skill-tag">HTML5</span>
+                            <span class="skill-tag">CSS3</span>
+                            <span class="skill-tag">JavaScript</span>
+                            <span class="skill-tag">React</span>
+                            <span class="skill-tag">Python</span>
+                            <span class="skill-tag">Git</span>
+                            <span class="skill-tag">Responsive Design</span>
+                        </div>
+                        <div class="certificate-gallery">
+                            <div class="certificate-thumb" title="HTML Certificate">
+                                <i class="fab fa-html5"></i>
+                            </div>
+                            <div class="certificate-thumb" title="CSS Certificate">
+                                <i class="fab fa-css3-alt"></i>
+                            </div>
+                            <div class="certificate-thumb" title="JavaScript Certificate">
+                                <i class="fab fa-js"></i>
+                            </div>
+                            <div class="certificate-thumb" title="React Certificate">
+                                <i class="fab fa-react"></i>
+                            </div>
+                            <div class="certificate-thumb" title="Python Certificate">
+                                <i class="fab fa-python"></i>
+                            </div>
+                        </div>
+                        <div class="timeline-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">2+</span>
+                                <span class="stat-label">Years</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">15+</span>
+                                <span class="stat-label">Projects</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">5</span>
+                                <span class="stat-label">Certificates</span>
+                            </div>
+                        </div>
+                        <a href="https://github.com/Divyanshu5520" class="timeline-link" target="_blank">
+                            View Portfolio <i class="fas fa-external-link-alt"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Future Plans -->
+                <div class="timeline-item">
+                    <div class="timeline-node">
+                        <i class="fas fa-rocket"></i>
+                    </div>
+                    <div class="timeline-content">
+                        <div class="status-indicator status-upcoming">Planned</div>
+                        <div class="timeline-badge">Future Goals</div>
+                        <h3 class="timeline-title">Bachelor's in Computer Science</h3>
+                        <div class="timeline-subtitle">Target: Top Engineering College</div>
+                        <div class="timeline-period">
+                            <i class="fas fa-calendar"></i>
+                            <span>2026 - 2030</span>
+                        </div>
+                        <p class="timeline-description">
+                            Planning to pursue Bachelor's degree in Computer Science Engineering from a prestigious institution. Aiming to specialize in software development, artificial intelligence, and web technologies.
+                        </p>
+                        <ul class="timeline-achievements">
+                            <li>Target admission in top-tier engineering colleges</li>
+                            <li>Focus on advanced programming and algorithms</li>
+                            <li>Specialization in AI/ML and web technologies</li>
+                            <li>Industry internships and real-world projects</li>
+                            <li>Research opportunities in emerging technologies</li>
+                        </ul>
+                        <div class="timeline-skills">
+                            <span class="skill-tag">Data Structures</span>
+                            <span class="skill-tag">Algorithms</span>
+                            <span class="skill-tag">AI/ML</span>
+                            <span class="skill-tag">Software Engineering</span>
+                            <span class="skill-tag">System Design</span>
+                        </div>
+                        <div class="timeline-stats">
+                            <div class="stat-item">
+                                <span class="stat-number">4</span>
+                                <span class="stat-label">Years</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">B.Tech</span>
+                                <span class="stat-label">Degree</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number">CSE</span>
+                                <span class="stat-label">Branch</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Intersection Observer for Timeline Animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationPlayState = 'running';
+                }
+            });
+        }, observerOptions);
+
+        // Observe timeline items
+        document.querySelectorAll('.timeline-item').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Add interactive hover effects
+        document.querySelectorAll('.timeline-content').forEach(content => {
+            content.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-8px) scale(1.02)';
+            });
+            
+            content.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0) scale(1)';
+            });
+        });
+
+        // Certificate gallery interaction
+        document.querySelectorAll('.certificate-thumb').forEach(thumb => {
+            thumb.addEventListener('click', function() {
+                const title = this.getAttribute('title');
+                // You can implement a modal or certificate viewer here
+                console.log(`Viewing certificate: ${title}`);
+                
+                // Add a visual feedback
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1.05)';
+                    setTimeout(() => {
+                        this.style.transform = 'scale(1)';
+                    }, 150);
+                }, 150);
+            });
+        });
+
+        // Smooth scrolling for timeline navigation
+        function scrollToTimelineItem(index) {
+            const items = document.querySelectorAll('.timeline-item');
+            if (items[index]) {
+                items[index].scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'center'
+                });
+            }
+        }
+
+        // Add timeline navigation dots (optional)
+        function createTimelineNavigation() {
+            const nav = document.createElement('div');
+            nav.className = 'timeline-navigation';
+            nav.style.cssText = `
+                position: fixed;
+                right: 2rem;
+                top: 50%;
+                transform: translateY(-50%);
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                z-index: 100;
+            `;
+
+            const items = document.querySelectorAll('.timeline-item');
+            items.forEach((item, index) => {
+                const dot = document.createElement('div');
+                dot.className = 'nav-dot';
+                dot.style.cssText = `
+                    width: 12px;
+                    height: 12px;
+                    border-radius: 50%;
+                    background: var(--surface-elevated);
+                    border: 2px solid var(--primary);
+                    cursor: pointer;
+                    transition: all 0.3s ease;
+                `;
+                
+                dot.addEventListener('click', () => scrollToTimelineItem(index));
+                
+                dot.addEventListener('mouseenter', function() {
+                    this.style.background = 'var(--primary)';
+                    this.style.transform = 'scale(1.2)';
+                });
+                
+                dot.addEventListener('mouseleave', function() {
+                    this.style.background = 'var(--surface-elevated)';
+                    this.style.transform = 'scale(1)';
+                });
+                
+                nav.appendChild(dot);
+            });
+
+            document.body.appendChild(nav);
+        }
+
+        // Initialize timeline navigation (uncomment if needed)
+        // createTimelineNavigation();
+
+        // Progress indicator for timeline
+        function updateTimelineProgress() {
+            const timeline = document.querySelector('.timeline');
+            const timelineRect = timeline.getBoundingClientRect();
+            const progress = Math.max(0, Math.min(1, (window.innerHeight - timelineRect.top) / timelineRect.height));
+            
+            // Update timeline line progress (optional enhancement)
+            const timelineLine = timeline.querySelector('::before');
+            // Implementation would require CSS custom properties
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', (e) => {
+            const items = document.querySelectorAll('.timeline-item');
+            let currentIndex = Array.from(items).findIndex(item => {
+                const rect = item.getBoundingClientRect();
+                return rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2;
+            });
+
+            if (e.key === 'ArrowDown' || e.key === 'j') {
+                e.preventDefault();
+                if (currentIndex < items.length - 1) {
+                    scrollToTimelineItem(currentIndex + 1);
+                }
+            } else if (e.key === 'ArrowUp' || e.key === 'k') {
+                e.preventDefault();
+                if (currentIndex > 0) {
+                    scrollToTimelineItem(currentIndex - 1);
+                }
+            }
+        });
+
+        // Enhanced scroll effects
+        window.addEventListener('scroll', () => {
+            updateTimelineProgress();
+            highlightCurrentTimelineItem();
+        });
+
+        function highlightCurrentTimelineItem() {
+            const items = document.querySelectorAll('.timeline-item');
+            items.forEach((item, index) => {
+                const rect = item.getBoundingClientRect();
+                const node = item.querySelector('.timeline-node');
+                
+                if (rect.top <= window.innerHeight / 2 && rect.bottom >= window.innerHeight / 2) {
+                    node.style.background = 'var(--primary)';
+                    node.style.color = 'white';
+                    node.style.transform = 'translate(-50%, -50%) scale(1.1)';
+                } else {
+                    node.style.background = 'var(--surface-elevated)';
+                    node.style.color = 'var(--primary)';
+                    node.style.transform = 'translate(-50%, -50%) scale(1)';
+                }
+            });
+        }
+
+        // Typing animation for timeline titles
+        function initTypingAnimation() {
+            const titles = document.querySelectorAll('.timeline-title');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const title = entry.target;
+                        const text = title.textContent;
+                        title.textContent = '';
+                        
+                        let index = 0;
+                        const typeInterval = setInterval(() => {
+                            title.textContent += text[index];
+                            index++;
+                            
+                            if (index === text.length) {
+                                clearInterval(typeInterval);
+                            }
+                        }, 50);
+                        
+                        observer.unobserve(title);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            titles.forEach(title => observer.observe(title));
+        }
+
+        // Initialize typing animation
+        initTypingAnimation();
+
+        // Timeline statistics counter animation
+        function animateCounters() {
+            const statNumbers = document.querySelectorAll('.stat-number');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const element = entry.target;
+                        const target = element.textContent;
+                        const isNumber = /^\d+/.test(target);
+                        
+                        if (isNumber) {
+                            const finalValue = parseInt(target);
+                            let currentValue = 0;
+                            const increment = finalValue / 30;
+                            
+                            const counter = setInterval(() => {
+                                currentValue += increment;
+                                element.textContent = Math.floor(currentValue) + target.replace(/^\d+/, '');
+                                
+                                if (currentValue >= finalValue) {
+                                    element.textContent = target;
+                                    clearInterval(counter);
+                                }
+                            }, 50);
+                        }
+                        
+                        observer.unobserve(element);
+                    }
+                });
+            }, { threshold: 0.5 });
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+        }
+
+        // Initialize counter animation
+        animateCounters();
+
+        // Add floating particles effect
+        function createFloatingParticles() {
+            const particleContainer = document.createElement('div');
+            particleContainer.style.cssText = `
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                pointer-events: none;
+                z-index: -1;
+                overflow: hidden;
+            `;
+            
+            document.body.appendChild(particleContainer);
+            
+            function createParticle() {
+                const particle = document.createElement('div');
+                particle.style.cssText = `
+                    position: absolute;
+                    width: 4px;
+                    height: 4px;
+                    background: var(--primary);
+                    border-radius: 50%;
+                    opacity: 0.3;
+                    animation: float-up 8s linear infinite;
+                    left: ${Math.random() * 100}%;
+                    animation-delay: ${Math.random() * 8}s;
+                `;
+                
+                particleContainer.appendChild(particle);
+                
+                setTimeout(() => {
+                    particle.remove();
+                }, 8000);
+            }
+            
+            // Create particles periodically
+            setInterval(createParticle, 2000);
+        }
+
+        // Add floating animation CSS
+        const floatingStyles = document.createElement('style');
+        floatingStyles.textContent = `
+            @keyframes float-up {
+                from {
+                    transform: translateY(100vh) rotate(0deg);
+                    opacity: 0.3;
+                }
+                10% {
+                    opacity: 0.6;
+                }
+                90% {
+                    opacity: 0.6;
+                }
+                to {
+                    transform: translateY(-100px) rotate(360deg);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(floatingStyles);
+
+        // Initialize floating particles
+        createFloatingParticles();
+
+        // Add theme toggle functionality
+        function createThemeToggle() {
+            const toggle = document.createElement('button');
+            toggle.innerHTML = '<i class="fas fa-moon"></i>';
+            toggle.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                right: 2rem;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: none;
+                background: var(--surface-elevated);
+                color: var(--text-primary);
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                z-index: 1000;
+                box-shadow: var(--shadow-md);
+            `;
+            
+            toggle.addEventListener('click', () => {
+                document.body.classList.toggle('light-theme');
+                const icon = toggle.querySelector('i');
+                
+                if (document.body.classList.contains('light-theme')) {
+                    icon.className = 'fas fa-sun';
+                } else {
+                    icon.className = 'fas fa-moon';
+                }
+            });
+            
+            document.body.appendChild(toggle);
+        }
+
+        // Add light theme styles
+        const lightThemeStyles = document.createElement('style');
+        lightThemeStyles.textContent = `
+            .light-theme {
+                --background: #f8f9fa;
+                --surface: #ffffff;
+                --surface-elevated: #ffffff;
+                --text-primary: #1a1a1a;
+                --text-secondary: #4a4a4a;
+                --text-muted: #999999;
+                --border: #e1e5e9;
+                --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.1);
+                --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.15);
+            }
+            
+            .light-theme .timeline::before {
+                box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+            }
+            
+            .light-theme .timeline-node {
+                box-shadow: 0 0 20px rgba(0, 102, 255, 0.2);
+            }
+        `;
+        document.head.appendChild(lightThemeStyles);
+
+        // Initialize theme toggle
+        createThemeToggle();
+
+        // Print functionality
+        function addPrintStyles() {
+            const printStyles = document.createElement('style');
+            printStyles.textContent = `
+                @media print {
+                    body { 
+                        background: white !important; 
+                        color: black !important;
+                        font-size: 12pt;
+                    }
+                    
+                    .timeline::before {
+                        background: #333 !important;
+                        box-shadow: none !important;
+                    }
+                    
+                    .timeline-content {
+                        background: white !important;
+                        border: 1px solid #333 !important;
+                        box-shadow: none !important;
+                        page-break-inside: avoid;
+                    }
+                    
+                    .timeline-node {
+                        background: white !important;
+                        border-color: #333 !important;
+                        color: #333 !important;
+                        box-shadow: none !important;
+                    }
+                    
+                    .status-indicator,
+                    .timeline-badge {
+                        background: #333 !important;
+                        color: white !important;
+                    }
+                    
+                    .skill-tag {
+                        background: #f0f0f0 !important;
+                        color: #333 !important;
+                        border: 1px solid #333 !important;
+                    }
+                }
+            `;
+            document.head.appendChild(printStyles);
+        }
+
+        addPrintStyles();
+
+        // Export timeline as JSON (for backup/data purposes)
+        function exportTimelineData() {
+            const timelineData = {
+                title: "Education Timeline - Divyanshu Pandey",
+                items: []
+            };
+            
+            document.querySelectorAll('.timeline-item').forEach(item => {
+                const content = item.querySelector('.timeline-content');
+                const itemData = {
+                    status: content.querySelector('.status-indicator')?.textContent || '',
+                    badge: content.querySelector('.timeline-badge')?.textContent || '',
+                    title: content.querySelector('.timeline-title')?.textContent || '',
+                    subtitle: content.querySelector('.timeline-subtitle')?.textContent || '',
+                    period: content.querySelector('.timeline-period span')?.textContent || '',
+                    description: content.querySelector('.timeline-description')?.textContent || '',
+                    achievements: Array.from(content.querySelectorAll('.timeline-achievements li')).map(li => li.textContent),
+                    skills: Array.from(content.querySelectorAll('.skill-tag')).map(tag => tag.textContent)
+                };
+                
+                timelineData.items.push(itemData);
+            });
+            
+            return JSON.stringify(timelineData, null, 2);
+        }
+
+        // Add export button
+        function createExportButton() {
+            const exportBtn = document.createElement('button');
+            exportBtn.innerHTML = '<i class="fas fa-download"></i>';
+            exportBtn.title = 'Export Timeline Data';
+            exportBtn.style.cssText = `
+                position: fixed;
+                top: 2rem;
+                left: 2rem;
+                width: 50px;
+                height: 50px;
+                border-radius: 50%;
+                border: none;
+                background: var(--surface-elevated);
+                color: var(--text-primary);
+                font-size: 1.2rem;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                z-index: 1000;
+                box-shadow: var(--shadow-md);
+            `;
+            
+            exportBtn.addEventListener('click', () => {
+                const data = exportTimelineData();
+                const blob = new Blob([data], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'education-timeline.json';
+                a.click();
+                URL.revokeObjectURL(url);
+            });
+            
+            document.body.appendChild(exportBtn);
+        }
+
+        createExportButton();
+
+        console.log('🎓 Education Timeline loaded successfully!');
+        console.log('📚 Interactive features enabled');
+        console.log('⌨️  Keyboard navigation: Arrow keys or j/k');
+        console.log('🎨 Theme toggle available');
+        console.log('📄 Print-friendly styles loaded');
+        console.log('💾 Export functionality ready');
+    </script>
+</body>
+</html>
