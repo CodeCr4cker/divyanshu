@@ -2191,7 +2191,7 @@
         </div>
 
         <!-- New Testimonials Page -->
-        <div class="page-content" id="testimonials-page">
+  <!--      <div class="page-content" id="testimonials-page">
             <section class="section">
                 <div class="container">
                     <div class="section-header">
@@ -2275,7 +2275,94 @@
                 </div>
             </section>
         </div>
+-->
 
+        <div class="page-content" id="testimonials-page">
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">What others say</div>
+                <h2 class="section-title">Testimonials</h2>
+                <p class="section-description">
+                    Feedback from clients, teachers, and collaborators
+                </p>
+            </div>
+            
+            <!-- Add ID to make this the click target -->
+            <div class="testimonials-container" id="testimonialClickArea">
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            Divyanshu's dedication to web development is truly impressive. His ability to create modern, responsive websites while maintaining clean code standards sets him apart from his peers.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">RK</div>
+                            <div class="author-info">
+                                <h4>Rajesh Kumar</h4>
+                                <p>Computer Science Teacher</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            Working with Divyanshu on our class project was amazing. He brought creative solutions and helped our team understand complex coding concepts with patience and clarity.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">AS</div>
+                            <div class="author-info">
+                                <h4>Ananya Sharma</h4>
+                                <p>Classmate & Project Partner</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            The website Divyanshu created for our local business exceeded our expectations. Professional design, fast loading, and excellent mobile responsiveness. Highly recommended!
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">MS</div>
+                            <div class="author-info">
+                                <h4>Mohit Singh</h4>
+                                <p>Small Business Owner</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="testimonial-card">
+                        <div class="testimonial-quote">
+                            Divyanshu's portfolio projects demonstrate a strong understanding of modern web technologies. His code is well-structured and his design sense is excellent for someone his age.
+                        </div>
+                        <div class="testimonial-author">
+                            <div class="author-avatar">PG</div>
+                            <div class="author-info">
+                                <h4>Priya Gupta</h4>
+                                <p>Senior Developer Mentor</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-nav">
+                    <button class="testimonial-btn" id="prevTestimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="testimonial-dots" id="testimonialDots">
+                        <div class="testimonial-dot active" data-slide="0"></div>
+                        <div class="testimonial-dot" data-slide="1"></div>
+                        <div class="testimonial-dot" data-slide="2"></div>
+                        <div class="testimonial-dot" data-slide="3"></div>
+                    </div>
+                    <button class="testimonial-btn" id="nextTestimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+        </div>
+        
         <!-- Contact Page -->
         <div class="page-content" id="contact-page">
             <section class="section">
@@ -2475,43 +2562,60 @@
                 }
             }
 
-            initTestimonialSlider() {
+            function initTestimonialSlider() {
     const slider = document.getElementById('testimonialSlider');
     const dots = document.querySelectorAll('.testimonial-dot');
     const prevBtn = document.getElementById('prevTestimonial');
     const nextBtn = document.getElementById('nextTestimonial');
+    const container = document.getElementById('testimonialClickArea'); // Updated to use ID
     let currentSlide = 0;
     const totalSlides = 4;
 
     const updateSlider = (slideIndex) => {
         slider.style.transform = `translateX(-${slideIndex * 100}%)`;
-        
+
         dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === slideIndex);
         });
-        
+
         currentSlide = slideIndex;
     };
 
     // Next button
-    nextBtn.addEventListener('click', () => {
+    nextBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent container click from firing too
         const nextSlide = (currentSlide + 1) % totalSlides;
         updateSlider(nextSlide);
     });
 
     // Previous button
-    prevBtn.addEventListener('click', () => {
+    prevBtn.addEventListener('click', (e) => {
+        e.stopPropagation(); // prevent container click from firing too
         const prevSlide = (currentSlide - 1 + totalSlides) % totalSlides;
         updateSlider(prevSlide);
     });
 
     // Dot navigation
     dots.forEach((dot, index) => {
-        dot.addEventListener('click', () => {
+        dot.addEventListener('click', (e) => {
+            e.stopPropagation(); // prevent container click from firing too
             updateSlider(index);
         });
     });
+
+    // Click on container to go to next slide
+    container.addEventListener('click', () => {
+        const nextSlide = (currentSlide + 1) % totalSlides;
+        updateSlider(nextSlide);
+    });
 }
+
+// Run when DOM is loaded
+document.addEventListener('DOMContentLoaded', () => {
+    initTestimonialSlider();
+});
+
+
 
             updateNavigation(activeRoute) {
                 // Update desktop navigation
