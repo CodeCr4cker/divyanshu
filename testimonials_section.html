@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Testimonials Section - Divyanshu Pandey</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --primary-dark: #0052cc;
+            --secondary: #ff6b35;
+            --accent: #00d4aa;
+            --background: #0a0a0a;
+            --surface: #1a1a1a;
+            --surface-elevated: #2a2a2a;
+            --text-primary: #ffffff;
+            --text-secondary: #b3b3b3;
+            --text-muted: #666666;
+            --border: #333333;
+            --gradient-primary: linear-gradient(135deg, #0066ff, #00d4aa);
+            --gradient-secondary: linear-gradient(135deg, #ff6b35, #ffba35);
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
+            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
+            --shadow-glow: 0 0 32px rgba(0, 102, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem 0;
+        }
+
+        /* Section Styles */
+        .section {
+            padding: 6rem 0;
+            position: relative;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-subtitle {
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .section-description {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Testimonials Container */
+        .testimonials-container {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Testimonial Cards */
+        .testimonial-card {
+            background: var(--surface-elevated);
+            border-radius: 20px;
+            padding: 3rem;
+            border: 1px solid var(--border);
+            position: relative;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+
+        .testimonial-card.active {
+            opacity: 1;
+            transform: translateY(0);
+            display: block;
+            animation: slideInUp 0.8s ease-out;
+        }
+
+        .testimonial-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+            border-radius: 20px 20px 0 0;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Quote Icon */
+        .quote-icon {
+            position: absolute;
+            top: -10px;
+            left: 2rem;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            box-shadow: var(--shadow-glow);
+        }
+
+        /* Testimonial Content */
+        .testimonial-content {
+            margin-top: 2rem;
+        }
+
+        .testimonial-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: var(--text-primary);
+            margin-bottom: 2rem;
+            font-style: italic;
+            position: relative;
+        }
+
+        .testimonial-text::before {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        .testimonial-text::after {
+            content: '"';
+            font-size: 4rem;
+            color: var(--primary);
+            position: absolute;
+            bottom: -40px;
+            right: 0;
+            opacity: 0.3;
+            font-family: serif;
+        }
+
+        /* Client Info */
+        .client-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .client-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-secondary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+            font-weight: 600;
+            border: 3px solid var(--border);
+            overflow: hidden;
+        }
+
+        .client-avatar img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .client-details h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+        }
+
+        .client-role {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .client-company {
+            color: var(--primary);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Rating Stars */
+        .rating {
+            display: flex;
+            gap: 0.25rem;
+            margin-top: 0.5rem;
+        }
+
+        .rating i {
+            color: #ffd700;
+            font-size: 1rem;
+        }
+
+        /* Navigation Controls */
+        .testimonial-nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 3rem;
+        }
+
+        .nav-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--text-secondary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: scale(1.1);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .nav-btn:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            transform: none;
+            background: var(--surface-elevated);
+            color: var(--text-muted);
+        }
+
+        /* Dots Indicator */
+        .testimonial-dots {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--surface-elevated);
+            border: 2px solid var(--border);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .dot.active {
+            background: var(--primary);
+            border-color: var(--primary);
+            transform: scale(1.2);
+        }
+
+        .dot:hover {
+            background: var(--accent);
+            border-color: var(--accent);
+        }
+
+        /* Progress Bar */
+        .testimonial-progress {
+            width: 100%;
+            height: 4px;
+            background: var(--surface-elevated);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 2rem;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+            transition: width 0.3s ease;
+            width: 0%;
+        }
+
+        /* Auto-play Controls */
+        .autoplay-controls {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+        }
+
+        .play-pause-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--primary);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .play-pause-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
+
+        .autoplay-text {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Section */
+        .testimonial-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+            padding: 2rem;
+            background: var(--surface);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 1rem;
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        /* Animations */
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            .section {
+                padding: 4rem 0;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .testimonial-card {
+                padding: 2rem;
+                margin: 0 1rem;
+            }
+
+            .testimonial-text {
+                font-size: 1.1rem;
+            }
+
+            .testimonial-nav {
+                flex-direction: column;
+                gap: 2rem;
+            }
+
+            .nav-btn {
+                width: 45px;
+                height: 45px;
+            }
+
+            .testimonial-stats {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1rem;
+                padding: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .quote-icon {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+
+            .testimonial-text {
+                font-size: 1rem;
+                line-height: 1.6;
+            }
+
+            .client-info {
+                flex-direction: column;
+                text-align: center;
+                gap: 0.5rem;
+            }
+
+            .testimonial-stats {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        /* Accessibility */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        /* Focus styles for keyboard navigation */
+        .nav-btn:focus,
+        .dot:focus,
+        .play-pause-btn:focus {
+            outline: 2px solid var(--primary);
+            outline-offset: 2px;
+        }
+
+        /* Smooth transitions for all interactive elements */
+        .testimonial-card,
+        .nav-btn,
+        .dot,
+        .play-pause-btn,
+        .client-avatar {
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Testimonials Section -->
+    <section class="section">
+        <div class="container">
+            <div class="section-header">
+                <div class="section-subtitle">What clients say</div>
+                <h2 class="section-title">Testimonials</h2>
+                <p class="section-description">
+                    Feedback from clients and collaborators who have worked with me
+                </p>
+            </div>
+
+            <div class="testimonials-container">
+                <!-- Testimonial Cards -->
+                <div class="testimonial-card active" data-testimonial="0">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            Divyanshu delivered an exceptional website for our construction company. His attention to detail and modern design approach exceeded our expectations. The site is not only visually stunning but also highly functional and user-friendly.
+                        </p>
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="client-details">
+                                <h4>Rajesh Kumar</h4>
+                                <div class="client-role">Project Manager</div>
+                                <div class="client-company">BuildTech Solutions</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-testimonial="1">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            Working with Divyanshu was a fantastic experience. He created a React chat application that perfectly matched our requirements. His code is clean, well-documented, and the final product works flawlessly across all devices.
+                        </p>
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="client-details">
+                                <h4>Priya Sharma</h4>
+                                <div class="client-role">Lead Developer</div>
+                                <div class="client-company">TechStart India</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-testimonial="2">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            Divyanshu's technical skills and creative approach impressed us from day one. He developed a code-to-PDF converter that has become an essential tool for our development team. Highly recommended for any web development project!
+                        </p>
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="client-details">
+                                <h4>Amit Verma</h4>
+                                <div class="client-role">CTO</div>
+                                <div class="client-company">CodeCraft Labs</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-testimonial="3">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            As a fellow student, I was amazed by Divyanshu's dedication and skill level. He helped me understand complex JavaScript concepts and even contributed to our college's web development club. A true tech enthusiast!
+                        </p>
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="client-details">
+                                <h4>Ananya Singh</h4>
+                                <div class="client-role">Computer Science Student</div>
+                                <div class="client-company">B.L Academy</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card" data-testimonial="4">
+                    <div class="quote-icon">
+                        <i class="fas fa-quote-left"></i>
+                    </div>
+                    <div class="testimonial-content">
+                        <p class="testimonial-text">
+                            Divyanshu's link converter tool solved a major problem for our content team. His ability to understand requirements and deliver solutions quickly is remarkable. Looking forward to collaborating on future projects.
+                        </p>
+                        <div class="client-info">
+                            <div class="client-avatar">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="client-details">
+                                <h4>Suresh Patel</h4>
+                                <div class="client-role">Digital Marketing Manager</div>
+                                <div class="client-company">WebFlow Agency</div>
+                                <div class="rating">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="far fa-star"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="testimonial-nav">
+                    <button class="nav-btn" id="prevBtn" aria-label="Previous testimonial">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    
+                    <div class="testimonial-dots" id="dotsContainer">
+                        <div class="dot active" data-slide="0" aria-label="Go to testimonial 1"></div>
+                        <div class="dot" data-slide="1" aria-label="Go to testimonial 2"></div>
+                        <div class="dot" data-slide="2" aria-label="Go to testimonial 3"></div>
+                        <div class="dot" data-slide="3" aria-label="Go to testimonial 4"></div>
+                        <div class="dot" data-slide="4" aria-label="Go to testimonial 5"></div>
+                    </div>
+                    
+                    <button class="nav-btn" id="nextBtn" aria-label="Next testimonial">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Progress Bar -->
+                <div class="testimonial-progress">
+                    <div class="progress-bar" id="progressBar"></div>
+                </div>
+
+                <!-- Auto-play Controls -->
+                <div class="autoplay-controls">
+                    <button class="play-pause-btn" id="playPauseBtn" aria-label="Toggle autoplay">
+                        <i class="fas fa-pause"></i>
+                    </button>
+                    <span class="autoplay-text">Auto-play enabled</span>
+                </div>
+            </div>
+
+            <!-- Statistics -->
+            <div class="testimonial-stats">
+                <div class="stat-item">
+                    <div class="stat-number">50+</div>
+                    <div class="stat-label">Happy Clients</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">95%</div>
+                    <div class="stat-label">Satisfaction Rate</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">24h</div>
+                    <div class="stat-label">Response Time</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        class TestimonialSlider {
+            constructor() {
+                this.currentSlide = 0;
+                this.totalSlides = document.querySelectorAll('.testimonial-card').length;
+                this.isAutoPlaying = true;
+                this.autoPlayInterval = null;
+                this.autoPlayDuration = 5000; // 5 seconds
+                
+                this.init();
+            }
+
+            init() {
+                this.bindEvents();
+                this.startAutoPlay();
+                this.updateProgress();
+            }
+
+            bindEvents() {
+                // Navigation buttons
+                document.getElementById('prevBtn').addEventListener('click', () => this.prevSlide());
+                document.getElementById('nextBtn').addEventListener('click', () => this.nextSlide());
+
+                // Dots navigation
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.addEventListener('click', () => this.goToSlide(index));
+                });
+
+                // Play/Pause button
+                document.getElementById('playPauseBtn').addEventListener('click', () => this.toggleAutoPlay());
+
+                // Keyboard navigation
+                document.addEventListener('keydown', (e) => {
+                    if (e.key === 'ArrowLeft') this.prevSlide();
+                    if (e.key === 'ArrowRight') this.nextSlide();
+                    if (e.key === ' ') {
+                        e.preventDefault();
+                        this.toggleAutoPlay();
+                    }
+                });
+
+                // Pause on hover
+                const container = document.querySelector('.testimonials-container');
+                container.addEventListener('mouseenter', () => this.pauseAutoPlay());
+                container.addEventListener('mouseleave', () => {
+                    if (this.isAutoPlaying) this.startAutoPlay();
+                });
+
+                // Touch/Swipe support for mobile
+                this.initTouchControls();
+            }
+
+            initTouchControls() {
+                let startX = 0;
+                let startY = 0;
+                const container = document.querySelector('.testimonials-container');
+
+                container.addEventListener('touchstart', (e) => {
+                    startX = e.touches[0].clientX;
+                    startY = e.touches[0].clientY;
+                }, { passive: true });
+
+                container.addEventListener('touchend', (e) => {
+                    if (!startX || !startY) return;
+
+                    const endX = e.changedTouches[0].clientX;
+                    const endY = e.changedTouches[0].clientY;
+
+                    const diffX = startX - endX;
+                    const diffY = startY - endY;
+
+                    // Only trigger swipe if horizontal movement is greater than vertical
+                    if (Math.abs(diffX) > Math.abs(diffY) && Math.abs(diffX) > 50) {
+                        if (diffX > 0) {
+                            this.nextSlide(); // Swipe left - next slide
+                        } else {
+                            this.prevSlide(); // Swipe right - previous slide
+                        }
+                    }
+
+                    startX = 0;
+                    startY = 0;
+                }, { passive: true });
+            }
+
+            goToSlide(slideIndex) {
+                // Fade out current slide
+                const currentCard = document.querySelector('.testimonial-card.active');
+                if (currentCard) {
+                    currentCard.style.opacity = '0';
+                    currentCard.style.transform = 'translateY(20px)';
+                    
+                    setTimeout(() => {
+                        currentCard.classList.remove('active');
+                        
+                        // Show new slide
+                        this.currentSlide = slideIndex;
+                        const newCard = document.querySelector(`[data-testimonial="${slideIndex}"]`);
+                        newCard.classList.add('active');
+                        
+                        // Update navigation
+                        this.updateNavigation();
+                        this.updateProgress();
+                        
+                        // Animate in new slide
+                        setTimeout(() => {
+                            newCard.style.opacity = '1';
+                            newCard.style.transform = 'translateY(0)';
+                        }, 50);
+                    }, 300);
+                }
+            }
+
+            nextSlide() {
+                const nextIndex = (this.currentSlide + 1) % this.totalSlides;
+                this.goToSlide(nextIndex);
+            }
+
+            prevSlide() {
+                const prevIndex = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+                this.goToSlide(prevIndex);
+            }
+
+            updateNavigation() {
+                // Update dots
+                document.querySelectorAll('.dot').forEach((dot, index) => {
+                    dot.classList.toggle('active', index === this.currentSlide);
+                });
+
+                // Update button states
+                const prevBtn = document.getElementById('prevBtn');
+                const nextBtn = document.getElementById('nextBtn');
+                
+                // For infinite loop, no need to disable buttons
+                prevBtn.disabled = false;
+                nextBtn.disabled = false;
+            }
+
+            updateProgress() {
+                const progressBar = document.getElementById('progressBar');
+                const progress = ((this.currentSlide + 1) / this.totalSlides) * 100;
+                progressBar.style.width = `${progress}%`;
+            }
+
+            startAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                }
+                
+                this.autoPlayInterval = setInterval(() => {
+                    this.nextSlide();
+                }, this.autoPlayDuration);
+            }
+
+            pauseAutoPlay() {
+                if (this.autoPlayInterval) {
+                    clearInterval(this.autoPlayInterval);
+                    this.autoPlayInterval = null;
+                }
+            }
+
+            toggleAutoPlay() {
+                const playPauseBtn = document.getElementById('playPauseBtn');
+                const autoplayText = document.querySelector('.autoplay-text');
+                
+                if (this.isAutoPlaying) {
+                    this.pauseAutoPlay();
+                    this.isAutoPlaying = false;
+                    playPauseBtn.innerHTML = '<i class="fas fa-play"></i>';
+                    autoplayText.textContent = 'Auto-play paused';
+                } else {
+                    this.startAutoPlay();
+                    this.isAutoPlaying = true;
+                    playPauseBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                    autoplayText.textContent = 'Auto-play enabled';
+                }
+            }
+        }
+
+        // Enhanced Statistics Animation
+        class StatsAnimator {
+            constructor() {
+                this.stats = [
+                    { element: document.querySelectorAll('.stat-number')[0], target: 50, suffix: '+' },
+                    { element: document.querySelectorAll('.stat-number')[1], target: 95, suffix: '%' },
+                    { element: document.querySelectorAll('.stat-number')[2], target: 24, suffix: 'h' },
+                    { element: document.querySelectorAll('.stat-number')[3], target: 15, suffix: '+' }
+                ];
+                this.observer = null;
+                this.init();
+            }
+
+            init() {
+                this.setupIntersectionObserver();
+            }
+
+            setupIntersectionObserver() {
+                this.observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            this.animateStats();
+                            this.observer.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.5 });
+
+                const statsSection = document.querySelector('.testimonial-stats');
+                if (statsSection) {
+                    this.observer.observe(statsSection);
+                }
+            }
+
+            animateStats() {
+                this.stats.forEach((stat, index) => {
+                    if (stat.element) {
+                        this.animateNumber(stat.element, stat.target, stat.suffix, index * 200);
+                    }
+                });
+            }
+
+            animateNumber(element, target, suffix, delay) {
+                setTimeout(() => {
+                    let current = 0;
+                    const increment = target / 50; // 50 steps
+                    const timer = setInterval(() => {
+                        current += increment;
+                        if (current >= target) {
+                            current = target;
+                            clearInterval(timer);
+                        }
+                        element.textContent = Math.floor(current) + suffix;
+                        
+                        // Add pulse effect when animation completes
+                        if (current === target) {
+                            element.style.animation = 'pulse 0.6s ease-in-out';
+                            setTimeout(() => {
+                                element.style.animation = '';
+                            }, 600);
+                        }
+                    }, 30);
+                }, delay);
+            }
+        }
+
+        // Testimonial Card Hover Effects
+        class CardEffects {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                const cards = document.querySelectorAll('.testimonial-card');
+                cards.forEach(card => {
+                    this.addHoverEffects(card);
+                });
+            }
+
+            addHoverEffects(card) {
+                card.addEventListener('mouseenter', () => {
+                    this.addParallaxEffect(card);
+                });
+
+                card.addEventListener('mouseleave', () => {
+                    this.resetParallaxEffect(card);
+                });
+
+                card.addEventListener('mousemove', (e) => {
+                    this.updateParallax(card, e);
+                });
+            }
+
+            addParallaxEffect(card) {
+                const quoteIcon = card.querySelector('.quote-icon');
+                const clientAvatar = card.querySelector('.client-avatar');
+                
+                if (quoteIcon) {
+                    quoteIcon.style.transition = 'transform 0.3s ease';
+                }
+                if (clientAvatar) {
+                    clientAvatar.style.transition = 'transform 0.3s ease';
+                }
+            }
+
+            updateParallax(card, e) {
+                const rect = card.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const y = e.clientY - rect.top;
+                
+                const centerX = rect.width / 2;
+                const centerY = rect.height / 2;
+                
+                const rotateX = (y - centerY) / 20;
+                const rotateY = (centerX - x) / 20;
+                
+                const quoteIcon = card.querySelector('.quote-icon');
+                const clientAvatar = card.querySelector('.client-avatar');
+                
+                if (quoteIcon) {
+                    quoteIcon.style.transform = `translate(${(x - centerX) / 30}px, ${(y - centerY) / 30}px) scale(1.1)`;
+                }
+                
+                if (clientAvatar) {
+                    clientAvatar.style.transform = `translate(${(x - centerX) / 40}px, ${(y - centerY) / 40}px) scale(1.05)`;
+                }
+            }
+
+            resetParallaxEffect(card) {
+                const quoteIcon = card.querySelector('.quote-icon');
+                const clientAvatar = card.querySelector('.client-avatar');
+                
+                if (quoteIcon) {
+                    quoteIcon.style.transform = 'translate(0, 0) scale(1)';
+                }
+                if (clientAvatar) {
+                    clientAvatar.style.transform = 'translate(0, 0) scale(1)';
+                }
+            }
+        }
+
+        // Accessibility Enhancements
+        class AccessibilityEnhancer {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.addAriaLabels();
+                this.setupKeyboardNavigation();
+                this.addScreenReaderSupport();
+                this.setupFocusManagement();
+            }
+
+            addAriaLabels() {
+                const container = document.querySelector('.testimonials-container');
+                container.setAttribute('role', 'region');
+                container.setAttribute('aria-label', 'Client testimonials');
+
+                const cards = document.querySelectorAll('.testimonial-card');
+                cards.forEach((card, index) => {
+                    card.setAttribute('role', 'tabpanel');
+                    card.setAttribute('aria-labelledby', `testimonial-${index}`);
+                    card.setAttribute('tabindex', card.classList.contains('active') ? '0' : '-1');
+                });
+            }
+
+            setupKeyboardNavigation() {
+                document.addEventListener('keydown', (e) => {
+                    const activeElement = document.activeElement;
+                    
+                    if (activeElement.classList.contains('dot')) {
+                        this.handleDotNavigation(e, activeElement);
+                    }
+                });
+            }
+
+            handleDotNavigation(e, activeElement) {
+                const dots = Array.from(document.querySelectorAll('.dot'));
+                const currentIndex = dots.indexOf(activeElement);
+                let newIndex = currentIndex;
+
+                switch (e.key) {
+                    case 'ArrowLeft':
+                        e.preventDefault();
+                        newIndex = currentIndex > 0 ? currentIndex - 1 : dots.length - 1;
+                        break;
+                    case 'ArrowRight':
+                        e.preventDefault();
+                        newIndex = currentIndex < dots.length - 1 ? currentIndex + 1 : 0;
+                        break;
+                    case 'Home':
+                        e.preventDefault();
+                        newIndex = 0;
+                        break;
+                    case 'End':
+                        e.preventDefault();
+                        newIndex = dots.length - 1;
+                        break;
+                }
+
+                if (newIndex !== currentIndex) {
+                    dots[newIndex].focus();
+                    dots[newIndex].click();
+                }
+            }
+
+            addScreenReaderSupport() {
+                const liveRegion = document.createElement('div');
+                liveRegion.setAttribute('aria-live', 'polite');
+                liveRegion.setAttribute('aria-atomic', 'true');
+                liveRegion.className = 'sr-only';
+                liveRegion.id = 'testimonial-live-region';
+                document.body.appendChild(liveRegion);
+
+                // Update live region when slide changes
+                const originalGoToSlide = window.testimonialSlider?.goToSlide;
+                if (originalGoToSlide) {
+                    window.testimonialSlider.goToSlide = function(slideIndex) {
+                        originalGoToSlide.call(this, slideIndex);
+                        const card = document.querySelector(`[data-testimonial="${slideIndex}"]`);
+                        const clientName = card.querySelector('.client-details h4').textContent;
+                        liveRegion.textContent = `Now showing testimonial from ${clientName}`;
+                    };
+                }
+            }
+
+            setupFocusManagement() {
+                const cards = document.querySelectorAll('.testimonial-card');
+                cards.forEach(card => {
+                    card.addEventListener('focus', () => {
+                        if (!card.classList.contains('active')) {
+                            const slideIndex = parseInt(card.getAttribute('data-testimonial'));
+                            if (window.testimonialSlider) {
+                                window.testimonialSlider.goToSlide(slideIndex);
+                            }
+                        }
+                    });
+                });
+            }
+        }
+
+        // Performance Optimizations
+        class PerformanceOptimizer {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.setupLazyLoading();
+                this.optimizeAnimations();
+                this.setupIntersectionObserver();
+            }
+
+            setupLazyLoading() {
+                // Lazy load non-critical images
+                const images = document.querySelectorAll('img[data-src]');
+                const imageObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const img = entry.target;
+                            img.src = img.dataset.src;
+                            img.removeAttribute('data-src');
+                            imageObserver.unobserve(img);
+                        }
+                    });
+                });
+
+                images.forEach(img => imageObserver.observe(img));
+            }
+
+            optimizeAnimations() {
+                // Use CSS transforms instead of changing layout properties
+                const cards = document.querySelectorAll('.testimonial-card');
+                cards.forEach(card => {
+                    card.style.willChange = 'transform, opacity';
+                });
+
+                // Optimize scroll-triggered animations
+                let ticking = false;
+                window.addEventListener('scroll', () => {
+                    if (!ticking) {
+                        requestAnimationFrame(() => {
+                            this.handleScroll();
+                            ticking = false;
+                        });
+                        ticking = true;
+                    }
+                }, { passive: true });
+            }
+
+            handleScroll() {
+                // Add scroll-based optimizations here
+                const scrollY = window.pageYOffset;
+                const testimonialSection = document.querySelector('.section');
+                
+                if (testimonialSection) {
+                    const rect = testimonialSection.getBoundingClientRect();
+                    const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                    
+                    if (isVisible) {
+                        testimonialSection.classList.add('in-viewport');
+                    }
+                }
+            }
+
+            setupIntersectionObserver() {
+                // Pause animations when not visible
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('animate');
+                        } else {
+                            entry.target.classList.remove('animate');
+                        }
+                    });
+                }, { threshold: 0.1 });
+
+                const animatedElements = document.querySelectorAll('.testimonial-card, .stat-item');
+                animatedElements.forEach(el => observer.observe(el));
+            }
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize main slider
+            window.testimonialSlider = new TestimonialSlider();
+            
+            // Initialize enhancements
+            new StatsAnimator();
+            new CardEffects();
+            new AccessibilityEnhancer();
+            new PerformanceOptimizer();
+
+            console.log('🎉 Testimonials section loaded successfully!');
+            console.log('📱 Mobile-friendly with swipe support');
+            console.log('♿ Accessibility features enabled');
+            console.log('⚡ Performance optimizations active');
+            console.log('🎨 Enhanced animations and effects ready');
+        });
+
+        // Export for integration with main portfolio
+        window.TestimonialSection = {
+            init: () => {
+                window.testimonialSlider = new TestimonialSlider();
+                new StatsAnimator();
+                new CardEffects();
+                new AccessibilityEnhancer();
+                new PerformanceOptimizer();
+            },
+            destroy: () => {
+                if (window.testimonialSlider && window.testimonialSlider.autoPlayInterval) {
+                    clearInterval(window.testimonialSlider.autoPlayInterval);
+                }
+            }
+        };
+    </script>
+</body>
+</html>
