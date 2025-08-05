@@ -10,26 +10,28 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* --- Refined Color Palette --- */
         :root {
-            --primary: #0066ff;
-            --primary-dark: #0052cc;
-            --secondary: #ff6b35;
-            --accent: #00d4aa;
-            --background: #0a0a0a;
-            --surface: #1a1a1a;
-            --surface-elevated: #2a2a2a;
-            --text-primary: #ffffff;
-            --text-secondary: #b3b3b3;
-            --text-muted: #666666;
-            --border: #333333;
-            --gradient-primary: linear-gradient(135deg, #0066ff, #00d4aa);
-            --gradient-secondary: linear-gradient(135deg, #ff6b35, #ffba35);
-            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
-            --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.2);
-            --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.3);
-            --shadow-glow: 0 0 32px rgba(0, 102, 255, 0.3);
+            --primary: #007ACC; /* Deep Sky Blue - Professional & Trustworthy */
+            --primary-dark: #005F99;
+            --secondary: #6C757D; /* Muted Gray - Balanced & Sophisticated */
+            --accent: #28A745; /* Vibrant Green - Success & Growth */
+            --background: #0A0A0A; /* Near Black - Premium & Modern */
+            --surface: #1A1A1A; /* Dark Gray - Base for elements */
+            --surface-elevated: #2A2A2A; /* Slightly Lighter Gray - For cards, forms */
+            --text-primary: #E0E0E0; /* Off-White - High Contrast & Readability */
+            --text-secondary: #B0B0B0; /* Light Gray - Subtler text */
+            --text-muted: #707070; /* Darker Gray - For meta info */
+            --border: #3A3A3A; /* Subtle Border - Defines elements without harsh lines */
+            --gradient-primary: linear-gradient(135deg, #007ACC, #00C4FF); /* Smooth Blue Gradient */
+            --gradient-secondary: linear-gradient(135deg, #6C757D, #495057); /* Subtle Gray Gradient */
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 25px rgba(0, 122, 204, 0.6); /* Enhanced Glow */
         }
 
+        /* --- Base Styles --- */
         * {
             margin: 0;
             padding: 0;
@@ -47,22 +49,24 @@
             color: var(--text-primary);
             line-height: 1.6;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased; /* Smoother font rendering */
+            -moz-osx-font-smoothing: grayscale;
         }
 
-        /* Enhanced Loading Screen */
+        /* --- Enhanced Loading Screen --- */
         .loader-screen {
             position: fixed;
             top: 0;
             left: 0;
             width: 100vw;
             height: 100vh;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 50%, #0a0a0a 100%);
+            background: var(--background);
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             z-index: 10000;
-            transition: opacity 1s ease, visibility 1s ease;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
         }
 
         .loader-screen.hidden {
@@ -149,12 +153,31 @@
             animation: pulse 2s ease-in-out infinite;
         }
 
+        .loader-center i {
+            animation: iconPulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes iconPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
         .loader-text {
             color: var(--text-secondary);
             font-size: 1.1rem;
             font-weight: 500;
             animation: fade 2s ease-in-out infinite;
             text-align: center;
+        }
+
+        .loader-text.typing::after {
+            content: '|';
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--text-secondary); }
         }
 
         .loader-progress {
@@ -174,7 +197,7 @@
             animation: progress 3s ease-in-out;
         }
 
-        /* Loading Animations */
+        /* --- Loading Animations --- */
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -186,8 +209,8 @@
         }
 
         @keyframes glow {
-            0% { text-shadow: 0 0 20px rgba(0, 102, 255, 0.5); }
-            100% { text-shadow: 0 0 30px rgba(0, 212, 170, 0.8); }
+            0% { text-shadow: 0 0 20px rgba(0, 122, 204, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(0, 196, 255, 0.8); }
         }
 
         @keyframes fade {
@@ -203,7 +226,7 @@
             100% { width: 100%; }
         }
 
-        /* Particles Background */
+        /* --- Particles Background --- */
         #particles-js {
             position: fixed;
             width: 100%;
@@ -214,7 +237,7 @@
             left: 0;
         }
 
-        /* Scrollbar Styling */
+        /* --- Scrollbar Styling --- */
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: var(--surface); }
         ::-webkit-scrollbar-thumb { 
@@ -224,7 +247,7 @@
         }
         ::-webkit-scrollbar-thumb:hover { background: var(--primary-dark); }
 
-        /* SPA Content Container */
+        /* --- SPA Content Container --- */
         .app-container {
             opacity: 0;
             transition: opacity 0.5s ease;
@@ -248,15 +271,15 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Enhanced Header */
+        /* --- Enhanced Header --- */
         .header {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 80px;
-            background: rgba(10, 10, 10, 0.95);
-            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.95); /* Darker, more professional header background */
+            backdrop-filter: blur(15px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
             transition: all 0.3s ease;
@@ -315,7 +338,7 @@
         .nav-link:hover,
         .nav-link.active {
             color: var(--text-primary);
-            background: rgba(0, 102, 255, 0.1);
+            background: rgba(0, 122, 204, 0.1); /* Updated primary color */
         }
 
         .nav-link::after {
@@ -351,7 +374,7 @@
             background: var(--surface-elevated);
         }
 
-        /* Enhanced Mobile Menu */
+        /* --- Enhanced Mobile Menu --- */
         .mobile-menu {
             position: fixed;
             top: 80px;
@@ -359,7 +382,7 @@
             width: 100%;
             height: calc(100vh - 80px);
             background: rgba(10, 10, 10, 0.98);
-            backdrop-filter: blur(20px);
+            backdrop-filter: blur(15px);
             transition: left 0.3s ease;
             z-index: 999;
             padding: 2rem;
@@ -397,7 +420,7 @@
             transform: translateX(10px);
         }
 
-        /* Hero Section */
+        /* --- Hero Section --- */
         .hero {
             min-height: 100vh;
             display: flex;
@@ -414,15 +437,18 @@
             width: 100%;
             height: 100%;
             background: 
-                radial-gradient(circle at 20% 80%, rgba(0, 102, 255, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 20%, rgba(0, 212, 170, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 40%, rgba(255, 107, 53, 0.05) 0%, transparent 50%);
+                radial-gradient(circle at 20% 80%, rgba(0, 122, 204, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(0, 196, 255, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(108, 117, 125, 0.03) 0%, transparent 50%);
             animation: float 20s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(10px, -10px); }
+            50% { transform: translate(0, 10px); }
+            75% { transform: translate(-10px, -5px); }
+            100% { transform: translate(0, 0); }
         }
 
         .hero-container {
@@ -486,7 +512,7 @@
 
         .btn {
             padding: 1rem 2rem;
-            border-radius: 12px;
+            border-radius: 8px;
             font-weight: 600;
             font-size: 1rem;
             text-decoration: none;
@@ -498,6 +524,7 @@
             border: none;
             position: relative;
             overflow: hidden;
+            z-index: 1;
         }
 
         .btn-primary {
@@ -506,15 +533,53 @@
             box-shadow: var(--shadow-glow);
         }
 
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, var(--accent), var(--primary));
+            z-index: -1;
+            transition: transform 0.5s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .btn-primary:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 0 40px rgba(0, 102, 255, 0.4);
+            box-shadow: 0 0 30px rgba(0, 122, 204, 0.6);
         }
 
         .btn-secondary {
             background: var(--surface-elevated);
             color: var(--text-primary);
             border: 1px solid var(--border);
+        }
+
+        .btn-secondary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--surface);
+            z-index: -1;
+            transition: transform 0.5s ease;
+            transform: scaleX(0);
+            transform-origin: right;
+        }
+
+        .btn-secondary:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
         }
 
         .btn-secondary:hover {
@@ -552,8 +617,8 @@
         }
 
         @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+            0%, 100% { transform: scale(1); box-shadow: 0 0 0 rgba(0, 122, 204, 0.4); }
+            50% { transform: scale(1.03); box-shadow: 0 0 20px rgba(0, 122, 204, 0.8); }
         }
 
         .social-links {
@@ -569,7 +634,7 @@
             width: 50px;
             height: 50px;
             background: var(--surface-elevated);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -578,7 +643,15 @@
             font-size: 1.2rem;
             transition: all 0.3s ease;
             border: 1px solid var(--border);
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
         }
+
+        .social-link:nth-child(1) { animation-delay: 1.2s; }
+        .social-link:nth-child(2) { animation-delay: 1.4s; }
+        .social-link:nth-child(3) { animation-delay: 1.6s; }
+        .social-link:nth-child(4) { animation-delay: 1.8s; }
 
         .social-link:hover {
             background: var(--primary);
@@ -587,7 +660,7 @@
             box-shadow: var(--shadow-md);
         }
 
-        /* Section Styles */
+        /* --- Section Styles --- */
         .section {
             padding: 6rem 0;
             position: relative;
@@ -603,6 +676,19 @@
             text-align: center;
             margin-bottom: 4rem;
         }
+
+        .section-header .section-subtitle,
+        .section-header .section-title,
+        .section-header .section-description {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-play-state: paused;
+        }
+
+        .section-header .section-subtitle { animation-delay: 0.2s; }
+        .section-header .section-title { animation-delay: 0.4s; }
+        .section-header .section-description { animation-delay: 0.6s; }
 
         .section-subtitle {
             color: var(--primary);
@@ -627,7 +713,7 @@
             margin: 0 auto;
         }
 
-        /* Blog Section Styles */
+        /* --- Blog Section Styles --- */
         .blog-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
@@ -637,16 +723,21 @@
 
         .blog-card {
             background: var(--surface-elevated);
-            border-radius: 16px;
+            border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
             position: relative;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-play-state: paused;
         }
 
         .blog-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-lg);
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
         }
 
         .blog-image {
@@ -666,6 +757,11 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .blog-card:hover .blog-image img {
+            transform: scale(1.05);
         }
 
         .blog-content {
@@ -685,7 +781,7 @@
             background: var(--primary);
             color: white;
             padding: 0.25rem 0.75rem;
-            border-radius: 12px;
+            border-radius: 8px;
             font-size: 0.8rem;
             font-weight: 600;
         }
@@ -718,7 +814,7 @@
             gap: 1rem;
         }
 
-        /* Back to Top Button */
+        /* --- Back to Top Button --- */
         .back-to-top {
             position: fixed;
             bottom: 2rem;
@@ -747,7 +843,7 @@
             box-shadow: var(--shadow-glow);
         }
 
-        /* Enhanced Animations */
+        /* --- Enhanced Animations --- */
         @keyframes slideInLeft {
             from {
                 opacity: 0;
@@ -785,7 +881,7 @@
             animation: fadeInUp 0.8s ease-out;
         }
 
-        /* Enhanced Mobile Responsiveness */
+        /* --- Enhanced Mobile Responsiveness --- */
         @media (max-width: 1030px) {
             .nav-menu {
                 display: none;
@@ -814,7 +910,7 @@
             }
 
             .social-links {
-              /*  position: static; */
+                position: static;
                 justify-content: center;
                 margin-top: 2rem;
             }
@@ -857,11 +953,9 @@
             .hero-title {
                 font-size: 2rem;
             }
-.mobile-menu {
-
-overflow: auto;
-
-}
+            .mobile-menu {
+                overflow: auto;
+            }
             .btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
@@ -873,7 +967,7 @@ overflow: auto;
             }
 
             .social-links {
-             /*   flex-wrap: wrap; */
+                flex-wrap: wrap;
                 justify-content: center;
             }
 
@@ -888,12 +982,6 @@ overflow: auto;
             .section-subtitle{
                 margin-top: 5rem;
             }
-/*
-            .hero-avatar {
-                width: 15rem;         
-      height: 15rem;        
-      border-radius: 50%;   
-            } */
 
             .loader-wrapper {
                 width: 80px;
@@ -901,13 +989,14 @@ overflow: auto;
             }
         }
 
-        /* Enhanced content sections for demonstration */
+        /* --- Enhanced content sections for demonstration --- */
         .content-section {
             padding: 2rem;
             background: var(--surface);
             margin: 2rem 0;
-            border-radius: 16px;
+            border-radius: 12px;
             border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm); /* Subtle shadow for depth */
         }
 
         .content-section h2 {
@@ -937,24 +1026,42 @@ overflow: auto;
             border-radius: 12px;
             border: 1px solid var(--border);
             transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s ease-out forwards;
+            animation-play-state: paused;
+            box-shadow: var(--shadow-sm); /* Subtle shadow for depth */
         }
+
+        .feature-grid .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-grid .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-grid .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-grid .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .feature-grid .feature-card:nth-child(5) { animation-delay: 0.5s; }
+        .feature-grid .feature-card:nth-child(6) { animation-delay: 0.6s; }
 
         .feature-card:hover {
             transform: translateY(-5px);
             box-shadow: var(--shadow-md);
+            border-color: var(--primary);
         }
 
         .feature-icon {
             width: 60px;
             height: 60px;
             background: var(--gradient-primary);
-            border-radius: 12px;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 1.5rem;
             color: white;
             margin-bottom: 1rem;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: rotate(5deg) scale(1.05);
         }
 
         .feature-card h3 {
@@ -967,7 +1074,41 @@ overflow: auto;
             line-height: 1.6;
         }
 
-        /* SPA Route indicator */
+        /* --- Form Styles --- */
+        form label {
+            color: var(--text-primary);
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        form input[type="text"],
+        form input[type="email"],
+        form textarea {
+            width: 100%;
+            padding: 1rem;
+            background: var(--surface-elevated);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 1rem;
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        form input[type="text"]:focus,
+        form input[type="email"]:focus,
+        form textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(0, 122, 204, 0.3); /* Focus glow */
+        }
+
+        form textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        /* --- SPA Route indicator --- */
         .route-indicator {
             position: fixed;
             top: 50%;
@@ -1023,11 +1164,6 @@ overflow: auto;
             .route-indicator {
                 display: none;
             }
-           /* .hero-avatar {
-                width: 20rem;         
-      height: 20rem;        
-      border-radius: 50%;   
-            } */
         }
     </style>
 </head>
@@ -1041,11 +1177,11 @@ overflow: auto;
             <div class="loader-brand">Divyanshu Pandey</div>
             <div class="loader-wrapper">
                 <div class="loader"></div>
-            <!--    <div class="loader-center">
+                <!-- <div class="loader-center">
                     <i class="fas fa-code"></i>
                 </div> -->
             </div>
-            <div class="loader-text">Loading Portfolio...</div>
+            <div class="loader-text" id="loaderText">Loading Portfolio...</div>
             <div class="loader-progress">
                 <div class="loader-progress-bar"></div>
             </div> 
@@ -1121,7 +1257,7 @@ overflow: auto;
                 <div class="hero-container">
                     <div class="hero-content">
                         <div class="hero-subtitle">
-                            <span>Hello, I'm</span>
+                            <span id="heroSubtitleText">Hello, I'm</span>
                         </div>
                         <h1 class="hero-title">
                             <span class="gradient-text">Divyanshu</span><br>
@@ -1295,21 +1431,6 @@ overflow: auto;
                                 </a>
                             </div>
                         </div>
-                        <!-- <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-comments"></i>
-                            </div>
-                            <h3>React Chat Application</h3>
-                            <p>A real-time chat application built with React, featuring modern UI design, emoji support, and responsive layout for seamless communication.</p>
-                            <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/react-chat-app/" target="_blank" class="btn btn-primary">
-                                    <i class="fas fa-external-link-alt"></i> Live Demo
-                                </a>
-                                <a href="#" target="_blank" class="btn btn-secondary">
-                                    <i class="fab fa-github"></i> Code
-                                </a>
-                            </div>
-                        </div> -->
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-building"></i>
@@ -1551,21 +1672,21 @@ overflow: auto;
                         <form id="contactForm">
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                                 <div>
-                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name</label>
-                                    <input type="text" name="name" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                    <label for="fullName">Full Name</label>
+                                    <input type="text" id="fullName" name="name" required>
                                 </div>
                                 <div>
-                                    <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email Address</label>
-                                    <input type="email" name="email" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                    <label for="emailAddress">Email Address</label>
+                                    <input type="email" id="emailAddress" name="email" required>
                                 </div>
                             </div>
                             <div style="margin-bottom: 1rem;">
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Subject</label>
-                                <input type="text" name="subject" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                <label for="subject">Subject</label>
+                                <input type="text" id="subject" name="subject" required>
                             </div>
                             <div style="margin-bottom: 2rem;">
-                                <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
-                                <textarea name="message" required rows="6" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem; resize: vertical;"></textarea>
+                                <label for="message">Message</label>
+                                <textarea id="message" name="message" required rows="6"></textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">
                                 Send Message <i class="fas fa-paper-plane"></i>
@@ -1674,6 +1795,7 @@ overflow: auto;
             showLoader() {
                 const loader = document.getElementById('loader');
                 const appContainer = document.getElementById('appContainer');
+                const loaderText = document.getElementById('loaderText');
                 
                 this.isLoading = true;
                 loader.classList.remove('hidden');
@@ -1684,14 +1806,19 @@ overflow: auto;
                 progressBar.style.animation = 'none';
                 progressBar.offsetHeight; // Trigger reflow
                 progressBar.style.animation = 'progress 3s ease-in-out';
+
+                // Start typing animation for loader text
+                loaderText.classList.add('typing');
             }
 
             hideLoader() {
                 const loader = document.getElementById('loader');
                 const appContainer = document.getElementById('appContainer');
+                const loaderText = document.getElementById('loaderText');
                 
                 setTimeout(() => {
                     loader.classList.add('hidden');
+                    loaderText.classList.remove('typing'); // Stop typing animation
                     setTimeout(() => {
                         appContainer.classList.add('loaded');
                         this.isLoading = false;
@@ -1739,6 +1866,9 @@ overflow: auto;
 
                     // Update page title
                     this.updatePageTitle(route);
+
+                    // Trigger section header animations
+                    this.triggerSectionAnimations(this.routes[route].element);
                 }
             }
 
@@ -1784,8 +1914,47 @@ overflow: auto;
             closeMobileMenu() {
                 const mobileMenu = document.getElementById('mobileMenu');
                 const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-                mobileMenu.classList.remove('active');
-                mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                if (mobileMenu && mobileMenu.classList.contains('active')) {
+                    mobileMenu.classList.remove('active');
+                    mobileMenuBtn.querySelector('i').classList.replace('fa-times', 'fa-bars');
+                }
+            }
+
+            // New: Trigger animations for elements within the active section
+            triggerSectionAnimations(sectionElement) {
+                // Reset and re-trigger section header animations
+                const sectionHeader = sectionElement.querySelector('.section-header');
+                if (sectionHeader) {
+                    sectionHeader.querySelectorAll('.section-subtitle, .section-title, .section-description').forEach(el => {
+                        el.style.animation = 'none';
+                        el.offsetHeight; // Trigger reflow
+                        el.style.animation = '';
+                        el.style.animationPlayState = 'running';
+                    });
+                }
+
+                // Reset and re-trigger feature card animations
+                sectionElement.querySelectorAll('.feature-card').forEach(card => {
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = '';
+                    card.style.animationPlayState = 'running';
+                });
+
+                // Reset and re-trigger blog card animations
+                sectionElement.querySelectorAll('.blog-card').forEach(card => {
+                    card.style.animation = 'none';
+                    card.offsetHeight; // Trigger reflow
+                    card.style.animation = '';
+                    card.style.animationPlayState = 'running';
+                });
+
+                // Reset and re-trigger social link animations (if applicable to other sections)
+                sectionElement.querySelectorAll('.social-link').forEach(link => {
+                    link.style.animation = 'none';
+                    link.offsetHeight; // Trigger reflow
+                    link.style.animation = '';
+                });
             }
         }
 
@@ -1794,6 +1963,7 @@ overflow: auto;
             constructor() {
                 this.loader = document.getElementById('loader');
                 this.appContainer = document.getElementById('appContainer');
+                this.loaderTextElement = document.getElementById('loaderText');
                 this.loadingTexts = [
                     'Loading Portfolio...',
                     'Initializing Components...',
@@ -1802,6 +1972,7 @@ overflow: auto;
                     'Ready!'
                 ];
                 this.currentTextIndex = 0;
+                this.typingInterval = null;
                 this.init();
             }
 
@@ -1811,15 +1982,42 @@ overflow: auto;
             }
 
             animateLoadingText() {
-                const loaderText = document.querySelector('.loader-text');
-                const textInterval = setInterval(() => {
-                    if (this.currentTextIndex < this.loadingTexts.length - 1) {
-                        loaderText.textContent = this.loadingTexts[this.currentTextIndex];
-                        this.currentTextIndex++;
+                this.loaderTextElement.classList.add('typing');
+                let currentPhrase = '';
+                let charIndex = 0;
+                let isDeleting = false;
+
+                const typeEffect = () => {
+                    const fullText = this.loadingTexts[this.currentTextIndex];
+
+                    if (isDeleting) {
+                        currentPhrase = fullText.substring(0, charIndex - 1);
+                        charIndex--;
                     } else {
-                        clearInterval(textInterval);
+                        currentPhrase = fullText.substring(0, charIndex + 1);
+                        charIndex++;
                     }
-                }, 600);
+
+                    this.loaderTextElement.textContent = currentPhrase;
+
+                    let typingSpeed = 100; // Typing speed
+                    if (isDeleting) {
+                        typingSpeed /= 2; // Faster deleting
+                    }
+
+                    if (!isDeleting && charIndex === fullText.length) {
+                        typingSpeed = 1500; // Pause at end of phrase
+                        isDeleting = true;
+                    } else if (isDeleting && charIndex === 0) {
+                        isDeleting = false;
+                        this.currentTextIndex = (this.currentTextIndex + 1) % this.loadingTexts.length;
+                        typingSpeed = 500; // Pause before typing next phrase
+                    }
+
+                    this.typingInterval = setTimeout(typeEffect, typingSpeed);
+                };
+
+                typeEffect(); // Start the typing effect
             }
 
             simulateLoading() {
@@ -1829,6 +2027,8 @@ overflow: auto;
             }
 
             hideLoader() {
+                clearTimeout(this.typingInterval); // Stop typing animation
+                this.loaderTextElement.classList.remove('typing');
                 this.loader.classList.add('hidden');
                 setTimeout(() => {
                     this.appContainer.classList.add('loaded');
@@ -1851,41 +2051,58 @@ overflow: auto;
                 particlesJS('particles-js', {
                     particles: {
                         number: {
-                            value: window.innerWidth < 768 ? 30 : 50,
+                            value: window.innerWidth < 768 ? 40 : 80,
                             density: {
                                 enable: true,
                                 value_area: 800
                             }
                         },
                         color: {
-                            value: '#0066ff'
+                            value: '#007ACC' /* Updated particle color */
                         },
                         shape: {
                             type: 'circle'
                         },
                         opacity: {
-                            value: 0.3,
-                            random: false
+                            value: 0.4,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 1,
+                                opacity_min: 0.1,
+                                sync: false
+                            }
                         },
                         size: {
-                            value: 3,
-                            random: true
+                            value: 4,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 40,
+                                size_min: 0.1,
+                                sync: false
+                            }
                         },
                         line_linked: {
                             enable: true,
                             distance: 150,
-                            color: '#0066ff',
-                            opacity: 0.2,
+                            color: '#007ACC', /* Updated line color */
+                            opacity: 0.3,
                             width: 1
                         },
                         move: {
                             enable: true,
-                            speed: 2,
+                            speed: 3,
                             direction: 'none',
                             random: false,
                             straight: false,
                             out_mode: 'out',
-                            bounce: false
+                            bounce: false,
+                            attract: {
+                                enable: false,
+                                rotateX: 600,
+                                rotateY: 1200
+                            }
                         }
                     },
                     interactivity: {
@@ -1903,9 +2120,9 @@ overflow: auto;
                         },
                         modes: {
                             grab: {
-                                distance: 140,
+                                distance: 180,
                                 line_linked: {
-                                    opacity: 0.5
+                                    opacity: 0.7
                                 }
                             },
                             push: {
@@ -1922,6 +2139,7 @@ overflow: auto;
                 this.initScrollEffects();
                 this.initFormHandling();
                 this.initAnimations();
+                this.initIntersectionObserverAnimations(); // New: For scroll-triggered animations
             }
 
             initMobileMenu() {
@@ -2004,49 +2222,14 @@ overflow: auto;
             }
 
             initAnimations() {
-                // Add hover effects to buttons
-                document.querySelectorAll('.btn').forEach(btn => {
-                    btn.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-2px) scale(1.02)';
-                    });
-                    
-                    btn.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0) scale(1)';
-                    });
-                });
-
-                // Add hover effects to feature cards
-                document.querySelectorAll('.feature-card').forEach(card => {
-                    card.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                        this.querySelector('.feature-icon').style.transform = 'scale(1.1) rotate(5deg)';
-                    });
-                    
-                    card.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0) scale(1)';
-                        this.querySelector('.feature-icon').style.transform = 'scale(1) rotate(0deg)';
-                    });
-                });
-
-                // Add hover effects to blog cards
-                document.querySelectorAll('.blog-card').forEach(card => {
-                    card.addEventListener('mouseenter', function() {
-                        this.style.transform = 'translateY(-8px) scale(1.02)';
-                    });
-                    
-                    card.addEventListener('mouseleave', function() {
-                        this.style.transform = 'translateY(0) scale(1)';
-                    });
-                });
-
                 // Animate hero subtitle
                 this.animateHeroSubtitle();
             }
 
             animateHeroSubtitle() {
-                const subtitle = document.querySelector('.hero-subtitle span');
-                if (subtitle) {
-                    const phrases = ["Hello, I'm", "Welcome, I'm", "Hi there, I'm"];
+                const subtitleElement = document.getElementById('heroSubtitleText');
+                if (subtitleElement) {
+                    const phrases = ["Hello, I'm", "Welcome, I'm", "Hi there, I'm a Web Developer"];
                     let phraseIndex = 0;
                     let charIndex = 0;
                     let isDeleting = false;
@@ -2055,10 +2238,10 @@ overflow: auto;
                         const currentPhrase = phrases[phraseIndex];
                         
                         if (isDeleting) {
-                            subtitle.textContent = currentPhrase.substring(0, charIndex - 1);
+                            subtitleElement.textContent = currentPhrase.substring(0, charIndex - 1);
                             charIndex--;
                         } else {
-                            subtitle.textContent = currentPhrase.substring(0, charIndex + 1);
+                            subtitleElement.textContent = currentPhrase.substring(0, charIndex + 1);
                             charIndex++;
                         }
 
@@ -2075,6 +2258,50 @@ overflow: auto;
 
                     setTimeout(typeEffect, 1000);
                 }
+            }
+
+            // New: Intersection Observer for scroll-triggered animations
+            initIntersectionObserverAnimations() {
+                const observerOptions = {
+                    root: null,
+                    rootMargin: '0px',
+                    threshold: 0.1 // Trigger when 10% of the element is visible
+                };
+
+                const observerCallback = (entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Add 'animate' class to trigger CSS animations
+                            if (entry.target.classList.contains('section-header')) {
+                                entry.target.querySelectorAll('.section-subtitle, .section-title, .section-description').forEach(el => {
+                                    el.style.animationPlayState = 'running';
+                                });
+                            } else if (entry.target.classList.contains('feature-card')) {
+                                entry.target.style.animationPlayState = 'running';
+                            } else if (entry.target.classList.contains('blog-card')) {
+                                entry.target.style.animationPlayState = 'running';
+                            }
+                            observer.unobserve(entry.target); // Stop observing once animated
+                        }
+                    });
+                };
+
+                const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+                // Observe section headers
+                document.querySelectorAll('.section-header').forEach(header => {
+                    observer.observe(header);
+                });
+
+                // Observe feature cards
+                document.querySelectorAll('.feature-card').forEach(card => {
+                    observer.observe(card);
+                });
+
+                // Observe blog cards
+                document.querySelectorAll('.blog-card').forEach(card => {
+                    observer.observe(card);
+                });
             }
         }
 
@@ -2127,7 +2354,7 @@ overflow: auto;
             handleResize() {
                 // Update particles based on screen size
                 if (window.pJSDom && window.pJSDom[0]) {
-                    const particleCount = window.innerWidth < 768 ? 25 : 50;
+                    const particleCount = window.innerWidth < 768 ? 40 : 80;
                     window.pJSDom[0].pJS.particles.number.value = particleCount;
                     window.pJSDom[0].pJS.fn.particlesRefresh();
                 }
@@ -2178,6 +2405,12 @@ overflow: auto;
                     if (!isScrolling) {
                         requestAnimationFrame(() => {
                             // Scroll-dependent updates here
+                            // Example: Parallax effect (if implemented)
+                            const heroBg = document.querySelector('.hero-bg');
+                            if (heroBg) {
+                                const scrollY = window.scrollY;
+                                heroBg.style.transform = `translateY(${scrollY * 0.05}px)`;
+                            }
                             isScrolling = false;
                         });
                         isScrolling = true;
