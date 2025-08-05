@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<!-- saved from url=(0045)https://codecr4cker.github.io/divyanshu/#home -->
-<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Divyanshu Pandey - Professional Portfolio</title>
-    <meta name="description" content="Professional portfolio of Divyanshu Pandey - Web Developer &amp; Student">
-    <link rel="preconnect" href="https://fonts.googleapis.com/">
-    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;family=JetBrains+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+    <meta name="description" content="Professional portfolio of Divyanshu Pandey - Web Developer & Student">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -76,9 +76,7 @@
             align-items: center;
             gap: 2rem;
         }
-#typing{
-font-size: 3rem;
-}
+
         .loader-brand {
             font-family: 'JetBrains Mono', monospace;
             font-size: clamp(1.8rem, 4vw, 2.5rem);
@@ -559,15 +557,15 @@ font-size: 3rem;
         }
 
         .social-links {
-margin-top: 3rem;
+            position: absolute;
             left: 2rem;
+            margin-top: 2rem;
             display: flex;
             gap: 1rem;
             z-index: 3;
         }
 
         .social-link {
-
             width: 50px;
             height: 50px;
             background: var(--surface-elevated);
@@ -609,7 +607,7 @@ margin-top: 3rem;
         .section-subtitle {
             color: var(--primary);
             font-weight: 600;
-            margin-top: 8rem;
+            margin-top: 2rem;
             font-size: 1rem;
             margin-bottom: 1rem;
             text-transform: uppercase;
@@ -791,7 +789,7 @@ margin-top: 3rem;
         @media (max-width: 1030px) {
             .nav-menu {
                 display: none;
-               height: 7rem; 
+                height: 5rem;
             }
 
             .mobile-menu-btn {
@@ -810,17 +808,14 @@ margin-top: 3rem;
             .hero-image {
                 order: -1;
             }
-            .header{
-                height: 3rem;
-            }
 
             .hero-avatar {
                 max-width: 280px;
             }
 
             .social-links {
-                /* position: static;
-                justify-content: center; */
+              /*  position: static; */
+                justify-content: center;
                 margin-top: 2rem;
             }
 
@@ -862,10 +857,11 @@ margin-top: 3rem;
             .hero-title {
                 font-size: 2rem;
             }
-            .mobile-menu {
-               overflow: auto;
-            }
+.mobile-menu {
 
+overflow: auto;
+
+}
             .btn {
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
@@ -876,10 +872,10 @@ margin-top: 3rem;
                 align-items: center;
             }
 
-            /* .social-links {
-                flex-wrap: wrap;
+            .social-links {
+             /*   flex-wrap: wrap; */
                 justify-content: center;
-            } */
+            }
 
             .loader-brand {
                 font-size: 1.5rem;
@@ -888,6 +884,16 @@ margin-top: 3rem;
             .loader-progress {
                 width: 200px;
             }
+
+            .section-subtitle{
+                margin-top: 5rem;
+            }
+/*
+            .hero-avatar {
+                width: 15rem;         
+      height: 15rem;        
+      border-radius: 50%;   
+            } */
 
             .loader-wrapper {
                 width: 80px;
@@ -1017,59 +1023,37 @@ margin-top: 3rem;
             .route-indicator {
                 display: none;
             }
+           /* .hero-avatar {
+                width: 20rem;         
+      height: 20rem;        
+      border-radius: 50%;   
+            } */
         }
-
-            @keyframes slideInRight {
-                from {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-            }
-            
-            @keyframes slideOutRight {
-                from {
-                    transform: translateX(0);
-                    opacity: 1;
-                }
-                to {
-                    transform: translateX(100%);
-                    opacity: 0;
-                }
-            }
-
-            .keyboard-navigation *:focus {
-                outline: 2px solid var(--primary) !important;
-                outline-offset: 2px !important;
-            }
-        </style>
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&amp;display=swap"><link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&amp;display=swap"></head>
+    </style>
+</head>
 <body>
     <!-- Particles Background -->
-    <div id="particles-js"><canvas class="particles-js-canvas-el" width="1440" height="811" style="width: 100%; height: 100%;"></canvas></div>
+    <div id="particles-js"></div>
 
     <!-- Enhanced Loading Screen -->
-    <div class="loader-screen hidden" id="loader">
+    <div class="loader-screen" id="loader">
         <div class="loader-container">
             <div class="loader-brand">Divyanshu Pandey</div>
             <div class="loader-wrapper">
                 <div class="loader"></div>
-               <!--  <div class="loader-center">
-                    <i class="fas fa-code"></i> 
-            </div>-->
-                </div>
-            <div class="loader-text">Finalizing Experience...</div>
-            <div class="loader-progress">
-                <div class="loader-progress-bar" style="animation: 3s ease-in-out 0s 1 normal none running progress;"></div>
+            <!--    <div class="loader-center">
+                    <i class="fas fa-code"></i>
+                </div> -->
             </div>
+            <div class="loader-text">Loading Portfolio...</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div> 
         </div>
     </div>
 
     <!-- SPA Container -->
-    <div class="app-container loaded" id="appContainer">
+    <div class="app-container" id="appContainer">
         <!-- Enhanced Header -->
         <header class="header" id="header">
             <div class="nav-container">
@@ -1137,57 +1121,55 @@ margin-top: 3rem;
                 <div class="hero-container">
                     <div class="hero-content">
                         <div class="hero-subtitle">
-                            <span>Hi there, I'm</span>
+                            <span>Hello, I'm</span>
                         </div>
                         <h1 class="hero-title">
-                            <span class="gradient-text" id="typing">   </span><br>
-                           
+                            <span class="gradient-text">Divyanshu</span><br>
+                            Pandey
                         </h1>
                         <p class="hero-description">
                             A passionate 12th-grade student and aspiring web developer, crafting beautiful digital experiences with modern technologies.
                         </p>
                         <div class="hero-cta">
-                            <button class="btn btn-primary" data-route="projects" style="transform: translateY(0px) scale(1);">
+                            <button class="btn btn-primary" data-route="projects">
                                 View My Work <i class="fas fa-arrow-right"></i>
                             </button>
-                            <button class="btn btn-secondary" data-route="contact" style="transform: translateY(0px) scale(1);">
+                            <button class="btn btn-secondary" data-route="contact">
                                 Get In Touch <i class="fas fa-envelope"></i>
                             </button>
-
-
                         </div>
-<div class="social-links">
+                         <div class="social-links">
                     <a href="https://github.com/Divyanshu5520" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://codecr4cker.github.io/divyanshu/#" class="social-link" target="_blank">
+                    <a href="#" class="social-link" target="_blank">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="https://codecr4cker.github.io/divyanshu/#" class="social-link" target="_blank">
+                    <a href="#" class="social-link" target="_blank">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://codecr4cker.github.io/divyanshu/#" class="social-link" target="_blank">
+                    <a href="#" class="social-link" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div>
                     </div>
                     <div class="hero-image">
                         <div class="hero-avatar">
-                            <img src="https://raw.githubusercontent.com/CodeCr4cker/About/main/Img/itz.png" alt="Divyanshu Pandey">
+                            <img src="https://raw.githubusercontent.com/CodeCr4cker/About/main/Img/itz.png" alt="Divyanshu Pandey" />
                         </div>
                     </div>
                 </div>
-         <!--       <div class="social-links">
+                <!-- <div class="social-links">
                     <a href="https://github.com/Divyanshu5520" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
-                    <a href="https://codecr4cker.github.io/divyanshu/#" class="social-link" target="_blank">
+                    <a href="#" class="social-link" target="_blank">
                         <i class="fab fa-linkedin"></i>
                     </a>
-                    <a href="https://codecr4cker.github.io/divyanshu/#" class="social-link" target="_blank">
+                    <a href="#" class="social-link" target="_blank">
                         <i class="fab fa-twitter"></i>
                     </a>
-                    <a href="https://codecr4cker.github.io/divyanshu/#" class="social-link" target="_blank">
+                    <a href="#" class="social-link" target="_blank">
                         <i class="fab fa-instagram"></i>
                     </a>
                 </div> -->
@@ -1234,7 +1216,7 @@ margin-top: 3rem;
                                 <i class="fas fa-tools"></i>
                             </div>
                             <h3>Multiple Technologies</h3>
-                            <p>Proficient in HTML, CSS, JavaScript,  Python, and various development tools and frameworks.</p>
+                            <p>Proficient in HTML, CSS, JavaScript, React, Python, and various development tools and frameworks.</p>
                         </div>
                     </div>
                 </div>
@@ -1247,7 +1229,7 @@ margin-top: 3rem;
                 <div class="container">
                     <div class="section-header">
                         <div class="section-subtitle">What I do</div>
-                        <h2 class="section-title">Skills &amp; Expertise</h2>
+                        <h2 class="section-title">Skills & Expertise</h2>
                         <p class="section-description">
                             Technologies and tools I use to bring ideas to life
                         </p>
@@ -1258,21 +1240,21 @@ margin-top: 3rem;
                                 <i class="fas fa-code"></i>
                             </div>
                             <h3>Frontend Development</h3>
-                            <p>HTML5, CSS3, JavaScript, Responsive Design - Creating beautiful and interactive user interfaces.</p>
+                            <p>HTML5, CSS3, JavaScript, React, Responsive Design, Bootstrap - Creating beautiful and interactive user interfaces.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-database"></i>
                             </div>
-                            <h3>Backend &amp; Database</h3>
-                            <p>Python, MySQL, PHP,  Building robust server-side applications and managing data.</p>
+                            <h3>Backend & Database</h3>
+                            <p>Python, MySQL, PHP, Node.js, API Integration - Building robust server-side applications and managing data.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-tools"></i>
                             </div>
-                            <h3>Tools &amp; Technologies</h3>
-                            <p>Git &amp; GitHub, VS Code, Figma, Chrome DevTools, Netlify - Using modern development tools for efficient workflows.</p>
+                            <h3>Tools & Technologies</h3>
+                            <p>Git & GitHub, VS Code, Figma, Chrome DevTools, Netlify - Using modern development tools for efficient workflows.</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
@@ -1322,13 +1304,13 @@ margin-top: 3rem;
                                 <a href="https://codecr4cker.github.io/Code-2-pdf/" target="_blank" class="btn btn-primary">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
-                                <a href="https://codecr4cker.github.io/divyanshu/#" target="_blank" class="btn btn-secondary">
+                                <a href="#" target="_blank" class="btn btn-secondary">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
                         </div>
-                    <!--    <div class="feature-card" style="transform: translateY(0px) scale(1);">
-                            <div class="feature-icon" style="transform: scale(1) rotate(0deg);">
+                        <div class="feature-card">
+                            <div class="feature-icon">
                                 <i class="fas fa-comments"></i>
                             </div>
                             <h3>React Chat Application</h3>
@@ -1337,11 +1319,11 @@ margin-top: 3rem;
                                 <a href="https://codecr4cker.github.io/react-chat-app/" target="_blank" class="btn btn-primary">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
-                                <a href="https://codecr4cker.github.io/divyanshu/#" target="_blank" class="btn btn-secondary">
+                                <a href="#" target="_blank" class="btn btn-secondary">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
-                        </div>  -->
+                        </div>
                         <div class="feature-card">
                             <div class="feature-icon">
                                 <i class="fas fa-building"></i>
@@ -1352,7 +1334,7 @@ margin-top: 3rem;
                                 <a href="https://codecr4cker.github.io/html-test/" target="_blank" class="btn btn-primary">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
-                                <a href="https://codecr4cker.github.io/divyanshu/#" target="_blank" class="btn btn-secondary">
+                                <a href="#" target="_blank" class="btn btn-secondary">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
@@ -1367,7 +1349,7 @@ margin-top: 3rem;
                                 <a href="https://codecr4cker.github.io/link-converter/" target="_blank" class="btn btn-primary">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
-                                <a href="https://codecr4cker.github.io/divyanshu/#" target="_blank" class="btn btn-secondary">
+                                <a href="#" target="_blank" class="btn btn-secondary">
                                     <i class="fab fa-github"></i> Code
                                 </a>
                             </div>
@@ -1513,14 +1495,13 @@ margin-top: 3rem;
             </section>
         </div>
 
-
         <!-- Education Page -->
         <div class="page-content" id="education-page">
             <section class="section">
                 <div class="container">
                     <div class="section-header">
                         <div class="section-subtitle">My Journey</div>
-                        <h2 class="section-title">Education &amp; Achievements</h2>
+                        <h2 class="section-title">Education & Achievements</h2>
                         <p class="section-description">
                             Academic milestones and learning experiences that shaped my path
                         </p>
@@ -1540,7 +1521,7 @@ margin-top: 3rem;
                             <div class="feature-icon">
                                 <i class="fas fa-certificate"></i>
                             </div>
-                            <h3>HTML &amp; CSS Certification</h3>
+                            <h3>HTML & CSS Certification</h3>
                             <p>Successfully completed comprehensive HTML and CSS course from FreeCodeCamp, demonstrating proficiency in modern web development practices.</p>
                         </div>
                         <div class="feature-card">
@@ -1585,36 +1566,36 @@ margin-top: 3rem;
                             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
                                 <div>
                                     <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Full Name</label>
-                                    <input type="text" name="name" required="" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                    <input type="text" name="name" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
                                 </div>
                                 <div>
                                     <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Email Address</label>
-                                    <input type="email" name="email" required="" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                    <input type="email" name="email" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
                                 </div>
                             </div>
                             <div style="margin-bottom: 1rem;">
                                 <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Subject</label>
-                                <input type="text" name="subject" required="" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
+                                <input type="text" name="subject" required style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem;">
                             </div>
                             <div style="margin-bottom: 2rem;">
                                 <label style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Message</label>
-                                <textarea name="message" required="" rows="6" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem; resize: vertical;"></textarea>
+                                <textarea name="message" required rows="6" style="width: 100%; padding: 1rem; background: var(--surface-elevated); border: 1px solid var(--border); border-radius: 8px; color: var(--text-primary); font-size: 1rem; resize: vertical;"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary" style="transform: translateY(0px) scale(1);">
+                            <button type="submit" class="btn btn-primary">
                                 Send Message <i class="fas fa-paper-plane"></i>
                             </button>
                         </form>
                     </div>
                     <div class="feature-grid">
-                        <div class="feature-card" style="transform: translateY(0px) scale(1);">
-                            <div class="feature-icon" style="transform: scale(1) rotate(0deg);">
+                        <div class="feature-card">
+                            <div class="feature-icon">
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <h3>Email</h3>
                             <p>divyanshu@example.com</p>
                         </div>
-                        <div class="feature-card" style="transform: translateY(0px) scale(1);">
-                            <div class="feature-icon" style="transform: scale(1) rotate(0deg);">
+                        <div class="feature-card">
+                            <div class="feature-icon">
                                 <i class="fas fa-phone"></i>
                             </div>
                             <h3>Phone</h3>
@@ -2076,15 +2057,6 @@ margin-top: 3rem;
                 this.animateHeroSubtitle();
             }
 
-
-
-
-
-
-
-
-
-
             animateHeroSubtitle() {
                 const subtitle = document.querySelector('.hero-subtitle span');
                 if (subtitle) {
@@ -2105,13 +2077,13 @@ margin-top: 3rem;
                         }
 
                         if (!isDeleting && charIndex === currentPhrase.length) {
-                            setTimeout(() => isDeleting = true, 1000);
+                            setTimeout(() => isDeleting = true, 2000);
                         } else if (isDeleting && charIndex === 0) {
                             isDeleting = false;
                             phraseIndex = (phraseIndex + 1) % phrases.length;
                         }
 
-                        const typingSpeed = isDeleting ? 60 : 100;
+                        const typingSpeed = isDeleting ? 50 : 100;
                         setTimeout(typeEffect, typingSpeed);
                     };
 
@@ -2450,24 +2422,6 @@ margin-top: 3rem;
         console.log('🎨 Enhanced loader with 3-second transitions');
         console.log('📝 Blog section added');
         console.log('🖼️ Real hero image implemented');
-
-// Typing effect
-const typingTarget = document.getElementById('typing');
-const typingTexts = [
-  "Divyanshu Pandey",
-  'Web Developer',
-  'Student & Coder'
-];
-let tIdx = 0, lIdx = 0, isDeleting = false;
-function type() {
-  let text = typingTexts[tIdx];
-  typingTarget.textContent = isDeleting ? text.substring(0, lIdx--) : text.substring(0, lIdx++);
-  if (!isDeleting && lIdx === text.length + 1) setTimeout(() => isDeleting = true, 1000);
-  else if (isDeleting && lIdx === 0) { tIdx = (tIdx + 1) % typingTexts.length; isDeleting = false; }
-  setTimeout(type, isDeleting ? 60 : 100);
-}
-type();
     </script>
-
-
-<iframe frameborder="0" scrolling="no" style="background-color: transparent; border: 0px; display: none;" src="./Divyanshu Pandey - Professional Portfolio_files/saved_resource.html"></iframe><div id="GOOGLE_INPUT_CHEXT_FLAG" input="" input_stat="{&quot;tlang&quot;:true,&quot;tsbc&quot;:true,&quot;pun&quot;:true,&quot;mk&quot;:true,&quot;ss&quot;:true}" style="display: none;"></div></body></html>
+</body>
+</html>
