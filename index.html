@@ -138,18 +138,18 @@
 
         .loader-center {
             position: absolute;
-            top: 50%;
-            left: 50%;
+            top: 21%;
+            left: 21%;
             transform: translate(-50%, -50%);
-            width: 40px;
-            height: 40px;
+            width: 70px;
+            height: 70px;
             background: var(--gradient-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
-            font-size: 1.2rem;
+            font-size: 3rem;
             animation: pulse 2s ease-in-out infinite;
         }
 
@@ -901,6 +901,23 @@
                 padding: 6rem 0;
             }
 
+            .loader-center {
+            position: absolute;
+            top: 26%;
+            left: 26%;
+            transform: translate(-50%, -50%);
+            width: 50px;
+            height: 50px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.5rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
             .hero-image {
                 order: -1;
             }
@@ -974,6 +991,23 @@
             .loader-brand {
                 font-size: 1.5rem;
             }
+
+            .loader-center {
+            position: absolute;
+            top: 26%;
+            left: 26%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.2rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
 
             .loader-progress {
                 width: 200px;
@@ -1174,12 +1208,12 @@
     <!-- Enhanced Loading Screen -->
     <div class="loader-screen" id="loader">
         <div class="loader-container">
-            <div class="loader-brand">Divyanshu Pandey</div>
+            <!-- <div class="loader-brand">Divyanshu Pandey</div> -->
             <div class="loader-wrapper">
                 <div class="loader"></div>
-                <!-- <div class="loader-center">
-                    <i class="fas fa-code"></i>
-                </div> -->
+               <div class="loader-center">
+                D
+                </div> 
             </div>
             <div class="loader-text" id="loaderText">Loading Portfolio...</div>
             <div class="loader-progress">
@@ -1257,7 +1291,7 @@
                 <div class="hero-container">
                     <div class="hero-content">
                         <div class="hero-subtitle">
-                            <span id="heroSubtitleText">Hello, I'm</span>
+                            <span id="heroSubtitleText"></span>
                         </div>
                         <h1 class="hero-title">
                             <span class="gradient-text">Divyanshu</span><br>
@@ -1275,7 +1309,7 @@
                             </button>
                         </div>
                          <div class="social-links">
-                    <a href="https://github.com/Divyanshu5520" class="social-link" target="_blank">
+                    <a href="https://github.com/CodeCr4cker" class="social-link" target="_blank">
                         <i class="fab fa-github"></i>
                     </a>
                     <a href="#" class="social-link" target="_blank">
@@ -1699,7 +1733,7 @@
                                 <i class="fas fa-envelope"></i>
                             </div>
                             <h3>Email</h3>
-                            <p>divyanshu@example.com</p>
+                            <p>divyanshu@gmail.com</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
@@ -1713,7 +1747,7 @@
                                 <i class="fas fa-map-marker-alt"></i>
                             </div>
                             <h3>Location</h3>
-                            <p>Bahraigh, Uttar Pradesh, India</p>
+                            <p>Prayagraj, Uttar Pradesh, India</p>
                         </div>
                         <div class="feature-card">
                             <div class="feature-icon">
@@ -2229,7 +2263,7 @@
             animateHeroSubtitle() {
                 const subtitleElement = document.getElementById('heroSubtitleText');
                 if (subtitleElement) {
-                    const phrases = ["Hello, I'm", "Welcome, I'm", "Hi there, I'm a Web Developer"];
+                    const phrases = ["Hello, I'm", "Welcome, I'm", "I'm a Web Developer"];
                     let phraseIndex = 0;
                     let charIndex = 0;
                     let isDeleting = false;
