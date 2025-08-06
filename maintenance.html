@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>System Maintenance - We'll Be Back Shortly</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        :root {
+            --primary-gradient: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+            --accent-gradient: linear-gradient(135deg, #00d4ff 0%, #090979 100%);
+            --secondary-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            --success-gradient: linear-gradient(135deg, #56ab2f 0%, #a8e6cf 100%);
+            --glass-bg: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-primary: #ffffff;
+            --text-secondary: #b8c5d1;
+            --text-muted: #8892a0;
+            --card-bg: rgba(255, 255, 255, 0.08);
+            --card-border: rgba(255, 255, 255, 0.12);
+            --success-color: #4ade80;
+            --warning-color: #fbbf24;
+            --accent-color: #00d4ff;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: var(--primary-gradient);
+            min-height: 100vh;
+            color: var(--text-primary);
+            overflow-x: hidden;
+            position: relative;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Animated background particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--accent-color);
+            border-radius: 50%;
+            animation: float-particle 15s infinite linear;
+            opacity: 0.6;
+        }
+
+        .particle:nth-child(odd) {
+            background: #ff6b6b;
+            animation-duration: 20s;
+        }
+
+        .particle:nth-child(3n) {
+            background: #4ade80;
+            animation-duration: 25s;
+        }
+
+        @keyframes float-particle {
+            0% {
+                transform: translateY(100vh) translateX(0px) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            90% {
+                opacity: 0.6;
+                transform: scale(1);
+            }
+            100% {
+                transform: translateY(-10vh) translateX(100px) scale(0);
+                opacity: 0;
+            }
+        }
+
+        /* Glowing orbs */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            animation: glow-float 8s ease-in-out infinite;
+            z-index: -1;
+        }
+
+        .orb-1 {
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.3), transparent 70%);
+            top: 10%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 150px;
+            height: 150px;
+            background: radial-gradient(circle, rgba(255, 107, 107, 0.2), transparent 70%);
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 3s;
+        }
+
+        .orb-3 {
+            width: 100px;
+            height: 100px;
+            background: radial-gradient(circle, rgba(74, 222, 128, 0.25), transparent 70%);
+            top: 60%;
+            right: 20%;
+            animation-delay: 6s;
+        }
+
+        @keyframes glow-float {
+            0%, 100% {
+                transform: translateY(0px) translateX(0px) scale(1);
+                opacity: 0.6;
+            }
+            33% {
+                transform: translateY(-30px) translateX(20px) scale(1.1);
+                opacity: 0.8;
+            }
+            66% {
+                transform: translateY(20px) translateX(-20px) scale(0.9);
+                opacity: 0.4;
+            }
+        }
+
+        /* Main container */
+        .maintenance-container {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 2rem;
+            max-width: 420px;
+            width: 100%;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px var(--glass-border),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: slideIn 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .maintenance-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+                filter: blur(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+                filter: blur(0px);
+            }
+        }
+
+        /* Header section */
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .logo-container {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-gradient);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2rem;
+            color: white;
+            animation: logoFloat 3s ease-in-out infinite;
+            box-shadow: 
+                0 10px 30px rgba(0, 212, 255, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .logo-container::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            animation: shine 3s ease-in-out infinite;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-5px) rotate(5deg);
+            }
+        }
+
+        @keyframes shine {
+            0% {
+                transform: translateX(-100%) translateY(-100%) rotate(45deg);
+            }
+            50% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+            100% {
+                transform: translateX(100%) translateY(100%) rotate(45deg);
+            }
+        }
+
+        .status-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(74, 222, 128, 0.1);
+            color: var(--success-color);
+            padding: 0.6rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            border: 1px solid rgba(74, 222, 128, 0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--success-color);
+            border-radius: 50%;
+            animation: pulse 2s infinite;
+            box-shadow: 0 0 10px rgba(74, 222, 128, 0.5);
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.5;
+                transform: scale(1.2);
+            }
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #ffffff 0%, #b8c5d1 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            margin-bottom: 2rem;
+        }
+
+        /* Progress section */
+        .progress-section {
+            margin: 1.5rem 0;
+        }
+
+        .progress-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem;
+        }
+
+        .progress-label {
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .progress-percentage {
+            font-size: 0.85rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .progress-bar-container {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            height: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            background: var(--accent-gradient);
+            height: 100%;
+            width: 0%;
+            border-radius: 50px;
+            animation: progressMove 4s ease-in-out infinite;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+            position: relative;
+        }
+
+        .progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shimmer 2s infinite;
+        }
+
+        @keyframes progressMove {
+            0% { width: 20%; }
+            50% { width: 70%; }
+            100% { width: 20%; }
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        /* Info cards */
+        .info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .info-card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.2rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--card-border);
+            transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .info-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .info-card:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 255, 255, 0.12);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .info-card:active {
+            transform: translateY(0px) scale(0.98);
+        }
+
+        .card-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+            background: var(--accent-gradient);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .card-title {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 0.3rem;
+            font-weight: 600;
+        }
+
+        .card-text {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        /* Contact section */
+        .contact-section {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--card-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        }
+
+        .contact-title {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-title i {
+            color: var(--accent-color);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s ease;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .contact-item:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-1px);
+            color: var(--accent-color);
+        }
+
+        .contact-item:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .contact-item i {
+            font-size: 1rem;
+            width: 16px;
+            text-align: center;
+        }
+
+        /* Status timeline */
+        .status-timeline {
+            margin: 1.5rem 0;
+            padding: 1.2rem;
+            background: var(--card-bg);
+            border-radius: 12px;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(10px);
+        }
+
+        .timeline-title {
+            font-size: 0.9rem;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .timeline-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .timeline-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .timeline-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--success-color);
+            flex-shrink: 0;
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-dot.completed {
+            background: var(--success-color);
+            animation: none;
+        }
+
+        .timeline-dot.pending {
+            background: var(--warning-color);
+            animation: pulse 2s infinite;
+        }
+
+        .timeline-dot.upcoming {
+            background: rgba(255, 255, 255, 0.3);
+            animation: none;
+        }
+
+        /* Footer */
+        .footer {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+        }
+
+        .footer-text {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+        }
+
+        .footer-text a {
+            color: var(--accent-color);
+            text-decoration: none;
+        }
+
+        .footer-text a:hover {
+            text-decoration: underline;
+        }
+
+        /* Mobile optimizations */
+        @media (max-width: 480px) {
+            body {
+                padding: 0.5rem;
+            }
+
+            .maintenance-container {
+                padding: 1.5rem;
+                border-radius: 16px;
+            }
+
+            h1 {
+                font-size: 1.6rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .info-grid {
+                grid-template-columns: 1fr;
+                gap: 0.8rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+                gap: 0.6rem;
+            }
+
+            .logo-container {
+                width: 70px;
+                height: 70px;
+                font-size: 1.8rem;
+                border-radius: 16px;
+            }
+
+            .info-card,
+            .contact-section,
+            .status-timeline {
+                padding: 1rem;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .maintenance-container {
+                padding: 1.2rem;
+            }
+
+            h1 {
+                font-size: 1.4rem;
+            }
+
+            .contact-item {
+                padding: 0.6rem;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Landscape mobile */
+        @media (max-height: 600px) and (orientation: landscape) {
+            body {
+                align-items: flex-start;
+                padding-top: 1rem;
+            }
+            
+            .maintenance-container {
+                max-width: 600px;
+                margin: 0 auto;
+            }
+        }
+
+        /* High contrast mode support */
+        @media (prefers-contrast: high) {
+            .maintenance-container {
+                background: rgba(0, 0, 0, 0.8);
+                border: 2px solid #ffffff;
+            }
+            
+            .info-card,
+            .contact-section,
+            .status-timeline {
+                background: rgba(255, 255, 255, 0.1);
+                border: 1px solid rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        /* Reduced motion support */
+        @media (prefers-reduced-motion: reduce) {
+            *,
+            *::before,
+            *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="particles">
+        <!-- Particles will be generated by JavaScript -->
+    </div>
+
+    <div class="glow-orb orb-1"></div>
+    <div class="glow-orb orb-2"></div>
+    <div class="glow-orb orb-3"></div>
+
+    <div class="maintenance-container">
+        <div class="header">
+            <div class="logo-container">
+                <i class="fas fa-rocket"></i>
+            </div>
+            
+            <div class="status-indicator">
+                <div class="status-dot"></div>
+                System Upgrading
+            </div>
+
+            <h1>We're Upgrading!</h1>
+            
+            <p class="subtitle">
+                Our platform is getting better! We're implementing new features and performance improvements for you.
+            </p>
+        </div>
+
+        <div class="progress-section">
+            <div class="progress-info">
+                <span class="progress-label">Upgrade Progress</span>
+                <span class="progress-percentage" id="progress-percent">45%</span>
+            </div>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </div>
+
+        <div class="status-timeline">
+            <div class="timeline-title">
+                <i class="fas fa-tasks"></i>
+                Current Status
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <span>Database backup completed</span>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot completed"></div>
+                <span>Core systems updated</span>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot pending"></div>
+                <span>Installing new features</span>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-dot upcoming"></div>
+                <span>Final testing & deployment</span>
+            </div>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="card-title">Time Left</div>
+                <div class="card-text">~2 hours</div>
+            </div>
+            
+            <div class="info-card">
+                <div class="card-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="card-title">Your Data</div>
+                <div class="card-text">100% Secure</div>
+            </div>
+        </div>
+
+        <div class="contact-section">
+            <div class="contact-title">
+                <i class="fas fa-headset"></i>
+                Need Help?
+            </div>
+            <div class="contact-grid">
+                <a href="mailto:support@company.com" class="contact-item">
+                    <i class="fas fa-envelope"></i>
+                    <span>Email</span>
+                </a>
+                <a href="tel:+1-800-123-4567" class="contact-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Call</span>
+                </a>
+                <a href="#" class="contact-item" onclick="openChat()">
+                    <i class="fas fa-comments"></i>
+                    <span>Chat</span>
+                </a>
+                <a href="https://status.company.com" class="contact-item" target="_blank">
+                    <i class="fas fa-chart-line"></i>
+                    <span>Status</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-text">
+                Last updated: <span id="current-time"></span><br>
+                Follow <a href="#">@YourCompany</a> for live updates
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Generate floating particles
+        function createParticles() {
+            const particlesContainer = document.querySelector('.particles');
+            const particleCount = window.innerWidth < 768 ? 20 : 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + 'vw';
+                particle.style.animationDelay = Math.random() * 15 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Update current time
+        function updateTime() {
+            const now = new Date();
+            const timeString = now.toLocaleString('en-US', {
+                month: 'short',
+                day: 'numeric',
+                hour: '2-digit',
+                minute: '2-digit',
+                hour12: true
+            });
+            document.getElementById('current-time').textContent = timeString;
+        }
+
+        // Simulate progress updates
+        let currentProgress = 45;
+        function updateProgress() {
+            const progressBar = document.getElementById('progress-bar');
+            const progressPercent = document.getElementById('progress-percent');
+            
+            // Simulate gradual progress
+            if (Math.random() > 0.7) {
+                currentProgress = Math.min(95, currentProgress + Math.random() * 5);
+                progressBar.style.width = currentProgress + '%';
+                progressPercent.textContent = Math.round(currentProgress) + '%';
+                
+                // Update timeline status
+                updateTimelineStatus(currentProgress);
+            }
+        }
+
+        function updateTimelineStatus(progress) {
+            const timelineItems = document.querySelectorAll('.timeline-dot');
+            
+            if (progress > 60) {
+                timelineItems[2].className = 'timeline-dot completed';
+            }
+            if (progress > 85) {
+                timelineItems[3].className = 'timeline-dot pending';
+            }
+        }
+
+        // Status messages for different progress levels
+        const statusMessages = [
+            { progress: 0, message: 'Initializing upgrade...' },
+            { progress: 20, message: 'Backing up data...' },
+            { progress: 40, message: 'Installing updates...' },
+            { progress: 60, message: 'Configuring features...' },
+            { progress: 80, message: 'Running tests...' },
+            { progress: 95, message: 'Almost complete!' }
+        ];
+
+        // Placeholder functions
+        function openChat() {
+            // In a real app, this would open a chat widget
+            alert('Live chat will be available here. For immediate help, email support@company.com');
+        }
+
+        // Add touch feedback for mobile
+        function addTouchFeedback() {
+            const touchElements = document.querySelectorAll('.info-card, .contact-item');
+            
+            touchElements.forEach(element => {
+                element.addEventListener('touchstart', function() {
+                    this.style.transform = 'scale(0.95)';
+                });
+                
+                element.addEventListener('touchend', function() {
+                    setTimeout(() => {
+                        this.style.transform = '';
+                    }, 150);
+                });
+            });
+        }
+
+        // Initialize everything when DOM is loaded
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            updateTime();
+            addTouchFeedback();
+            
+            // Set initial progress bar
+            document.getElementById('progress-bar').style.width = currentProgress + '%';
+            
+            // Update time every minute
+            setInterval(updateTime, 60000);
+            
+            // Update progress every 10 seconds
+            setInterval(updateProgress, 10000);
+            
+            // Handle visibility change (when user switches tabs)
+            document.addEventListener('visibilitychange', function() {
+                if (!document.hidden) {
+                    updateTime();
+                    updateProgress();
+                }
+            });
+
+            // Add subtle haptic feedback on modern mobile devices
+            if ('vibrate' in navigator) {
+                const interactiveElements = document.querySelectorAll('.contact-item, .info-card');
+                interactiveElements.forEach(element => {
+                    element.addEventListener('touchstart', () => {
+                        navigator.vibrate(10); // Very subtle vibration
+                    });
+                });
+            }
+
+            // Performance optimization: pause animations when not visible
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    } else {
+                        entry.target.style.animationPlayState = 'paused';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.particle, .glow-orb, .logo-container').forEach(el => {
+                observer.observe(el);
+            });
+        });
+
+        // Handle orientation change
+        window.addEventListener('orientationchange', function() {
+            setTimeout(() => {
+                // Recalculate particles for new screen dimensions
+                document.querySelector('.particles').innerHTML = '';
+                createParticles();
+            }, 100);
+        });
+
+        // Progressive Web App installation prompt
+        let deferredPrompt;
+        window.addEventListener('beforeinstallprompt', (e) => {
+            deferredPrompt = e;
+            // Could show an install button here
+        });
+    </script>
+</body>
+</html>
