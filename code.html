@@ -1457,7 +1457,7 @@
                             <h3>Code to PDF Converter</h3>
                             <p>A web application that converts source code into beautifully formatted PDF documents with syntax highlighting and customizable themes.</p>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/Code-2-pdf/" target="_blank" class="btn btn-primary">
+                                <a href="https://codecr4cker.github.io/Code-2-pdf/" target="_blank" class="btn btn-primary social-links">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                                 <a href="#" target="_blank" class="btn btn-secondary">
@@ -1472,7 +1472,7 @@
                             <h3>Construction Portfolio</h3>
                             <p>A professional portfolio website for a construction company, showcasing their projects, services, and company information with modern design.</p>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/html-test/" target="_blank" class="btn btn-primary">
+                                <a href="https://codecr4cker.github.io/html-test/" target="_blank" class="btn btn-primary social-links">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                                 <a href="#" target="_blank" class="btn btn-secondary">
@@ -1487,7 +1487,7 @@
                             <h3>Link Converter Tool</h3>
                             <p>A utility web application for converting and managing different types of links, with features for URL validation and format conversion.</p>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/link-converter/" target="_blank" class="btn btn-primary">
+                                <a href="https://codecr4cker.github.io/link-converter/" target="_blank" class="btn btn-primary social-links">
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                                 <a href="#" target="_blank" class="btn btn-secondary">
@@ -1987,6 +1987,12 @@
 
                 // Reset and re-trigger social link animations (if applicable to other sections)
                 sectionElement.querySelectorAll('.social-link').forEach(link => {
+                    link.style.animation = 'none';
+                    link.offsetHeight; // Trigger reflow
+                    link.style.animation = '';
+                });
+
+                sectionElement.querySelectorAll('.social-links').forEach(link => {
                     link.style.animation = 'none';
                     link.offsetHeight; // Trigger reflow
                     link.style.animation = '';
