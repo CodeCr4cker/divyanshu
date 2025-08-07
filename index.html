@@ -1457,7 +1457,7 @@
                             <h3>Code to PDF Converter</h3>
                             <p>A web application that converts source code into beautifully formatted PDF documents with syntax highlighting and customizable themes.</p>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/Code-2-pdf/" target="_blank" class="btn btn-primary">
+                                <a href="https://codecr4cker.github.io/Code-2-pdf/" target="_blank" class="btn btn-primary social-links" data-loader-trigger>
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                                 <a href="#" target="_blank" class="btn btn-secondary">
@@ -1472,7 +1472,7 @@
                             <h3>Construction Portfolio</h3>
                             <p>A professional portfolio website for a construction company, showcasing their projects, services, and company information with modern design.</p>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/html-test/" target="_blank" class="btn btn-primary">
+                                <a href="https://codecr4cker.github.io/html-test/" target="_blank" class="btn btn-primary social-links" data-loader-trigger>
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                                 <a href="#" target="_blank" class="btn btn-secondary">
@@ -1487,7 +1487,7 @@
                             <h3>Link Converter Tool</h3>
                             <p>A utility web application for converting and managing different types of links, with features for URL validation and format conversion.</p>
                             <div style="margin-top: 1rem; display: flex; gap: 1rem; flex-wrap: wrap;">
-                                <a href="https://codecr4cker.github.io/link-converter/" target="_blank" class="btn btn-primary">
+                                <a href="https://codecr4cker.github.io/link-converter/" target="_blank" class="btn btn-primary social-links" data-loader-trigger>
                                     <i class="fas fa-external-link-alt"></i> Live Demo
                                 </a>
                                 <a href="#" target="_blank" class="btn btn-secondary">
@@ -1792,8 +1792,9 @@
                 // Set up event listeners
                 this.setupEventListeners();
                 
-                // Load initial route
-                this.loadRoute(this.currentRoute);
+                // Load initial route without showing loader if it's the first load
+                const initialHash = window.location.hash.slice(1);
+                this.loadRoute(initialHash || this.currentRoute, false, false);
             }
 
             registerRoute(path, elementId) {
@@ -1816,13 +1817,25 @@
                 // Browser back/forward buttons
                 window.addEventListener('popstate', (e) => {
                     const route = e.state?.route || 'home';
+                    // When using popstate, we don't want to show the full 3-second loader
+                    // as it's a browser-driven navigation, not a user-initiated SPA link click.
                     this.loadRoute(route, false, false);
                 });
             }
 
             navigateTo(route) {
-                if (this.routes[route] && !this.isLoading) {
-                    this.loadRoute(route, true, true);
+                if (this.routes[route] && !this.isLoading && route !== this.currentRoute) {
+                    this.showLoader(); // Show loader immediately
+                    this.isLoading = true; // Set loading state
+
+                    setTimeout(() => {
+                        this.performRouteTransition(route, true); // Perform transition after 3 seconds
+                        this.hideLoader(); // Hide loader after transition
+                        this.isLoading = false; // Reset loading state
+                    }, 3000); // 3-second delay
+                } else if (route === this.currentRoute) {
+                    // If navigating to the current route, just scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
                 }
             }
 
@@ -1831,7 +1844,6 @@
                 const appContainer = document.getElementById('appContainer');
                 const loaderText = document.getElementById('loaderText');
                 
-                this.isLoading = true;
                 loader.classList.remove('hidden');
                 appContainer.classList.remove('loaded');
                 
@@ -1843,6 +1855,7 @@
 
                 // Start typing animation for loader text
                 loaderText.classList.add('typing');
+                loaderText.textContent = 'Loading Portfolio...'; // Reset text for internal navigation
             }
 
             hideLoader() {
@@ -1850,27 +1863,17 @@
                 const appContainer = document.getElementById('appContainer');
                 const loaderText = document.getElementById('loaderText');
                 
+                loader.classList.add('hidden');
+                loaderText.classList.remove('typing'); // Stop typing animation
                 setTimeout(() => {
-                    loader.classList.add('hidden');
-                    loaderText.classList.remove('typing'); // Stop typing animation
-                    setTimeout(() => {
-                        appContainer.classList.add('loaded');
-                        this.isLoading = false;
-                    }, 500);
-                }, 3000);
+                    appContainer.classList.add('loaded');
+                }, 500); // Allow fade-out transition for loader
             }
 
-            loadRoute(route, pushState = true, showLoading = false) {
-                if (showLoading && route !== this.currentRoute) {
-                    this.showLoader();
-                    
-                    setTimeout(() => {
-                        this.performRouteTransition(route, pushState);
-                        this.hideLoader();
-                    }, 100);
-                } else {
-                    this.performRouteTransition(route, pushState);
-                }
+            loadRoute(route, pushState = true) {
+                // This method is now primarily for internal use by navigateTo or popstate.
+                // It no longer directly controls the loader visibility for user-initiated clicks.
+                this.performRouteTransition(route, pushState);
             }
 
             performRouteTransition(route, pushState) {
@@ -1895,7 +1898,7 @@
                     // Close mobile menu
                     this.closeMobileMenu();
 
-                    // Scroll to top
+                    // Scroll to top (already handled by navigateTo's setTimeout, but good to keep here for popstate)
                     window.scrollTo({ top: 0, behavior: 'smooth' });
 
                     // Update page title
@@ -1985,6 +1988,12 @@
 
                 // Reset and re-trigger social link animations (if applicable to other sections)
                 sectionElement.querySelectorAll('.social-link').forEach(link => {
+                    link.style.animation = 'none';
+                    link.offsetHeight; // Trigger reflow
+                    link.style.animation = '';
+                });
+
+                sectionElement.querySelectorAll('.social-links').forEach(link => {
                     link.style.animation = 'none';
                     link.offsetHeight; // Trigger reflow
                     link.style.animation = '';
@@ -2174,6 +2183,7 @@
                 this.initFormHandling();
                 this.initAnimations();
                 this.initIntersectionObserverAnimations(); // New: For scroll-triggered animations
+                this.handleLiveDemoLinks(); // Added: For external live demo links
             }
 
             initMobileMenu() {
@@ -2336,6 +2346,57 @@
                 document.querySelectorAll('.blog-card').forEach(card => {
                     observer.observe(card);
                 });
+            }
+
+            // New: Handle Live Demo links with loader
+            handleLiveDemoLinks() {
+                document.querySelectorAll('[data-loader-trigger]').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault(); // Prevent default link behavior immediately
+                        const targetUrl = e.currentTarget.href;
+
+                        // Show the loader
+                        this.showLoaderForExternalLink();
+
+                        // After 3 seconds, open the link in a new tab
+                        setTimeout(() => {
+                            window.open(targetUrl, '_blank');
+                            this.hideLoaderForExternalLink(); // Hide loader after opening link
+                        }, 3000);
+                    });
+                });
+            }
+
+            showLoaderForExternalLink() {
+                const loader = document.getElementById('loader');
+                const appContainer = document.getElementById('appContainer');
+                const loaderText = document.getElementById('loaderText');
+
+                loader.classList.remove('hidden');
+                appContainer.classList.remove('loaded'); // Hide main content
+                
+                // Reset progress bar animation
+                const progressBar = loader.querySelector('.loader-progress-bar');
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight; // Trigger reflow
+                progressBar.style.animation = 'progress 3s ease-in-out';
+
+                // Start typing animation for loader text
+                loaderText.classList.add('typing');
+                loaderText.textContent = 'Opening Live Demo...'; // Custom text for external link
+            }
+
+            hideLoaderForExternalLink() {
+                const loader = document.getElementById('loader');
+                const appContainer = document.getElementById('appContainer');
+                const loaderText = document.getElementById('loaderText');
+
+                clearTimeout(this.typingInterval); // Stop typing animation if it's still running
+                loaderText.classList.remove('typing');
+                loader.classList.add('hidden');
+                setTimeout(() => {
+                    appContainer.classList.add('loaded'); // Show main content again
+                }, 500); // Allow fade-out transition for loader
             }
         }
 
@@ -2675,6 +2736,7 @@
         console.log('🎨 Enhanced loader with 3-second transitions');
         console.log('📝 Blog section added');
         console.log('🖼️ Real hero image implemented');
+        console.log('🔗 Live Demo links now trigger a 3-second loader!');
     </script>
 </body>
 </html>
