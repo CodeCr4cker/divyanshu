@@ -1236,6 +1236,7 @@
                         <li><a class="nav-link" data-route="projects">Projects</a></li>
                         <li><a class="nav-link" data-route="blog">Blog</a></li>
                         <li><a class="nav-link" data-route="education">Education</a></li>
+                        <li><a class="nav-link" data-route="documentation">Documentation</a></li>
                         <li><a class="nav-link" data-route="contact">Contact</a></li>
                     </ul>
                     <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1254,6 +1255,7 @@
                 <li><a class="mobile-nav-link" data-route="projects"><i class="fas fa-folder"></i> Projects</a></li>
                 <li><a class="mobile-nav-link" data-route="blog"><i class="fas fa-blog"></i> Blog</a></li>
                 <li><a class="mobile-nav-link" data-route="education"><i class="fas fa-graduation-cap"></i> Education</a></li>
+                <li><a class="mobile-nav-link" data-route="documentation"><i class="fas fa-file-alt"></i> Documentation</a></li>
                 <li><a class="mobile-nav-link" data-route="contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </div>
@@ -1277,6 +1279,9 @@
             </div>
             <div class="route-dot" data-route="education">
                 <div class="route-label">Education</div>
+            </div>
+            <div class="route-dot" data-route="documentation">
+                <div class="route-label">Documentation</div>
             </div>
             <div class="route-dot" data-route="contact">
                 <div class="route-label">Contact</div>
@@ -1691,6 +1696,47 @@
             </section>
         </div>
 
+        <!-- Documentation Page -->
+        <div class="page-content" id="documentation-page">
+            <section class="section">
+                <div class="container">
+                    <div class="section-header">
+                        <div class="section-subtitle">My Resources</div>
+                        <h2 class="section-title">Documents & Downloads</h2>
+                        <p class="section-description">
+                            Access my resume, case studies, and other relevant documents
+                        </p>
+                    </div>
+                    <div class="feature-grid">
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-file-alt"></i>
+                            </div>
+                            <h3>My Resume</h3>
+                            <p>A detailed overview of my skills, experience, and education. Available for download in PDF format.</p>
+                            <div style="margin-top: 1rem;">
+                                <a href="/path/to/your/resume.pdf" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-download"></i> Download Resume
+                                </a>
+                            </div>
+                        </div>
+                        <div class="feature-card">
+                            <div class="feature-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Project Case Study: E-commerce Platform</h3>
+                            <p>A comprehensive case study detailing the development process, challenges, and solutions for a recent e-commerce project.</p>
+                            <div style="margin-top: 1rem;">
+                                <a href="/path/to/your/case-study.pdf" target="_blank" class="btn btn-primary">
+                                    <i class="fas fa-download"></i> Download Case Study
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+
         <!-- Contact Page -->
         <div class="page-content" id="contact-page">
             <section class="section">
@@ -1787,6 +1833,7 @@
                 this.registerRoute('projects', 'projects-page');
                 this.registerRoute('blog', 'blog-page');
                 this.registerRoute('education', 'education-page');
+                this.registerRoute('documentation', 'documentation-page'); // New: Register documentation route
                 this.registerRoute('contact', 'contact-page');
 
                 // Set up event listeners
@@ -1943,6 +1990,7 @@
                     projects: 'Projects - Divyanshu Pandey',
                     blog: 'Blog - Divyanshu Pandey',
                     education: 'Education - Divyanshu Pandey',
+                    documentation: 'Documentation - Divyanshu Pandey', // New: Add title for documentation
                     contact: 'Contact - Divyanshu Pandey'
                 };
                 document.title = titles[route] || titles.home;
@@ -2737,6 +2785,7 @@
         console.log('📝 Blog section added');
         console.log('🖼️ Real hero image implemented');
         console.log('🔗 Live Demo links now trigger a 3-second loader!');
+        console.log('📄 Documentation section added!');
     </script>
 </body>
 </html>
