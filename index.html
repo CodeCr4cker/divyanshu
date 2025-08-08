@@ -2063,7 +2063,7 @@
                         
                         <!-- Video Gallery Item (Example 1) -->
                         <div class="gallery-item" data-type="video">
-                            <video controls loop muted autoplay playsinline data-src="https://www.w3schools.com/html/mov_bbb.mp4" poster="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&h=400&q=80">
+                            <video controls playsinline class="gallery-video" data-src="https://www.w3schools.com/html/mov_bbb.mp4" poster="https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=600&h=400&q=80">
                                 Your browser does not support the video tag.
                             </video>
                             <div class="gallery-item-overlay">
@@ -2083,7 +2083,7 @@
 
                         <!-- Video Gallery Item (Example 2) -->
                         <div class="gallery-item" data-type="video">
-                            <video controls loop muted autoplay playsinline data-src="https://www.w3schools.com/html/movie.mp4" poster="https://images.unsplash.com/photo-1510519138101-570d1dca3d6b?auto=format&fit=crop&w=600&h=400&q=80">
+                            <video controls playsinline class="gallery-video" data-src="https://www.w3schools.com/html/movie.mp4" poster="https://images.unsplash.com/photo-1510519138101-570d1dca3d6b?auto=format&fit=crop&w=600&h=400&q=80">
                                 Your browser does not support the video tag.
                             </video>
                             <div class="gallery-item-overlay">
@@ -3047,6 +3047,47 @@
 
         // Initialize the main application when the script loads
         new App();
+        
+        // Video gallery controls - play one at a time
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('gallery-video')) {
+                const videos = document.querySelectorAll('.gallery-video');
+                videos.forEach(video => {
+                    if (video !== e.target && !video.paused) {
+                        video.pause();
+                    }
+                });
+                // Only play if not already playing
+                if (e.target.paused) {
+                    e.target.play();
+                }
+            }
+        });
+
+        // Pause all videos when playing any video
+        document.querySelectorAll('.gallery-video').forEach(video => {
+            video.addEventListener('play', function() {
+                document.querySelectorAll('.gallery-video').forEach(v => {
+                    if (v !== this && !v.paused) {
+                        v.pause();
+                    }
+                });
+            });
+        });
+        
+        // Video gallery controls
+        document.addEventListener('click', (e) => {
+            // Handle clicks on gallery videos
+            if (e.target.classList.contains('gallery-video')) {
+                const videos = document.querySelectorAll('.gallery-video');
+                videos.forEach(video => {
+                    if (video !== e.target) {
+                        video.pause();
+                    }
+                });
+                e.target.play();
+            }
+        });
 
         // Global Utility Functions: Accessible via `window.utils`
         window.utils = {
@@ -3241,6 +3282,33 @@
                     window.pJSDom[0].pJS.fn.vendors.play();
                 }
             }
+        });
+
+        // Video gallery controls - play one at a time
+        document.addEventListener('click', (e) => {
+            if (e.target.classList.contains('gallery-video')) {
+                const videos = document.querySelectorAll('.gallery-video');
+                videos.forEach(video => {
+                    if (video !== e.target && !video.paused) {
+                        video.pause();
+                    }
+                });
+                // Only play if not already playing
+                if (e.target.paused) {
+                    e.target.play();
+                }
+            }
+        });
+
+        // Pause all videos when playing any video
+        document.querySelectorAll('.gallery-video').forEach(video => {
+            video.addEventListener('play', function() {
+                document.querySelectorAll('.gallery-video').forEach(v => {
+                    if (v !== this && !v.paused) {
+                        v.pause();
+                    }
+                });
+            });
         });
 
         // Console logs for successful initialization and features
