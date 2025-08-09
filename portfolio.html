@@ -2203,13 +2203,13 @@
                 // Listen for when the audio actually starts playing
                 this.audioElement.addEventListener('play', () => {
                     this.isPlaying = true;
-                    this.updateMuteButtonIcon();
+                    // this.updateMuteButtonIcon(); // Removed as button is removed
                 });
 
                 // Listen for when the audio pauses
                 this.audioElement.addEventListener('pause', () => {
                     this.isPlaying = false;
-                    this.updateMuteButtonIcon();
+                    // this.updateMuteButtonIcon(); // Removed as button is removed
                 });
 
                 // Listen for when the audio ends (shouldn't happen with loop, but good for debugging)
@@ -2217,8 +2217,8 @@
                     console.log('Current song ended. Looping...');
                 });
 
-                // Setup mute button
-                this.setupMuteButton();
+                // Removed setupMuteButton() call as the button is removed
+                // this.setupMuteButton();
             },
 
             handleUserInteraction: function() {
@@ -2238,11 +2238,11 @@
                         playPromise.then(() => {
                             console.log('Music playback started.');
                             this.isPlaying = true;
-                            this.updateMuteButtonIcon();
+                            // this.updateMuteButtonIcon(); // Removed as button is removed
                         }).catch(error => {
                             console.warn('Music playback prevented (likely autoplay policy):', error);
                             this.isPlaying = false;
-                            this.updateMuteButtonIcon();
+                            // this.updateMuteButtonIcon(); // Removed as button is removed
                             // Optionally, show a notification to the user to click the mute button
                             // window.utils.showNotification('Click the speaker icon to play music!', 'info');
                         });
@@ -2260,7 +2260,7 @@
                     this.audioElement.pause();
                     console.log('Music playback paused.');
                     this.isPlaying = false;
-                    this.updateMuteButtonIcon();
+                    // this.updateMuteButtonIcon(); // Removed as button is removed
                 }
             },
 
@@ -2279,7 +2279,7 @@
                 }
             },
 
-            // Toggles mute state
+            // Toggles mute state (functionality remains, but no button to trigger it)
             toggleMute: function() {
                 this.isMuted = !this.isMuted;
                 this.audioElement.muted = this.isMuted;
@@ -2290,48 +2290,48 @@
                     this.play(); // Attempt to play if unmuted
                     window.utils.showNotification('Music ON', 'success');
                 }
-                this.updateMuteButtonIcon();
+                // this.updateMuteButtonIcon(); // Removed as button is removed
             },
 
-            // Updates the mute button icon based on mute/play state
-            updateMuteButtonIcon: function() {
-                const muteButton = document.getElementById('muteMusicButton');
-                if (muteButton) {
-                    if (this.isMuted || !this.isPlaying) {
-                        muteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                    } else {
-                        muteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    }
-                }
-          },
+            // Removed updateMuteButtonIcon as the button is removed
+            // updateMuteButtonIcon: function() {
+            //     const muteButton = document.getElementById('muteMusicButton');
+            //     if (muteButton) {
+            //         if (this.isMuted || !this.isPlaying) {
+            //             muteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            //         } else {
+            //             muteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+            //         }
+            //     }
+            // },
 
-            // Creates and sets up the mute button
-            setupMuteButton: function() {
-                let muteButton = document.getElementById('muteMusicButton');
-                if (!muteButton) {
-                    muteButton = document.createElement('button');
-                    muteButton.id = 'muteMusicButton';
-                      muteButton.style.cssText = `
-                        position: fixed;
-                       bottom: 2rem;
-                        left: 2rem;
-                        width: 50px;
-                        height: 50px;
-                        background: var(--surface-elevated);
-                        color: var(--text-primary);
-                        border: 1px solid var(--border);
-                        border-radius: 50%;
-                        font-size: 1.2rem;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                        z-index: 1000;
-                        box-shadow: var(--shadow-sm);
-                    `;
-                    document.body.appendChild(muteButton);
-                }
-                muteButton.addEventListener('click', this.toggleMute.bind(this));
-                this.updateMuteButtonIcon(); // Set initial icon
-            },
+            // Removed setupMuteButton as the button is removed
+            // setupMuteButton: function() {
+            //     let muteButton = document.getElementById('muteMusicButton');
+            //     if (!muteButton) {
+            //         muteButton = document.createElement('button');
+            //         muteButton.id = 'muteMusicButton';
+            //           muteButton.style.cssText = `
+            //             position: fixed;
+            //            bottom: 2rem;
+            //             left: 2rem;
+            //             width: 50px;
+            //             height: 50px;
+            //             background: var(--surface-elevated);
+            //             color: var(--text-primary);
+            //             border: 1px solid var(--border);
+            //             border-radius: 50%;
+            //             font-size: 1.2rem;
+            //             cursor: pointer;
+            //             transition: all 0.3s ease;
+            //             z-index: 1000;
+            //             box-shadow: var(--shadow-sm);
+            //         `;
+            //         document.body.appendChild(muteButton);
+            //     }
+            //     muteButton.addEventListener('click', this.toggleMute.bind(this));
+            //     this.updateMuteButtonIcon(); // Set initial icon
+            // },
 
             // Handles visibility change (tab switch)
             handleVisibilityChange: function() {
@@ -3255,7 +3255,7 @@
                     console.log('Text copied to clipboard');
                     window.utils.showNotification('Copied to clipboard!', 'success');
                 }).catch(err => {
-                    console.error('Failed to copy text: ', err);
+                    console.error('Failed to copy!', err);
                     window.utils.showNotification('Failed to copy!', 'error');
                 });
             },
