@@ -1506,7 +1506,6 @@
                         <li><a class="nav-link" data-route="testimonials">Testimonials</a></li>
                         <li><a class="nav-link" data-route="gallery">Gallery</a></li>
                         <li><a class="nav-link" data-route="documentation">Documentation</a></li>
-                        <li><a class="nav-link" data-route="contact">Contact</a></li>
                     </ul>
                     <!-- Mobile Menu Button (hidden on desktop) -->
                     <button class="mobile-menu-btn" id="mobileMenuBtn">
@@ -1528,7 +1527,6 @@
                 <li><a class="mobile-nav-link" data-route="testimonials"><i class="fas fa-quote-right"></i> Testimonials</a></li>
                 <li><a class="mobile-nav-link" data-route="gallery"><i class="fas fa-images"></i> Gallery</a></li>
                 <li><a class="mobile-nav-link" data-route="documentation"><i class="fas fa-file-alt"></i> Documentation</a></li>
-                <li><a class="mobile-nav-link" data-route="contact"><i class="fas fa-envelope"></i> Contact</a></li>
             </ul>
         </div>
 
@@ -1560,9 +1558,6 @@
             </div>
             <div class="route-dot" data-route="documentation">
                 <div class="route-label">Documentation</div>
-            </div>
-            <div class="route-dot" data-route="contact">
-                <div class="route-label">Contact</div>
             </div>
         </div>
 
@@ -2162,76 +2157,6 @@
             </section>
         </div>
 
-        <!-- Contact Page -->
-        <div class="page-content" id="contact-page">
-            <section class="section">
-                <div class="container">
-                    <div class="section-header">
-                        <div class="section-subtitle">Let's work together</div>
-                        <h2 class="section-title">Get In Touch</h2>
-                        <p class="section-description">
-                            Have a project in mind? Let's discuss how we can bring your ideas to life
-                        </p>
-                    </div>
-                    <div class="content-section">
-                        <form id="contactForm">
-                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: 1rem;">
-                                <div>
-                                    <label for="fullName">Full Name</label>
-                                    <input type="text" id="fullName" name="name" required>
-                                </div>
-                                <div>
-                                    <label for="emailAddress">Email Address</label>
-                                    <input type="email" id="emailAddress" name="email" required>
-                                </div>
-                            </div>
-                            <div style="margin-bottom: 1rem;">
-                                <label for="subject">Subject</label>
-                                <input type="text" id="subject" name="subject" required>
-                            </div>
-                            <div style="margin-bottom: 2rem;">
-                                <label for="message">Message</label>
-                                <textarea id="message" name="message" required rows="6"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">
-                                Send Message <i class="fas fa-paper-plane"></i>
-                            </button>
-                        </form>
-                    </div>
-                    <div class="feature-grid">
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-envelope"></i>
-                            </div>
-                            <h3>Email</h3>
-                            <p>divyanshu@gmail.com</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-phone"></i>
-                            </div>
-                            <h3>Phone</h3>
-                            <p>+91 12345 67890</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-map-marker-alt"></i>
-                            </div>
-                            <h3>Location</h3>
-                            <p>Prayagraj, Uttar Pradesh, India</p>
-                        </div>
-                        <div class="feature-card">
-                            <div class="feature-icon">
-                                <i class="fas fa-clock"></i>
-                            </div>
-                            <h3>Response Time</h3>
-                            <p>Within 24 hours</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </div>
-
         <!-- Back to Top Button -->
         <button class="back-to-top" id="backToTop">
             <i class="fas fa-arrow-up"></i>
@@ -2262,7 +2187,6 @@
                 this.registerRoute('testimonials', 'testimonials-page');
                 this.registerRoute('gallery', 'gallery-page');
                 this.registerRoute('documentation', 'documentation-page');
-                this.registerRoute('contact', 'contact-page');
 
                 // Set up event listeners for navigation and browser history
                 this.setupEventListeners();
@@ -2431,8 +2355,7 @@
                     education: 'Divyanshu Pandey - Education',
                     testimonials: 'Divyanshu Pandey - Testimonials',
                     gallery: 'Divyanshu Pandey - Gallery',
-                    documentation: 'Divyanshu Pandey - Documentation',
-                    contact: 'Divyanshu Pandey - Contact'
+                    documentation: 'Divyanshu Pandey - Documentation'
                 };
                 document.title = titles[route] || titles.home; // Fallback to home title
             }
@@ -2664,7 +2587,6 @@
             initComponents() {
                 this.initMobileMenu();
                 this.initScrollEffects();
-                this.initFormHandling();
                 this.initAnimations(); // Hero subtitle typing animation
                 this.initIntersectionObserverAnimations(); // Scroll-triggered animations
                 this.handleLiveDemoLinks(); // Special handling for external links with loader
@@ -2723,38 +2645,6 @@
                         behavior: 'smooth'
                     });
                 });
-            }
-
-            // Handles the contact form submission with a simulated loading state
-            initFormHandling() {
-                const contactForm = document.getElementById('contactForm');
-                if (contactForm) {
-                    contactForm.addEventListener('submit', (e) => {
-                        e.preventDefault(); // Prevent actual form submission
-
-                        const submitBtn = contactForm.querySelector('button[type="submit"]');
-                        const originalText = submitBtn.innerHTML; // Store original button text
-
-                        // Show sending state
-                        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
-                        submitBtn.disabled = true; // Disable button during submission
-
-                        // Simulate API call delay
-                        setTimeout(() => {
-                            // Show success state
-                            submitBtn.innerHTML = '<i class="fas fa-check"></i> Message Sent!';
-                            submitBtn.style.background = 'var(--gradient-secondary)'; // Change button style
-
-                            // Reset button after a short delay
-                            setTimeout(() => {
-                                submitBtn.innerHTML = originalText;
-                                submitBtn.disabled = false;
-                                submitBtn.style.background = ''; // Reset background
-                                contactForm.reset(); // Clear form fields
-                            }, 2000);
-                        }, 2000);
-                    });
-                }
             }
 
             // Initializes general animations, specifically the hero subtitle typing effect
