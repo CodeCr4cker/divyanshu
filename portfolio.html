@@ -2217,6 +2217,9 @@
                     console.log('Current song ended. Looping...');
                 });
 
+                // Register visibility change listener
+                document.addEventListener('visibilitychange', this.handleVisibilityChange.bind(this));
+
                 // Removed setupMuteButton() call as the button is removed
                 // this.setupMuteButton();
             },
@@ -2340,7 +2343,8 @@
                         this.audioElement.pause();
                     }
                 } else {
-                    if (this.isPlaying) { // Only resume if it was actively playing before hiding
+                    // Only resume if it was playing before hiding and not muted
+                    if (this.isPlaying && !this.isMuted) {
                         this.play(); // Attempt to play again
                     }
                 }
@@ -2500,6 +2504,16 @@
 
             // Performs the visual transition between pages
             performRouteTransition(route, pushState) {
+                // Pause all gallery videos if navigating away from the gallery page
+                if (this.currentRoute === 'gallery' && route !== 'gallery') {
+                    const galleryVideos = document.querySelectorAll('#gallery-page .gallery-video');
+                    galleryVideos.forEach(video => {
+                        if (!video.paused) {
+                            video.pause();
+                        }
+                    });
+                }
+
                 // Hide all page content elements
                 Object.values(this.routes).forEach(routeObj => {
                     routeObj.element.classList.remove('active');
@@ -3191,51 +3205,6 @@
         // Initialize the main application when the script loads
         new App();
 
-        // Video gallery controls - play one at a time
-        // This block is now redundant and can be removed or simplified
-        document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('gallery-video')) {
-                const videos = document.querySelectorAll('.gallery-video');
-                videos.forEach(video => {
-                    if (video !== e.target && !video.paused) {
-                        video.pause();
-                    }
-                });
-                // The play() call is handled by the event listener on the video itself
-                // if (e.target.paused) {
-                //     e.target.play();
-                // }
-            }
-        });
-
-        // Pause all videos when playing any video
-        // This block is now redundant and can be removed or simplified
-        document.querySelectorAll('.gallery-video').forEach(video => {
-            video.addEventListener('play', function() {
-                document.querySelectorAll('.gallery-video').forEach(v => {
-                    if (v !== this && !v.paused) {
-                        v.pause();
-                    }
-                });
-            });
-        });
-
-        // Video gallery controls
-        // This block is now redundant and can be removed or simplified
-        document.addEventListener('click', (e) => {
-            // Handle clicks on gallery videos
-            if (e.target.classList.contains('gallery-video')) {
-                const videos = document.querySelectorAll('.gallery-video');
-                videos.forEach(video => {
-                    if (video !== e.target) {
-                        video.pause();
-                    }
-                });
-                // The play() call is handled by the event listener on the video itself
-                // e.target.play();
-            }
-        });
-
         // Global Utility Functions: Accessible via `window.utils`
         window.utils = {
             // Smoothly scrolls to an element by its ID
@@ -3414,29 +3383,6 @@
                     });
                 }
             }, 1000); // Delay logging to avoid interfering with initial render
-        });
-
-        // Visibility API for performance optimization: Pause/resume animations when tab is hidden/visible
-        document.addEventListener('visibilitychange', () => {
-            if (document.hidden) {
-                // Page is hidden, pause non-essential animations (e.g., particles.js)
-                if (window.pJSDom && window.pJSDom[0]) {
-                    window.pJSDom[0].pJS.fn.vendors.pause();
-                }
-                // Pause music if it was playing
-                if (window.musicPlayer && window.musicPlayer.isPlaying) {
-                    window.musicPlayer.pause();
-                }
-            } else {
-                // Page is visible, resume animations
-                if (window.pJSDom && window.pJSDom[0]) {
-                    window.pJSDom[0].pJS.fn.vendors.play();
-                }
-                // Resume music if it was playing and not muted
-                if (window.musicPlayer && !window.musicPlayer.isMuted) {
-                    window.musicPlayer.play();
-                }
-            }
         });
 
         // Console logs for successful initialization and features
