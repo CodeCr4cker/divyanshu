@@ -655,7 +655,7 @@
                                 // IMPORTANT: Replace 'https://www.example.com' with your actual alternative website URL
                                 window.location.href = 'maintenance.html'; 
                             }
-                        }, 4000); // Wait for 1 second (transition loader duration)
+                        }, 4000); // Wait for 4 seconds (transition loader duration)
                     })
                     .catch(error => {
                         console.error('Error checking portfolio.html:', error);
@@ -663,7 +663,7 @@
                         setTimeout(() => {
                             // IMPORTANT: Replace 'https://www.example.com' with your actual alternative website URL
                             window.location.href = 'maintenance.html'; 
-                        }, 4000);
+                        }, 4000); // Wait for 4 seconds
                     });
             }
 
@@ -674,11 +674,11 @@
                 loader.classList.remove('hidden');
                 loaderText.classList.add('typing');
                 
-                // Reset and start progress bar animation (1 second)
+                // Reset and start progress bar animation (4 seconds)
                 const progressBar = loader.querySelector('.loader-progress-bar');
                 progressBar.style.animation = 'none';
                 progressBar.offsetHeight; // Trigger reflow
-                progressBar.style.animation = 'progress 1s ease-in-out';
+                progressBar.style.animation = 'progress 4s ease-in-out';
             }
 
             initParticles() {
@@ -785,7 +785,7 @@
 
         console.log('🚀 Welcome Page loaded successfully!');
         console.log('⏳ Initial loader: 3 seconds');
-        console.log('🔄 Transition loader: 1 second');
+        console.log('🔄 Transition loader: 4 seconds');
     </script>
 </body>
 </html>
