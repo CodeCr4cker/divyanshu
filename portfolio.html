@@ -1471,7 +1471,7 @@
     <!-- 'preload="auto"' helps the browser load the audio data more efficiently. -->
     <audio id="backgroundMusic" loop preload="auto">
         <!-- Replace with your actual audio file paths -->
-        <source src="https://raw.githubusercontent.com/CodeCr4cker/divyanshu/main/Audio/home_music.mp3" type="audio/mpeg">
+        <source src="https://raw.githubusercontent.com/CodeCr4cker/divyanshu/main/audio/audio.mp3" type="audio/mpeg">
         Your browser does not support the audio element.
     </audio>
 
@@ -2294,44 +2294,44 @@
             },
 
             // Updates the mute button icon based on mute/play state
-            updateMuteButtonIcon: function() {
-                const muteButton = document.getElementById('muteMusicButton');
-                if (muteButton) {
-                    if (this.isMuted || !this.isPlaying) {
-                        muteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
-                    } else {
-                        muteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
-                    }
-                }
-            },
+      //      updateMuteButtonIcon: function() {
+           //     const muteButton = document.getElementById('muteMusicButton');
+          //      if (muteButton) {
+           //         if (this.isMuted || !this.isPlaying) {
+            //            muteButton.innerHTML = '<i class="fas fa-volume-mute"></i>';
+           //         } else {
+           //             muteButton.innerHTML = '<i class="fas fa-volume-up"></i>';
+           //         }
+          //      }
+       //   },
 
             // Creates and sets up the mute button
-            setupMuteButton: function() {
-                let muteButton = document.getElementById('muteMusicButton');
-                if (!muteButton) {
-                    muteButton = document.createElement('button');
-                    muteButton.id = 'muteMusicButton';
-                    muteButton.style.cssText = `
-                        position: fixed;
-                        bottom: 2rem;
-                        left: 2rem;
-                        width: 50px;
-                        height: 50px;
-                        background: var(--surface-elevated);
-                        color: var(--text-primary);
-                        border: 1px solid var(--border);
-                        border-radius: 50%;
-                        font-size: 1.2rem;
-                        cursor: pointer;
-                        transition: all 0.3s ease;
-                        z-index: 1000;
-                        box-shadow: var(--shadow-sm);
-                    `;
-                    document.body.appendChild(muteButton);
-                }
-                muteButton.addEventListener('click', this.toggleMute.bind(this));
-                this.updateMuteButtonIcon(); // Set initial icon
-            },
+       //     setupMuteButton: function() {
+       //         let muteButton = document.getElementById('muteMusicButton');
+         //       if (!muteButton) {
+          //          muteButton = document.createElement('button');
+         //           muteButton.id = 'muteMusicButton';
+         ///           muteButton.style.cssText = `
+        //                position: fixed;
+        //               bottom: 2rem;
+       //                 left: 2rem;
+        //                width: 50px;
+        //                height: 50px;
+         //               background: var(--surface-elevated);
+        //                color: var(--text-primary);
+       //                 border: 1px solid var(--border);
+        //                border-radius: 50%;
+        //                font-size: 1.2rem;
+        //                cursor: pointer;
+        //                transition: all 0.3s ease;
+        //                z-index: 1000;
+        //                box-shadow: var(--shadow-sm);
+       //             `;
+       //             document.body.appendChild(muteButton);
+       //         }
+         //       muteButton.addEventListener('click', this.toggleMute.bind(this));
+        //        this.updateMuteButtonIcon(); // Set initial icon
+         //   },
 
             // Handles visibility change (tab switch)
             handleVisibilityChange: function() {
