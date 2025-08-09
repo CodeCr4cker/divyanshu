@@ -1,0 +1,777 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Divyanshu Pandey</title>
+    <meta name="description" content="Welcome to Divyanshu Pandey's Professional Portfolio">
+    
+    <!-- Google Fonts: Inter (for general text) and JetBrains Mono (for code/brand) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"> -->
+    
+    <style>
+        /* --- Color Palette (CSS Variables) --- */
+        :root {
+            --primary: #007ACC;
+            --primary-dark: #005F99;
+            --secondary: #6C757D;
+            --accent: #28A745;
+            --background: #0A0A0A;
+            --surface: #1A1A1A;
+            --surface-elevated: #2A2A2A;
+            --text-primary: #E0E0E0;
+            --text-secondary: #B0B0B0;
+            --text-muted: #707070;
+            --border: #3A3A3A;
+            --gradient-primary: linear-gradient(135deg, #007ACC, #00C4FF);
+            --gradient-secondary: linear-gradient(135deg, #6C757D, #495057);
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.2);
+            --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.3);
+            --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.4);
+            --shadow-glow: 0 0 25px rgba(0, 122, 204, 0.6);
+        }
+
+        /* --- Base Styles --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* --- Enhanced Loading Screen --- */
+        .loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: var(--background);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 0.8s ease-out, visibility 0.8s ease-out;
+        }
+
+        .loader-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .loader-brand {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.8rem, 4vw, 2.5rem);
+            font-weight: 600;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: glow 2s ease-in-out infinite alternate;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .loader-wrapper {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .loader {
+            width: 100%;
+            height: 100%;
+            border: 4px solid transparent;
+            border-radius: 50%;
+            position: relative;
+            animation: spin 2s linear infinite;
+        }
+
+        .loader::before {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            right: -4px;
+            bottom: -4px;
+            border: 4px solid transparent;
+            border-top: 4px solid var(--primary);
+            border-right: 4px solid var(--accent);
+            border-radius: 50%;
+            animation: spin 1.5s linear infinite reverse;
+        }
+
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            right: 8px;
+            bottom: 8px;
+            border: 3px solid transparent;
+            border-top: 3px solid var(--secondary);
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        .loader-center {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        .loader-center i {
+            animation: iconPulse 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes iconPulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        .loader-text {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            font-weight: 500;
+            animation: fade 2s ease-in-out infinite;
+            text-align: center;
+        }
+
+        .loader-text.typing::after {
+            content: '|';
+            animation: blink-caret 0.75s step-end infinite;
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: var(--text-secondary); }
+        }
+
+        .loader-progress {
+            width: 300px;
+            height: 4px;
+            background: var(--surface-elevated);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 1rem;
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            background: var(--gradient-primary);
+            width: 0%;
+            border-radius: 2px;
+            animation: progress 3s ease-in-out;
+        }
+
+        /* --- Loading Animations --- */
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 20px rgba(0, 122, 204, 0.5); }
+            100% { text-shadow: 0 0 30px rgba(0, 196, 255, 0.8); }
+        }
+
+        @keyframes fade {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            25% { width: 30%; }
+            50% { width: 60%; }
+            75% { width: 85%; }
+            100% { width: 100%; }
+        }
+
+       /* Welcome Content */
+        .welcome-container {
+            display: none;
+            height: 100vh;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+        }
+
+        .welcome-container.loaded {
+            display: block;
+        }
+
+        .welcome-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            z-index: 20;
+            animation: slideInUp 1.2s ease-out;
+        }
+
+        .brand-logo {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 2rem;
+            position: relative;
+            border: 2px solid var(--primary);
+            border-radius: 20px;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--surface), transparent);
+            backdrop-filter: blur(10px);
+            animation: logoFloat 4s ease-in-out infinite;
+        }
+
+        .brand-logo::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, var(--primary), var(--secondary), var(--accent), var(--primary));
+            border-radius: 20px;
+            z-index: -1;
+            animation: borderRotate 3s linear infinite;
+        }
+
+        .brand-logo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 18px;
+            object-fit: cover;
+        }
+
+        .brand-logo .letter {
+            font-family: 'Orbitron', monospace;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-shadow: 0 0 20px var(--primary-glow);
+            line-height: 1;
+            margin-top: 25px;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes borderRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .welcome-title {
+            font-family: 'Orbitron', monospace;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            animation: titleGlow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% { filter: drop-shadow(0 0 10px var(--primary-glow)); }
+            100% { filter: drop-shadow(0 0 20px var(--primary-glow)); }
+        }
+
+        .access-prompt {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 500;
+        }
+
+        .system-info {
+            font-family: 'Orbitron', monospace;
+            font-size: 1rem;
+            color: var(--text-dim);
+            margin-bottom: 3rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .access-granted {
+            display: inline-block;
+            padding: 0.3rem 1rem;
+            background: linear-gradient(90deg, transparent, var(--primary-glow), transparent);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            margin-bottom: 2rem;
+            animation: accessBlink 2s ease-in-out infinite;
+        }
+
+        @keyframes accessBlink {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .enter-portal {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Orbitron', monospace;
+            text-decoration: none;
+            overflow: hidden;
+        }
+
+        .enter-portal .portal-button {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1.5rem 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            color: var(--background);
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .enter-portal::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--secondary), var(--primary));
+            border-radius: 50px;
+            transform: scale(0);
+            transition: transform 0.4s ease;
+            z-index: 0;
+        }
+
+        .enter-portal:hover::before {
+            transform: scale(1);
+        }
+
+        .enter-portal:hover .portal-button {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px var(--primary-glow);
+        }
+
+        .portal-icon {
+            animation: iconSpin 2s linear infinite;
+        }
+
+        @keyframes iconSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .loader-center {
+                width: 50px;
+                height: 50px;
+                font-size: 1.5rem;
+            }
+
+            .loader-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+
+            .loader-progress {
+                width: 250px;
+            }
+
+            .welcome-logo {
+                width: 120px;
+                height: 120px;
+                font-size: 3rem;
+            }
+
+            .enter-btn {
+                padding: 1.2rem 2.5rem;
+                font-size: 1.1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loader-center {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+
+            .loader-wrapper {
+                width: 80px;
+                height: 80px;
+            }
+
+            .loader-progress {
+                width: 200px;
+            }
+
+            .welcome-logo {
+                width: 100px;
+                height: 100px;
+                font-size: 2.5rem;
+            }
+
+            .enter-btn {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Initial Loading Screen -->
+    <div class="loader-screen" id="initialLoader">
+        <div class="loader-container">
+            <div class="loader-wrapper">
+                <div class="loader"></div>
+                <div class="loader-center">D</div>
+            </div>
+            <div class="loader-text typing" id="initialLoaderText">Loading Welcome Page...</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transition Loading Screen -->
+    <div class="loader-screen hidden" id="transitionLoader">
+        <div class="loader-container">
+            <div class="loader-wrapper">
+                <div class="loader"></div>
+                <div class="loader-center">D</div>
+            </div>
+            <div class="loader-text typing" id="transitionLoaderText">Entering Portfolio...</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+      <!-- Welcome Content -->
+    <div class="welcome-container" id="welcomeContent">
+        <div class="welcome-content">
+            <div class="brand-logo">
+                <img src="https://raw.githubusercontent.com/CodeCr4cker/divyanshu/main/Images/logo.png" alt="D" />
+              
+              <!--  <div class="letter"><img src="https://raw.githubusercontent.com/CodeCr4cker/divyanshu/main/Images/logo.png" alt="D" />
+              
+            </div> -->
+            </div>
+            
+            <h1 class="welcome-title">Divyanshu Pandey</h1>
+            
+            <div class="access-granted">
+                <span class="access-prompt">Welcome to the Digital Portfolio</span>
+            </div>
+            
+            <div class="system-info"> Web Developer • Student</div>
+            
+            <button class="enter-portal" id="enterBtn">
+                <div class="portal-button">
+                    <span>Enter</span>
+                    <!-- <i class="fas fa-arrow-right portal-icon"></i> -->
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        class WelcomePage {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                // Show initial loader for 3 seconds
+                this.showInitialLoader();
+                
+                // Initialize particles
+                this.initParticles();
+                
+                // Setup enter button click handler
+                this.setupEnterButton();
+                
+                // Hide initial loader after 3 seconds
+                setTimeout(() => {
+                    this.hideInitialLoader();
+                    this.showWelcomeContent();
+                }, 3000);
+            }
+
+            showInitialLoader() {
+                const loader = document.getElementById('initialLoader');
+                const loaderText = document.getElementById('initialLoaderText');
+                
+                loader.classList.remove('hidden');
+                loaderText.classList.add('typing');
+                
+                // Reset and start progress bar animation
+                const progressBar = loader.querySelector('.loader-progress-bar');
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight; // Trigger reflow
+                progressBar.style.animation = 'progress 3s ease-in-out';
+            }
+
+            hideInitialLoader() {
+                const loader = document.getElementById('initialLoader');
+                const loaderText = document.getElementById('initialLoaderText');
+                
+                loader.classList.add('hidden');
+                loaderText.classList.remove('typing');
+            }
+
+            showWelcomeContent() {
+                const welcomeContent = document.getElementById('welcomeContent');
+                welcomeContent.classList.add('loaded');
+                welcomeContent.style.display = 'flex';
+            }
+
+            setupEnterButton() {
+                const enterBtn = document.getElementById('enterBtn');
+                enterBtn.addEventListener('click', () => {
+                    this.handleEnterClick();
+                });
+            }
+
+            handleEnterClick() {
+                // Hide welcome content
+                const welcomeContent = document.getElementById('welcomeContent');
+                welcomeContent.style.display = 'none';
+                
+                // Show transition loader
+                this.showTransitionLoader();
+                
+                // Check if portfolio.html exists
+                fetch('portfolio.html', { method: 'HEAD' })
+                    .then(response => {
+                        setTimeout(() => {
+                            if (response.ok) {
+                                // portfolio.html exists, redirect to it
+                                window.location.href = 'portfolio.html';
+                            } else {
+                                // portfolio.html does not exist, redirect to the other website
+                                // IMPORTANT: Replace 'https://www.example.com' with your actual alternative website URL
+                                window.location.href = 'https://www.example.com'; 
+                            }
+                        }, 1000); // Wait for 1 second (transition loader duration)
+                    })
+                    .catch(error => {
+                        console.error('Error checking portfolio.html:', error);
+                        // Fallback in case of network error or other issues
+                        setTimeout(() => {
+                            // IMPORTANT: Replace 'https://www.example.com' with your actual alternative website URL
+                            window.location.href = 'https://www.example.com'; 
+                        }, 1000);
+                    });
+            }
+
+            showTransitionLoader() {
+                const loader = document.getElementById('transitionLoader');
+                const loaderText = document.getElementById('transitionLoaderText');
+                
+                loader.classList.remove('hidden');
+                loaderText.classList.add('typing');
+                
+                // Reset and start progress bar animation (1 second)
+                const progressBar = loader.querySelector('.loader-progress-bar');
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight; // Trigger reflow
+                progressBar.style.animation = 'progress 1s ease-in-out';
+            }
+
+            initParticles() {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: {
+                            value: window.innerWidth < 768 ? 40 : 80,
+                            density: {
+                                enable: true,
+                                value_area: 800
+                            }
+                        },
+                        color: {
+                            value: '#007ACC'
+                        },
+                        shape: {
+                            type: 'triangle'
+                        },
+                        opacity: {
+                            value: 0.4,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 1,
+                                opacity_min: 0.1,
+                                sync: false
+                            }
+                        },
+                        size: {
+                            value: 4,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 40,
+                                size_min: 0.1,
+                                sync: false
+                            }
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#007ACC',
+                            opacity: 0.3,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 3,
+                            direction: 'none',
+                            random: false,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false,
+                            attract: {
+                                enable: false,
+                                rotateX: 600,
+                                rotateY: 1200
+                            }
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: {
+                                enable: true,
+                                mode: 'grab'
+                            },
+                            onclick: {
+                                enable: true,
+                                mode: 'push'
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            grab: {
+                                distance: 180,
+                                line_linked: {
+                                    opacity: 0.7
+                                }
+                            },
+                            push: {
+                                particles_nb: 4
+                            }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+        }
+
+        // Initialize the welcome page when DOM is loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            new WelcomePage();
+        });
+
+        // Handle resize for particles
+        window.addEventListener('resize', () => {
+            if (window.pJSDom && window.pJSDom[0]) {
+                const particleCount = window.innerWidth < 768 ? 40 : 80;
+                window.pJSDom[0].pJS.particles.number.value = particleCount;
+                window.pJSDom[0].pJS.fn.particlesRefresh();
+            }
+        });
+
+        console.log('🚀 Welcome Page loaded successfully!');
+        console.log('⏳ Initial loader: 3 seconds');
+        console.log('🔄 Transition loader: 1 second');
+    </script>
+</body>
+</html>
