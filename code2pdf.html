@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -823,8 +823,22 @@
           doc.text(`Page ${i} of ${pageCount}`, 170, 287);
         }
 
-        // Save PDF
-        doc.save(`${pdfHeading}.pdf`);
+        // --- MODIFIED PDF DOWNLOAD LOGIC FOR BETTER WEBVIEW COMPATIBILITY ---
+        const pdfBlob = doc.output('blob'); // Get PDF as Blob
+        const url = URL.createObjectURL(pdfBlob); // Create a URL for the Blob
+
+        const downloadLink = document.createElement('a');
+        downloadLink.href = url;
+        downloadLink.download = `${pdfHeading}.pdf`; // Set the filename
+        downloadLink.style.display = 'none'; // Hide the link
+
+        document.body.appendChild(downloadLink); // Append to body
+        downloadLink.click(); // Programmatically click the link
+        document.body.removeChild(downloadLink); // Clean up the link element
+
+        // Clean up the object URL after a short delay
+        setTimeout(() => URL.revokeObjectURL(url), 100);
+        // --- END MODIFIED PDF DOWNLOAD LOGIC ---
 
         // Show success
         setTimeout(() => {
