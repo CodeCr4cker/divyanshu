@@ -1,0 +1,894 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome - Divyanshu Pandey</title>
+    <meta name="description" content="Welcome to Divyanshu Pandey's Professional Portfolio">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #00D9FF;
+            --primary-dark: #0099CC;
+            --secondary: #8B5CF6;
+            --accent: #10B981;
+            --accent-pink: #F472B6;
+            --background: #0A0E17;
+            --surface: #111827;
+            --surface-elevated: #1F2937;
+            --text-primary: #F9FAFB;
+            --text-secondary: #D1D5DB;
+            --text-muted: #9CA3AF;
+            --border: #374151;
+            --glow-cyan: rgba(0, 217, 255, 0.5);
+            --glow-purple: rgba(139, 92, 246, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+            font-size: 16px;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--background);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* Enhanced Loading Screen */
+        .loader-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: linear-gradient(135deg, #0A0E17 0%, #1a1a2e 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            transition: opacity 1s ease-out, visibility 1s ease-out;
+        }
+
+        .loader-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        .loader-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .loader-wrapper {
+            position: relative;
+            width: 140px;
+            height: 140px;
+        }
+
+        /* Orbital rings */
+        .orbit-ring {
+            position: absolute;
+            border: 2px solid transparent;
+            border-radius: 50%;
+            animation: orbit 3s linear infinite;
+        }
+
+        .orbit-ring-1 {
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-top-color: var(--primary);
+            border-right-color: var(--primary);
+            animation-duration: 2s;
+        }
+
+        .orbit-ring-2 {
+            top: 15px;
+            left: 15px;
+            right: 15px;
+            bottom: 15px;
+            border-top-color: var(--secondary);
+            border-left-color: var(--secondary);
+            animation-duration: 3s;
+            animation-direction: reverse;
+        }
+
+        .orbit-ring-3 {
+            top: 30px;
+            left: 30px;
+            right: 30px;
+            bottom: 30px;
+            border-top-color: var(--accent);
+            border-right-color: var(--accent);
+            animation-duration: 4s;
+        }
+
+        .loader-core {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 70px;
+            height: 70px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 0 40px var(--glow-cyan), 0 0 80px var(--glow-purple);
+            animation: coreGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes orbit {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes coreGlow {
+            0% { 
+                box-shadow: 0 0 40px var(--glow-cyan), 0 0 80px var(--glow-purple);
+                transform: translate(-50%, -50%) scale(1);
+            }
+            100% { 
+                box-shadow: 0 0 60px var(--glow-cyan), 0 0 120px var(--glow-purple);
+                transform: translate(-50%, -50%) scale(1.05);
+            }
+        }
+
+        .loader-text {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            animation: textPulse 2s ease-in-out infinite;
+        }
+
+        .loader-text::after {
+            content: '';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: ''; }
+            40% { content: '.'; }
+            60% { content: '..'; }
+            80%, 100% { content: '...'; }
+        }
+
+        @keyframes textPulse {
+            0%, 100% { opacity: 0.7; }
+            50% { opacity: 1; }
+        }
+
+        .loader-progress {
+            width: 320px;
+            height: 6px;
+            background: var(--surface-elevated);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .loader-progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+            width: 0%;
+            border-radius: 10px;
+            position: relative;
+            animation: progress 3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 0 20px var(--glow-cyan);
+        }
+
+        .loader-progress-bar::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 50px;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4));
+            animation: shimmer 1.5s infinite;
+        }
+
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
+        }
+
+        @keyframes progress {
+            0% { width: 0%; }
+            100% { width: 100%; }
+        }
+
+        /* Welcome Content */
+        .welcome-container {
+            display: none;
+            min-height: 100vh;
+            position: relative;
+            z-index: 10;
+            overflow: hidden;
+            justify-content: center;
+            align-items: center;
+            padding: 2rem;
+        }
+
+        .welcome-container.loaded {
+            display: flex;
+        }
+
+        .welcome-content {
+            text-align: center;
+            z-index: 20;
+            animation: fadeInScale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+            max-width: 900px;
+        }
+
+        @keyframes fadeInScale {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+
+        .brand-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 2.5rem;
+            position: relative;
+            border-radius: 30px;
+            overflow: visible;
+            animation: logoFloat 6s ease-in-out infinite;
+        }
+
+        .logo-wrapper {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            border-radius: 30px;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .logo-wrapper::before {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 30px;
+            padding: 3px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary), var(--accent));
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            animation: logoRotate 8s linear infinite;
+            pointer-events: none;
+        }
+
+        .logo-inner {
+            width: 100%;
+            height: 100%;
+            background: var(--surface);
+            border-radius: 27px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .logo-inner img {
+            width: 90%;
+            height: 90%;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .logo-glow {
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            right: -50%;
+            bottom: -50%;
+            background: radial-gradient(circle, var(--glow-cyan) 0%, transparent 70%);
+            opacity: 0.3;
+            animation: glowPulse 4s ease-in-out infinite;
+            pointer-events: none;
+        }
+
+        @keyframes logoFloat {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-15px) rotate(1deg); }
+            75% { transform: translateY(-10px) rotate(-1deg); }
+        }
+
+        @keyframes logoRotate {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .welcome-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 50%, var(--accent-pink) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -2px;
+            line-height: 1.1;
+            animation: titleShine 3s ease-in-out infinite;
+            position: relative;
+        }
+
+        @keyframes titleShine {
+            0%, 100% { 
+                filter: drop-shadow(0 0 20px var(--glow-cyan)) brightness(1);
+            }
+            50% { 
+                filter: drop-shadow(0 0 40px var(--glow-purple)) brightness(1.2);
+            }
+        }
+
+        .tagline {
+            font-size: clamp(1.1rem, 3vw, 1.4rem);
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+            font-weight: 500;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.3s forwards;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.7rem 1.5rem;
+            background: linear-gradient(135deg, rgba(0, 217, 255, 0.1), rgba(139, 92, 246, 0.1));
+            border: 1px solid rgba(0, 217, 255, 0.3);
+            border-radius: 50px;
+            margin-bottom: 2.5rem;
+            backdrop-filter: blur(10px);
+            animation: badgePulse 3s ease-in-out infinite, fadeInUp 1s ease-out 0.5s forwards;
+            opacity: 0;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: dotBlink 2s ease-in-out infinite;
+            box-shadow: 0 0 10px var(--accent);
+        }
+
+        @keyframes dotBlink {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.5; transform: scale(1.2); }
+        }
+
+        @keyframes badgePulse {
+            0%, 100% { 
+                box-shadow: 0 0 20px rgba(0, 217, 255, 0.2);
+                border-color: rgba(0, 217, 255, 0.3);
+            }
+            50% { 
+                box-shadow: 0 0 40px rgba(139, 92, 246, 0.4);
+                border-color: rgba(139, 92, 246, 0.5);
+            }
+        }
+
+        .role-text {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 3rem;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.7s forwards;
+        }
+
+        .role-separator {
+            color: var(--primary);
+            margin: 0 0.5rem;
+        }
+
+        .enter-portal {
+            position: relative;
+            display: inline-block;
+            padding: 0;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-decoration: none;
+            opacity: 0;
+            animation: fadeInUp 1s ease-out 0.9s forwards;
+        }
+
+        .portal-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            padding: 1.5rem 3.5rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            border-radius: 50px;
+            transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 217, 255, 0.3);
+        }
+
+        .portal-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .enter-portal:hover .portal-button::before {
+            left: 100%;
+        }
+
+        .enter-portal:hover .portal-button {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 60px rgba(0, 217, 255, 0.5), 0 0 80px rgba(139, 92, 246, 0.3);
+        }
+
+        .enter-portal:active .portal-button {
+            transform: translateY(-2px) scale(1.02);
+        }
+
+        .arrow-icon {
+            display: inline-block;
+            transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .enter-portal:hover .arrow-icon {
+            transform: translateX(5px);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Particles Background */
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #0A0E17 0%, #1a1a2e 100%);
+            z-index: -1;
+            top: 0;
+            left: 0;
+        }
+
+        /* Gradient Orbs Background */
+        .gradient-orbs {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            overflow: hidden;
+            pointer-events: none;
+        }
+
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: orbFloat 20s ease-in-out infinite;
+        }
+
+        .orb-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--primary);
+            top: -250px;
+            right: -250px;
+            animation-delay: 0s;
+        }
+
+        .orb-2 {
+            width: 400px;
+            height: 400px;
+            background: var(--secondary);
+            bottom: -200px;
+            left: -200px;
+            animation-delay: 5s;
+        }
+
+        .orb-3 {
+            width: 300px;
+            height: 300px;
+            background: var(--accent-pink);
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 10s;
+        }
+
+        @keyframes orbFloat {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-30px, 30px) scale(0.9); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .loader-wrapper {
+                width: 120px;
+                height: 120px;
+            }
+
+            .loader-core {
+                width: 60px;
+                height: 60px;
+                font-size: 1.6rem;
+            }
+
+            .loader-progress {
+                width: 280px;
+            }
+
+            .brand-logo {
+                width: 100px;
+                height: 100px;
+            }
+
+            .portal-button {
+                padding: 1.3rem 2.8rem;
+                font-size: 1.1rem;
+            }
+
+            .tagline {
+                letter-spacing: 2px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .loader-wrapper {
+                width: 100px;
+                height: 100px;
+            }
+
+            .loader-core {
+                width: 50px;
+                height: 50px;
+                font-size: 1.3rem;
+            }
+
+            .loader-progress {
+                width: 240px;
+            }
+
+            .brand-logo {
+                width: 90px;
+                height: 90px;
+            }
+
+            .portal-button {
+                padding: 1.2rem 2.5rem;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Gradient Orbs Background -->
+    <div class="gradient-orbs">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+
+    <!-- Initial Loading Screen -->
+    <div class="loader-screen" id="initialLoader">
+        <div class="loader-container">
+            <div class="loader-wrapper">
+                <div class="orbit-ring orbit-ring-1"></div>
+                <div class="orbit-ring orbit-ring-2"></div>
+                <div class="orbit-ring orbit-ring-3"></div>
+                <div class="loader-core">D</div>
+            </div>
+            <div class="loader-text" id="initialLoaderText">Loading Experience</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Transition Loading Screen -->
+    <div class="loader-screen hidden" id="transitionLoader">
+        <div class="loader-container">
+            <div class="loader-wrapper">
+                <div class="orbit-ring orbit-ring-1"></div>
+                <div class="orbit-ring orbit-ring-2"></div>
+                <div class="orbit-ring orbit-ring-3"></div>
+                <div class="loader-core">D</div>
+            </div>
+            <div class="loader-text" id="transitionLoaderText">Entering Portfolio</div>
+            <div class="loader-progress">
+                <div class="loader-progress-bar"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Welcome Content -->
+    <div class="welcome-container" id="welcomeContent">
+        <div class="welcome-content">
+            <div class="brand-logo">
+                <div class="logo-glow"></div>
+                <div class="logo-wrapper">
+                    <div class="logo-inner">
+                        <img src="https://raw.githubusercontent.com/CodeCr4cker/Web-Storage/main/my%20all%20website%20logo%20image/logo.png" alt="D" />
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="welcome-title">Divyanshu Pandey</h1>
+            
+            <p class="tagline">Digital Portfolio</p>
+            
+            <div class="status-badge">
+                <span class="status-dot"></span>
+                <span>Access Granted</span>
+            </div>
+            
+            <div class="role-text">
+                Web Developer<span class="role-separator">•</span>Student
+            </div>
+            
+            <button class="enter-portal" id="enterBtn">
+                <div class="portal-button">
+                    <span>Enter</span>
+                    <span class="arrow-icon">→</span>
+                </div>
+            </button>
+        </div>
+    </div>
+
+    <audio id="enterSound" src="https://raw.githubusercontent.com/CodeCr4cker/divyanshu/main/audio/welcome.mp3" preload="auto"></audio>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/particles.js/2.0.0/particles.min.js"></script>
+    <script>
+        class WelcomePage {
+            constructor() {
+                this.init();
+            }
+
+            init() {
+                this.showInitialLoader();
+                this.initParticles();
+                this.setupEnterButton();
+                
+                setTimeout(() => {
+                    this.hideInitialLoader();
+                    this.showWelcomeContent();
+                }, 3000);
+            }
+
+            showInitialLoader() {
+                const loader = document.getElementById('initialLoader');
+                loader.classList.remove('hidden');
+                
+                const progressBar = loader.querySelector('.loader-progress-bar');
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight;
+                progressBar.style.animation = 'progress 3s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+
+            hideInitialLoader() {
+                const loader = document.getElementById('initialLoader');
+                loader.classList.add('hidden');
+            }
+
+            showWelcomeContent() {
+                const welcomeContent = document.getElementById('welcomeContent');
+                welcomeContent.classList.add('loaded');
+            }
+
+            setupEnterButton() {
+                const enterBtn = document.getElementById('enterBtn');
+                enterBtn.addEventListener('click', () => {
+                    this.handleEnterClick();
+                });
+            }
+
+            handleEnterClick() {
+                const enterSound = document.getElementById('enterSound');
+                if (enterSound) {
+                    enterSound.play().catch(e => console.error("Audio play failed:", e));
+                }
+
+                const welcomeContent = document.getElementById('welcomeContent');
+                welcomeContent.style.display = 'none';
+                
+                this.showTransitionLoader();
+                
+                fetch('portfolio.html', { method: 'HEAD' })
+                    .then(response => {
+                        setTimeout(() => {
+                            if (response.ok) {
+                                window.location.href = 'portfolio.html';
+                            } else {
+                                window.location.href = 'maintenance.html'; 
+                            }
+                        }, 4000);
+                    })
+                    .catch(error => {
+                        console.error('Error checking portfolio.html:', error);
+                        setTimeout(() => {
+                            window.location.href = 'maintenance.html'; 
+                        }, 4000);
+                    });
+            }
+
+            showTransitionLoader() {
+                const loader = document.getElementById('transitionLoader');
+                loader.classList.remove('hidden');
+                
+                const progressBar = loader.querySelector('.loader-progress-bar');
+                progressBar.style.animation = 'none';
+                progressBar.offsetHeight;
+                progressBar.style.animation = 'progress 4s cubic-bezier(0.4, 0, 0.2, 1)';
+            }
+
+            initParticles() {
+                particlesJS('particles-js', {
+                    particles: {
+                        number: {
+                            value: window.innerWidth < 768 ? 50 : 100,
+                            density: {
+                                enable: true,
+                                value_area: 1000
+                            }
+                        },
+                        color: {
+                            value: ['#00D9FF', '#8B5CF6', '#10B981']
+                        },
+                        shape: {
+                            type: ['circle', 'triangle'],
+                        },
+                        opacity: {
+                            value: 0.5,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 1,
+                                opacity_min: 0.1,
+                                sync: false
+                            }
+                        },
+                        size: {
+                            value: 3,
+                            random: true,
+                            anim: {
+                                enable: true,
+                                speed: 3,
+                                size_min: 0.5,
+                                sync: false
+                            }
+                        },
+                        line_linked: {
+                            enable: true,
+                            distance: 150,
+                            color: '#00D9FF',
+                            opacity: 0.25,
+                            width: 1
+                        },
+                        move: {
+                            enable: true,
+                            speed: 2,
+                            direction: 'none',
+                            random: true,
+                            straight: false,
+                            out_mode: 'out',
+                            bounce: false
+                        }
+                    },
+                    interactivity: {
+                        detect_on: 'canvas',
+                        events: {
+                            onhover: {
+                                enable: true,
+                                mode: 'grab'
+                            },
+                            onclick: {
+                                enable: true,
+                                mode: 'push'
+                            },
+                            resize: true
+                        },
+                        modes: {
+                            grab: {
+                                distance: 200,
+                                line_linked: {
+                                    opacity: 0.5
+                                }
+                            },
+                            push: {
+                                particles_nb: 4
+                            }
+                        }
+                    },
+                    retina_detect: true
+                });
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            new WelcomePage();
+        });
+
+        window.addEventListener('resize', () => {
+            if (window.pJSDom && window.pJSDom[0]) {
+                const particleCount = window.innerWidth < 768 ? 50 : 100;
+                window.pJSDom[0].pJS.particles.number.value = particleCount;
+                window.pJSDom[0].pJS.fn.particlesRefresh();
+            }
+        });
+
+        console.log('🚀 Enhanced Welcome Page Loaded');
+    </script>
+</body>
+</html>
